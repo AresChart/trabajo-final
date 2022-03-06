@@ -2,28 +2,39 @@ import { StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   input: {
-    
+    width :190,
+    height: 40,
     margin: 8,
     borderWidth: 1,
     padding: 10,
     color:'black',
-    fontSize: 12
+    fontSize: 17
   },
   inputTable:{
-    width: 40,
+    textAlign: 'center',
+    fontSize: 25,
+    width: 60,
+    height:40,
     borderWidth: 1,
   },
+  inputTableAp:{
+    textAlign: 'center',
+    width: 30,
+    height:25,
+    borderWidth: 1
+  },
+
   button_style: {
     marginBottom: 10
   },
 
     textInput_table_sp: {
       width: 150,
-      height: 300,
+      height:520,
       borderWidth: 1,
       textAlign: 'center',
       color:'black',
-      fontSize: 17
+      fontSize: 25
     },
 
     textInput_semaforos_sp: {
@@ -75,8 +86,8 @@ export const styles = StyleSheet.create({
       
       },
       container_table: {
-         width:100,
-         height:200,
+         width:300,
+         height:500,
       },
       container_buttons: {
         flex: 1,
@@ -85,5 +96,17 @@ export const styles = StyleSheet.create({
         width:170,
         height:500,
       }, 
+      item_resultado: {
+        fontSize: 15,
+        height: 200,
+        width:900,
+        justifyContent: "center",
+        borderColor: 'black',
+        borderWidth: .25,
+        textAlign: 'justify',
+      },
+      checkbox: {
+        alignSelf: "center",
+      },
   });
 

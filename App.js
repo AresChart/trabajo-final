@@ -6,6 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Screen from './Screen';
 import IndexSp from './components_sp/IndexSp';
 import IndexSm from './components_sm/IndexSm';
+import IndexAp from './components_ap/IndexAp';
 
 function semaforoScreen() {
     return (<IndexSp/>);
@@ -17,8 +18,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator>
-        <Drawer.Screen name="Semaforos" component={IndexSp} />
-        <Drawer.Screen name="Segmentación" component={IndexSm} />
+        <Drawer.Screen name="Algoritmos de Planificación" component={IndexAp} />
+      
       </Drawer.Navigator>
     </NavigationContainer>
   );

@@ -163,7 +163,7 @@ function  crearTablaEntrada (){
     <View style={{width: "100%" ,height: "100%" ,backgroundColor: '#ffffff',alignItems: 'center'}}>
 
         <View style={{width: "100%" ,height: "100%", top:20 ,flex: 2,alignItems: 'center',justifyContent: 'center',flexDirection: 'row'}}>
-          <View style={{flex: 1,alignItems: 'center',justifyContent: 'center',flexDirection: 'row'}}>
+          <View style={{flex: 1,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
               <TextInput style={styles.input} onChangeText={(val)=>setCantidadSemaforos(val)} placeholder="Cantidad de Semaforos"/>
               <TouchableOpacity style={{marginTop:0, width: 200, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>establecerSemaforos()} >
                 <Text style={{color:'white', fontSize: 17}}>Establecer Semaforos</Text>
