@@ -9,6 +9,7 @@ import IndexAp from '../components_ap/IndexAp';
 import IndexEa from '../components_ea/IndexEa';
 import IndexSp from '../components_sp/IndexSp';
 import IndexSm from '../components_sm/IndexSm';
+import IndexPm from '../components_pm/IndexPm';
 
 
 function HomeScreen(props) {
@@ -44,6 +45,10 @@ function SincronizacionDeProcesosScreen() {
   return (<IndexSp/>);
 }
 
+function PaginacionDeMemoria() {
+  return (<IndexPm/>);
+}
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -55,7 +60,7 @@ function MyDrawer() {
             <Drawer.Screen name="Algoritmos de planificación" component={AlgoritmosPlanificacionScreen} />
             <Drawer.Screen name="Estrategias De Ajuste" component={EstrategiaDeAjusteScreen} />
             <Drawer.Screen name="Sincronización de Procesos" component={SincronizacionDeProcesosScreen} />
-            
+            <Drawer.Screen name="Paginación de Memoria" component={PaginacionDeMemoria} />
             <Drawer.Screen name="Segmentación de Memoria" component={SegmentacionMemoria} />
         </Drawer.Navigator>
       </NavigationContainer>      
