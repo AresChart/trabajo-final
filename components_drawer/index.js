@@ -8,6 +8,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import IndexAp from '../components_ap/IndexAp';
 import IndexEa from '../components_ea/IndexEa';
 import IndexSp from '../components_sp/IndexSp';
+import IndexSm from '../components_sm/IndexSm';
 
 
 function HomeScreen(props) {
@@ -25,6 +26,10 @@ function HomeScreen(props) {
       <Text style={{fontSize:20}}>aramirezv_1@uqvirtual.edu.co</Text>
     </View>
   );
+}
+
+function SegmentacionMemoria() {
+  return (<IndexSm/>);
 }
 
 function AlgoritmosPlanificacionScreen() {
@@ -50,6 +55,8 @@ function MyDrawer() {
             <Drawer.Screen name="Algoritmos de planificación" component={AlgoritmosPlanificacionScreen} />
             <Drawer.Screen name="Estrategias De Ajuste" component={EstrategiaDeAjusteScreen} />
             <Drawer.Screen name="Sincronización de Procesos" component={SincronizacionDeProcesosScreen} />
+            
+            <Drawer.Screen name="Segmentación de Memoria" component={SegmentacionMemoria} />
         </Drawer.Navigator>
       </NavigationContainer>      
   );
