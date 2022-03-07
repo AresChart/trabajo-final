@@ -190,7 +190,7 @@ function quantumComponent(){
  return (
 
     <ScrollView style={{paddingVertical: 0}}>
-    <View style={{width:'100%',height:'100%',borderWidth: 1,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+    <View style={{width:'100%',height:'100%',backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
 
         <View style={{top:15,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
           <TextInput style={styles.input} onChangeText={(val)=>setNumeroProcesos(val)} placeholder="número de procesos"/>

@@ -29,12 +29,12 @@ export const styles = StyleSheet.create({
   },
 
     textInput_table_sp: {
-      width: 150,
-      height:520,
-      borderWidth: 1,
+      width: 50,
+      height:300,
       textAlign: 'center',
       color:'black',
-      fontSize: 25
+      fontSize: 17,
+      textAlignVertical: 'top'
     },
 
     textInput_semaforos_sp: {
@@ -87,7 +87,7 @@ export const styles = StyleSheet.create({
       },
       container_table: {
          width:300,
-         height:500,
+         height:1100,
       },
       container_buttons: {
         flex: 1,

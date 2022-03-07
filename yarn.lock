@@ -2671,6 +2671,11 @@
     "compare-versions" "^3.4.0"
     "invariant" "^2.2.4"
 
+"expo-speech@~10.1.0":
+  "integrity" "sha512-tovcfD3Qi5WvY91d+N+dMVDMz+GwW/c9ze/Ct3cZQLBJQubqlVtlDqb/cDD2Uwuwb+zjAH3N6NfAFSgCdhqwAQ=="
+  "resolved" "https://registry.npmjs.org/expo-speech/-/expo-speech-10.1.1.tgz"
+  "version" "10.1.1"
+
 "expo-status-bar@~1.2.0":
   "integrity" "sha512-pVZZ/kDCXFK79E4dCtRecs3XLC8aiwlciutSd/fFmUPJSQZ1Txia6hlKajPt0GAYft8/YnT0V3URXzWZOBniYQ=="
   "resolved" "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.2.0.tgz"
