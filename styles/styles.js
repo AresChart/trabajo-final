@@ -2,13 +2,13 @@ import { StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   input: {
-    width :190,
+    width :300,
     height: 40,
     margin: 8,
     borderWidth: 1,
     padding: 10,
     color:'black',
-    fontSize: 17
+    fontSize: 15
   },
   inputTable:{
     textAlign: 'center',
@@ -21,50 +21,58 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     width: 30,
     height:25,
-    borderWidth: 1
   },
 
   button_style: {
     marginBottom: 10
   },
 
-    textInput_table_sp: {
+    textInput_table_ea: {
+      textAlignVertical: 'top',
       width: 50,
       height:300,
       textAlign: 'center',
       color:'black',
-      fontSize: 17,
+      fontSize: 17
+    },
+
+    textInput_table_sp: {
+      width: 60,
+      height:220,
+      textAlign: 'center',
+      color:'black',
+      fontSize: 10,
       textAlignVertical: 'top'
     },
 
     textInput_semaforos_sp: {
-      width: 400,
+      width: 300,
       height: 30,
       borderWidth: 1,
       textAlign: 'center',
       color:'black',
-      fontSize: 17,
-      marginLeft:20
+      fontSize: 15,
+      marginTop:20
     },
 
     textInput_variables_sp: {
-      width: 200,
+      width: 300,
       height: 30,
       borderWidth: 1,
       textAlign: 'center',
       color:'black',
-      fontSize: 17,
-      marginLeft:20
+      fontSize: 15,
+      marginTop:20
     },
 
     textInput_salida_sp: {
-      width: 400,
+      width: 300,
       height: 30,
       borderWidth: 1,
       textAlign: 'center',
-      marginLeft: 20,
+      marginTop: 20,
       color:'black',
-      fontSize: 17
+      fontSize: 15
     },
 
     textInput_hilos_bloqueados_sp: {
@@ -72,9 +80,9 @@ export const styles = StyleSheet.create({
       height: 30,
       borderWidth: 1,
       textAlign: 'center',
-      marginLeft: 20,
+      marginTop: 20,
       color:'black',
-      fontSize: 17
+      fontSize: 15
     },
 
     container: {

@@ -7,6 +7,7 @@ import {styles} from '../styles/styles';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import IndexAp from '../components_ap/IndexAp';
 import IndexEa from '../components_ea/IndexEa';
+import IndexSp from '../components_sp/IndexSp';
 
 
 function HomeScreen(props) {
@@ -22,9 +23,6 @@ function HomeScreen(props) {
       <Text style={{fontSize:20}}>kdsanchezs@uqvirtual.edu.co</Text>
       <Text style={{fontSize:30}}>Anderson Ramirez Vasquez</Text>
       <Text style={{fontSize:20}}>aramirezv_1@uqvirtual.edu.co</Text>
-
-     
-
     </View>
   );
 }
@@ -35,7 +33,11 @@ function AlgoritmosPlanificacionScreen() {
 
 function EstrategiaDeAjusteScreen() {
    return (<IndexEa/>);
-  }
+}
+
+function SincronizacionDeProcesosScreen() {
+  return (<IndexSp/>);
+}
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -47,7 +49,7 @@ function MyDrawer() {
             <Drawer.Screen name="Home" component={HomeScreen} />
             <Drawer.Screen name="Algoritmos de planificación" component={AlgoritmosPlanificacionScreen} />
             <Drawer.Screen name="Estrategias De Ajuste" component={EstrategiaDeAjusteScreen} />
-          
+            <Drawer.Screen name="Sincronización de Procesos" component={SincronizacionDeProcesosScreen} />
         </Drawer.Navigator>
       </NavigationContainer>      
   );

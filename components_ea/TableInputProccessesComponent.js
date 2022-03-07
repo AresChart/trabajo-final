@@ -32,7 +32,7 @@ const TableInputProccessesComponent = (props) => {
             <DataTable.Row style={{height: 300}}>
               <DataTable.Cell style={{justifyContent: 'center',flex: 1}}>
                 <View>
-                   <TextInput multiline={true} numberOfLines={13} value={""+listaProcesos} onChangeText={(data)=>updateListaProcesos(data)} style={styles.textInput_table_sp}/>
+                   <TextInput multiline={true} numberOfLines={13} value={""+listaProcesos} onChangeText={(data)=>updateListaProcesos(data)} style={styles.textInput_table_ea}/>
                 </View>
               </DataTable.Cell>
               

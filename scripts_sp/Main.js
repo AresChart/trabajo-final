@@ -287,7 +287,7 @@ function encontrarSalidaCondicional(cuerpo){
 }
 
 function almacenarVariablesYvalores(textVariables){
-    let listaResultados = textVariables.replaceAll(",","=");
+    let listaResultados = textVariables.replace(/,/g,"=");
     let listaVariablesYValores = listaResultados.split("=");
 
     for (let index = 0; index < listaVariablesYValores.length; index++) {

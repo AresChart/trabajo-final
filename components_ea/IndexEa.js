@@ -57,7 +57,7 @@ const onRefresh = React.useCallback(() => {
     function buttonGenerarAleatorios (){
       if(banderaEntrada){
         return(
-        <TouchableOpacity style={{marginTop:20, width: 200, height: 40, backgroundColor: '#EDAF0A',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>inicializarTablaEntradaNumerosAleatorios()} >
+        <TouchableOpacity style={{marginTop:20, width: 300, height: 40, backgroundColor: '#EDAF0A',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>inicializarTablaEntradaNumerosAleatorios()} >
           <Text style={{color:'white', fontSize: 17}}>Generar Aleatorios</Text>
         </TouchableOpacity>);  
       }
@@ -69,7 +69,7 @@ const onRefresh = React.useCallback(() => {
     function buttonEjecutarAlgoritmo (){
       if(banderaEntrada){
         return(
-        <TouchableOpacity style={{marginTop:20, width: 200, height: 40, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>iniciarAlgoritmo(false)} >
+        <TouchableOpacity style={{marginTop:20, width: 300, height: 42, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>iniciarAlgoritmo(false)} >
           <Text style={{color:'white', fontSize: 17}}>Ejecutar Algortimo</Text>
         </TouchableOpacity>);
       }
@@ -80,7 +80,7 @@ const onRefresh = React.useCallback(() => {
     function buttonEjecutarAlgoritmoPasoAPaso (){
       if(banderaEntrada){
         return(
-        <TouchableOpacity style={{marginTop:20, width: 200, height: 40, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>iniciarAlgoritmo(true)} >
+        <TouchableOpacity style={{marginTop:20, width: 300, height: 40, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>iniciarAlgoritmo(true)} >
           <Text style={{color:'white', fontSize: 17}}>Ejecutar x Pasos</Text>
         </TouchableOpacity>);
       }
@@ -137,7 +137,7 @@ const onRefresh = React.useCallback(() => {
     function pickerAjustes(){
       if(banderaEntrada){
       return (
-      <Picker style={{marginTop:20, height: 40, width:200}} selectedValue={itemAjustes} onValueChange={(itemValue, itemIndex) => setItemAjustes(itemValue)}>
+      <Picker style={{marginTop:0, height: 40, width:300}} selectedValue={itemAjustes} onValueChange={(itemValue, itemIndex) => setItemAjustes(itemValue)}>
       <Picker.Item label={"Primer Ajuste"}  value={"Primer Ajuste"}/>
       <Picker.Item label={"Mejor Ajuste"}  value={"Mejor Ajuste"}/>
       <Picker.Item label={"Peor Ajuste"}  value={"Peor Ajuste"}/>
@@ -154,7 +154,7 @@ const onRefresh = React.useCallback(() => {
     function pickerAlgoritmoAjuste(){
       if(banderaEntrada){
       return (
-      <Picker style={{marginTop:20 , height: 40, width:250}} selectedValue={itemAlgoritmoAjuste} onValueChange={(itemValue, itemIndex) => cambiarItemAlgoritmosAjustes(itemValue)}>
+      <Picker style={{marginTop:20 , height: 40, width:300}} selectedValue={itemAlgoritmoAjuste} onValueChange={(itemValue, itemIndex) => cambiarItemAlgoritmosAjustes(itemValue)}>
         <Picker.Item label={"Ajuste Sobre Huecos"}  value={"Ajuste Sobre Huecos"}/>
         <Picker.Item label={"Ajuste Sobre Solicitudes"}  value={"Ajuste Sobre Solicitudes"}/>
       </Picker>);}
@@ -236,8 +236,8 @@ const onRefresh = React.useCallback(() => {
 
           <View style={{height:140,top:10,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
             <TextInput style={styles.input} onChangeText={(val)=>setCantidadCeldas(val)} placeholder="Cantidad de Celdas"/>
-              <TouchableOpacity style={{marginTop:5, width: 200, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>inicializarTabla()} >
-                <Text style={{color:'white', fontSize: 17}}>Crear Solicitudes</Text>
+              <TouchableOpacity style={{marginTop:5, width: 300, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>inicializarTabla()} >
+                <Text style={{color:'white', fontSize: 15}}>Crear Solicitudes</Text>
               </TouchableOpacity>
           </View>
 

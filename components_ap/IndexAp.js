@@ -41,8 +41,8 @@ export default function IndexAp() {
   function buttonEjecutarAlgoritmoComponent (){
     if(banderaEntrada){
       return(
-        <TouchableOpacity style={{marginTop:20, width: 190, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>iniciarAlgoritmo()} >
-          <Text style={{color:'white', fontSize: 17}}>Ejecutar Algoritmo</Text>
+        <TouchableOpacity style={{marginTop:20, width: 300, height: 40, backgroundColor: '#00BF26',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>iniciarAlgoritmo()} >
+          <Text style={{color:'white', fontSize: 15}}>Ejecutar Algoritmo</Text>
         </TouchableOpacity>);
     }
 
@@ -128,8 +128,8 @@ function inicializarTablaEntradaNumerosAleatorios(){
 function bottonInicializarTablaeEntrada(){
   if(banderaEntrada){
     return(
-    <TouchableOpacity style={{marginTop:20, width: 190, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>inicializarTablaEntradaNumerosAleatorios()} >
-      <Text style={{color:'white', fontSize: 17}}>Generar Aleatorios</Text>
+    <TouchableOpacity style={{marginTop:20, width: 300, height: 40, backgroundColor: '#DDB300',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>inicializarTablaEntradaNumerosAleatorios()} >
+      <Text style={{color:'white', fontSize: 15}}>Generar Aleatorios</Text>
     </TouchableOpacity>);
   }
 
@@ -164,7 +164,7 @@ function cambiarValorPickerAlgoritmos(itemValue){
 function pickerAlgortimos(){
   if(banderaEntrada){
   return (
-  <Picker style={{width: 200}} selectedValue={item_algoritmo} onValueChange={(itemValue, itemIndex) => cambiarValorPickerAlgoritmos(itemValue)}>
+  <Picker style={{width: 300 }} selectedValue={item_algoritmo} onValueChange={(itemValue, itemIndex) => cambiarValorPickerAlgoritmos(itemValue)}>
   <Picker.Item label={"FCFS"}  value={"FCFS"}/>
   <Picker.Item label={"SJF"}  value={"SJF"}/>
   <Picker.Item label={"SRTF"}  value={"SRTF"}/>
@@ -197,8 +197,8 @@ function quantumComponent(){
           <TextInput style={styles.input} onChangeText={(val)=>setNumeroCPU(val)} placeholder="número de CPU´S"/>
           <TextInput style={styles.input} onChangeText={(val)=>setNumeroNucleos(val)} placeholder="número de núcleos"/>
           {quantumComponent()}
-          <TouchableOpacity style={{marginTop:0, width: 190, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>init()} >
-            <Text style={{color:'white', fontSize: 17}}>Crear Tabla</Text>
+          <TouchableOpacity style={{marginTop:0, width: 300, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>init()} >
+            <Text style={{color:'white', fontSize: 15}}>Crear Tabla</Text>
           </TouchableOpacity>
         </View>
         

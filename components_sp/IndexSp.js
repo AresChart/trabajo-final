@@ -36,7 +36,7 @@ const onRefresh = React.useCallback(() => {
 
 function tableInputThreadsComponent (){
   if(verTablaEntrada){
-    return(<TableInputThreadsComponent  height={300} tablaEntrada={tablaEntrada} setTablaEntrada={setTablaEntrada} />);
+    return(<TableInputThreadsComponent  height={170} tablaEntrada={tablaEntrada} setTablaEntrada={setTablaEntrada} />);
   }
 
   return(<></>);
@@ -86,12 +86,13 @@ function  crearTablaEntrada (){
   function ejecutarAlgoritmo(){
     let resultado =  main.ejecutarAlgoritmo(textSemaforos,tablaEntrada,textVariables);
     let estaBloqueadoElSistema = resultado[1];
-    setTextHilosBloqueados(resultado[2]);
-    setTextSalida(resultado[0]);
+    setTextHilosBloqueados(""+resultado[2]);
+    setTextSalida(""+resultado[0]);
     setTextVariables(resultado[3]);
     if(estaBloqueadoElSistema){
       alert("Se bloqueo el sistema !");
     }
+    onRefresh();
    }
 
    function limpiarCampos(){
@@ -106,8 +107,8 @@ function  crearTablaEntrada (){
   function buttonGenerarSemaforosAleatoriosComponent(){
     if(verTablaEntrada){
       return(
-        <TouchableOpacity style={{marginTop:0, width: 250, height: 40, backgroundColor: '#EDAF0A',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>generarSemaforosAleatorios()} >
-          <Text style={{color:'white', fontSize: 17}}>Generar Semaforos Aleatorios</Text>
+        <TouchableOpacity style={{marginTop:20, width: 300, height: 40, backgroundColor: '#EDAF0A',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>generarSemaforosAleatorios()} >
+          <Text style={{color:'white', fontSize: 15}}>Semaforos Aleatorios</Text>
         </TouchableOpacity>
       );
     }
@@ -118,8 +119,8 @@ function  crearTablaEntrada (){
   function buttonEjecutarAlgoritmo(){
     if(verTablaEntrada){
       return(
-        <TouchableOpacity style={{marginLeft:20, width: 100, height: 40, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>ejecutarAlgoritmo()} >
-          <Text style={{color:'white', fontSize: 17}}>Ejecutar</Text>
+        <TouchableOpacity style={{marginTop:20, width: 300, height: 40, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>ejecutarAlgoritmo()} >
+          <Text style={{color:'white', fontSize: 15}}>Ejecutar</Text>
         </TouchableOpacity>);
     }
   
@@ -129,8 +130,8 @@ function  crearTablaEntrada (){
   function buttonClear(){
     if(verTablaEntrada){
       return(
-        <TouchableOpacity style={{marginLeft:20, width: 100, height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>limpiarCampos()} >
-          <Text style={{color:'white', fontSize: 17}}>Limpiar</Text>
+        <TouchableOpacity style={{marginTop:0, width: 300, height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>limpiarCampos()} >
+          <Text style={{color:'white', fontSize: 15}}>Limpiar</Text>
         </TouchableOpacity>);
     }
   
@@ -159,28 +160,36 @@ function  crearTablaEntrada (){
     return (<></>)
   }
 
-  return (
-    <View style={{width: "100%" ,height: "100%" ,backgroundColor: '#ffffff',alignItems: 'center'}}>
+ return (
 
-        <View style={{width: "100%" ,height: "100%", top:20 ,flex: 2,alignItems: 'center',justifyContent: 'center',flexDirection: 'row'}}>
-          <View style={{flex: 1,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+  <ScrollView style={{paddingVertical: 0, backgroundColor: '#fff',}}>
+    <View style={{width:'100%',height:'100%',backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+       
+        <View style={{top:20 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+          <View style={{alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
               <TextInput style={styles.input} onChangeText={(val)=>setCantidadSemaforos(val)} placeholder="Cantidad de Semaforos"/>
-              <TouchableOpacity style={{marginTop:0, width: 200, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>establecerSemaforos()} >
-                <Text style={{color:'white', fontSize: 17}}>Establecer Semaforos</Text>
+              <TouchableOpacity style={{marginTop:10, width: 300, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>establecerSemaforos()} >
+                <Text style={{color:'white', fontSize: 15}}>Establecer Semaforos</Text>
               </TouchableOpacity>
           </View>
             {textInputVariablesComponent()}
             {textInputSemaforosComponent()}
-            {buttonClear()}
+            {buttonGenerarSemaforosAleatoriosComponent()}
+            {buttonEjecutarAlgoritmo()}
+           
         </View>
         
         {tableInputThreadsComponent()}
-        <View style={{top:20 ,flex: 2,alignItems: 'center',justifyContent: 'center',flexDirection: 'row'}}>
-          {buttonGenerarSemaforosAleatoriosComponent()}
-          {buttonEjecutarAlgoritmo()}
+        
+        <View style={{top:200 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+          {buttonClear()}
           {textAreaSalidaComponent()}
           {textAreaHilosBloqueadosComponent()}
         </View>
+
+        <View  style={{width: '100%',height:250}}>
+        </View>
     </View>
-  );
+  </ScrollView>
+    );
 }

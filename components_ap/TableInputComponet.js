@@ -21,16 +21,16 @@ const TableInputComponent = (props) => {
         <View style={{width:'95%',height:props.height, top:70}}>
           <DataTable id="tabla">
             <DataTable.Header>
-              <DataTable.Title style={{ flex: 0.4}}><Text style={{fontSize: 12}}>Pid</Text></DataTable.Title>
-              <DataTable.Title style={{ justifyContent:'center', flex: 0.7}}><Text style={{fontSize: 12,textAlign: 'center'}}>T-Llegada</Text></DataTable.Title>
-              <DataTable.Title style={{ justifyContent:'center'}}><Text style={{fontSize: 12,textAlign: 'center'}}>Rafaga CPU</Text></DataTable.Title>
-              <DataTable.Title style={{ justifyContent:'center'}}><Text style={{fontSize: 12,textAlign: 'center'}}>Rafaga E/S</Text></DataTable.Title>
-              <DataTable.Title style={{ justifyContent:'center',display: props.isPrioridad,flex: 0.7}} ><Text style={{fontSize: 12,textAlign: 'center'}}>Prioridad</Text></DataTable.Title>
+              <DataTable.Title style={{ flex: 0.4}}><Text style={{fontSize: 13}}>Pid</Text></DataTable.Title>
+              <DataTable.Title style={{ justifyContent:'center', flex: 0.7}}><Text style={{fontSize: 13,textAlign: 'center'}}>T-Llegada</Text></DataTable.Title>
+              <DataTable.Title style={{ justifyContent:'center'}}><Text style={{fontSize: 13,textAlign: 'center'}}>Rafaga CPU</Text></DataTable.Title>
+              <DataTable.Title style={{ justifyContent:'center'}}><Text style={{fontSize: 13,textAlign: 'center'}}>Rafaga E/S</Text></DataTable.Title>
+              <DataTable.Title style={{ justifyContent:'center',display: props.isPrioridad,flex: 0.7}} ><Text style={{fontSize: 13,textAlign: 'center'}}>Prioridad</Text></DataTable.Title>
             </DataTable.Header>
         
            {tablaEntrada.map((row,index) => (
             <DataTable.Row >
-              <DataTable.Cell style={{flex: 0.4}}><Text style={{fontSize: 12, width:'10%'}}>{row.pid}</Text></DataTable.Cell>
+              <DataTable.Cell style={{flex: 0.4}}><Text style={{fontSize: 15, width:'10%'}}>{row.pid}</Text></DataTable.Cell>
               <DataTable.Cell style={{justifyContent:'center',flex: 0.7}}>
                 <View>
                   <TextInput value={""+row.t_llegada} onChangeText={(data)=>updateLista(index,"t_llegada",data)} style={styles.inputTableAp}/>
