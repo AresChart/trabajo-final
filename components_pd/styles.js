@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
   item_resultado: {
     fontSize: 15,
     height: 100,
-    width:900,
+    width:'100%',
     borderColor: 'black',
     borderWidth: .25,
     textAlign: 'justify',

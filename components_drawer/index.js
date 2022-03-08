@@ -20,13 +20,13 @@ function HomeScreen(props) {
   const [estaReproducir, setEstaReproducir] = useState(false);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' ,  backgroundColor: '#fff'}}>
-      <Text style={{fontSize:60}}>Infraestructura Computacional</Text>
-      <Text style={{fontSize:40, marginTop: 40}}>Presentado Por :</Text>
-      <Text style={{fontSize:30,marginTop: 30}}>Kevin David Sanchez Solís</Text>
-      <Text style={{fontSize:20}}>kdsanchezs@uqvirtual.edu.co</Text>
-      <Text style={{fontSize:30}}>Anderson Ramirez Vasquez</Text>
-      <Text style={{fontSize:20}}>aramirezv_1@uqvirtual.edu.co</Text>
+    <View style={{ width:'100%',height:'100%',alignItems: 'center', justifyContent: 'center' ,  backgroundColor: '#fff'}}>
+      <Text style={{fontSize:35}}>Infraestructura Computacional</Text>
+      <Text style={{fontSize:25, marginTop: 40}}>Owners:</Text>
+      <Text style={{fontSize:20,marginTop: 30}}>Kevin David Sanchez Solís</Text>
+      <Text style={{fontSize:15}}>kdsanchezs@uqvirtual.edu.co</Text>
+      <Text style={{fontSize:20}}>Anderson Ramirez Vasquez</Text>
+      <Text style={{fontSize:15}}>aramirezv_1@uqvirtual.edu.co</Text>
     </View>
   );
 }
