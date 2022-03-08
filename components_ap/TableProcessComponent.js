@@ -47,10 +47,11 @@ const TableProcessComponent = (props) => {
 
   return(
     <View style={{width:'100%',height:'100%', top: props.top}}>
-        <DataTable>
+      <ScrollView horizontal={true} vertical={true} style={{ top: 0 ,width: '100%' ,height: 1000}}  > 
+        <DataTable style={{width:1000}}>
         {tablaStyles.map((row,i) => (
-          <DataTable.Row >
-              <DataTable.Cell style={{ flex: 2}}>{obtenerPID()}</DataTable.Cell>
+          <DataTable.Row style={{width:1000}}>
+              <DataTable.Cell >{obtenerPID()}</DataTable.Cell>
               {row.map((data) => (
               <>
               <DataTable.Cell style={{ backgroundColor: obtenerBackGound(data)}}>
@@ -60,7 +61,8 @@ const TableProcessComponent = (props) => {
               ))}
           </DataTable.Row>
           ))}
-        </DataTable> 
+        </DataTable>
+      </ScrollView> 
     </View>   
   );  
 }

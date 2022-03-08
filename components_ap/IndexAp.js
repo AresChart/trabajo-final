@@ -210,7 +210,7 @@ function quantumComponent(){
           {tableInputComponent()} 
           {tableOutComponent()}
 
-          <View style={{width:'90%',height:400,top:(200+(5*numeroProcesos))}}>
+          <View style={{width:'90%',height:(160+(numeroProcesos*40)),top:(220+(5*numeroProcesos))}}>
             {tableProcessComponent()} 
           </View>
    
@@ -218,11 +218,5 @@ function quantumComponent(){
           </View>
     </View>
   </ScrollView>
-
- 
-
-
-
-
   );
 }

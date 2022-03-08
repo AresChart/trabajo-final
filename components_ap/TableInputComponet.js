@@ -51,7 +51,7 @@ const TableInputComponent = (props) => {
 
               <DataTable.Cell style={{display: props.isPrioridad ,justifyContent:'center',flex: 0.7}} >
                  <View >
-                <TextInput value={""+row.prioridad} onChangeText={(data)=>updateLista(index,"prioridad",data)}style={styles.inputTableAp}/>
+                <TextInput value={""+row.prioridad} onChangeText={(data)=>updateLista(index,"prioridad",data)}style={{textAlign:'center',width: 30,height:25,display: props.isPrioridad}}/>
                 </View>
               </DataTable.Cell>
 

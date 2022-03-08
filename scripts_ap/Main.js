@@ -169,6 +169,21 @@ function verificarIntercepcionDeProcesos(tiempo_llegada) {
 }
 
  function editarTablaSalida() {
+
+    
+
+    for (let x = 0; x < matrizDeDatos.length; x++) {
+        for (let i = 0; i < matrizDeDatos.length-x-1; i++) {
+            if(matrizDeDatos[i][0] > matrizDeDatos[i+1][0]){
+                let aux = matrizDeDatos[i];
+                matrizDeDatos[i] = matrizDeDatos[i + 1];
+                matrizDeDatos[i + 1] = aux;
+            }
+        }
+    }
+
+
+
     let suma = 0;
     for (let i = 0; i < (matrizDeSalida.length-1); i++) {
         var tiempo_espera_total = 0;
@@ -187,13 +202,31 @@ function verificarIntercepcionDeProcesos(tiempo_llegada) {
         var tiempo_servicio = tiempo_ejecucion_total + tiempo_espera_total + parseInt(matrizDeDatos[i][4]);
         var tiempo_salida = tiempo_servicio + parseInt(matrizDeDatos[i][1]);
         matrizDeSalida[i][0]=pid;
-        matrizDeSalida[i][1]=tiempo_salida + parseInt(matrizDeDatos[i][4]);
+        matrizDeSalida[i][1]=tiempo_salida;
         matrizDeSalida[i][2]=tiempo_servicio;
         matrizDeSalida[i][3]=tiempo_espera_total;
         matrizDeSalida[i][4]=(tiempo_ejecucion_total / tiempo_servicio);
         var exp = Math.pow(10, 2);
         matrizDeSalida[i][4] = parseInt(matrizDeSalida[i][4] * exp, 10) / exp;
     }
+
+    /*
+    for (let x = 0; x < matrizDeSalida.length; x++) {
+        for (let i = 0; i < matrizDeSalida.length-x-1; i++) {
+            if(matrizDeSalida[i][0] > matrizDeSalida[i+1][0]){
+                let tmp = matrizDeSalida[i+1][0];
+                matrizDeSalida[i+1][0] = matrizDeSalida[i][0];
+                matrizDeSalida[i][0] = tmp;
+
+                tmp = matrizDeSalida[i+1][1];
+                matrizDeSalida[i+1][1] = matrizDeSalida[i][1];
+                matrizDeSalida[i][1] = tmp;
+
+
+            }
+        }
+    }
+    */
 
     matrizDeSalida[matrizDeSalida.length-1][0]="Prom"  
     matrizDeSalida[matrizDeSalida.length-1][3]= suma/(matrizDeSalida.length-1);
