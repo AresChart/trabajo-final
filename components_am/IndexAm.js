@@ -468,7 +468,6 @@
             <View style={{width: `80%` ,top:20 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
                 
                 <TextInput onChangeText={(val) => setnombreArchivo(val)} value={nombreArchivo} placeholder="Nombre del Archivo" style={styles.input} keyboardType='default' clearButtonMode="always"/>
-                <TextInput onChangeText={(val) => settamañoCaracteres(val)} value={tamañoCaracteres} placeholder="Tamaño de caracteres del Archivo" style={styles.input_tamanio_archivo} keyboardType='numeric' />
                 
                 <TouchableOpacity style={{marginTop:15, width: '100%', height: 40, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=>limpiarDisco()}>
                     <Text style={{color:'white', fontSize: 15}}>Limpiar Discos</Text>
