@@ -2,6 +2,7 @@ import { View,TextInput,Text} from 'react-native';
 import {DataTable} from 'react-native-paper';
 import {styles} from '../styles/styles';
 import React from 'react';
+import NumberFormat from 'react-number-format';
 
 const TableInputComponent = (props) => {
 
@@ -9,12 +10,17 @@ const TableInputComponent = (props) => {
 
   function cellPrioridadComponent(){
 
+    
   }
 
+
+
   function updateLista (index,property,value){
+    if (/^\d+$/.test(value) || value==="") {
     let nuevaLista = [...tablaEntrada];
     nuevaLista[index][property]=value;
     props.setTablaEntrada(nuevaLista);
+    }
   }
 
       return(
@@ -33,25 +39,25 @@ const TableInputComponent = (props) => {
               <DataTable.Cell style={{flex: 0.4}}><Text style={{fontSize: 15, width:'10%'}}>{row.pid}</Text></DataTable.Cell>
               <DataTable.Cell style={{justifyContent:'center',flex: 0.7}}>
                 <View>
-                  <TextInput value={""+row.t_llegada} onChangeText={(data)=>updateLista(index,"t_llegada",data)} style={styles.inputTableAp}/>
+                    <TextInput value={""+row.t_llegada} onChangeText={(data)=>updateLista(index,"t_llegada",data)} style={styles.inputTableAp} keyboardType="numeric"/>
                 </View>
               </DataTable.Cell>
 
               <DataTable.Cell style={{justifyContent:'center'}}>
                 <View >
-                  <TextInput value={""+row.t_ejecucion} onChangeText={(data)=>updateLista(index,"t_ejecucion",data)} style={styles.inputTableAp}/>
+                  <TextInput value={""+row.t_ejecucion} onChangeText={(data)=>updateLista(index,"t_ejecucion",data)} style={styles.inputTableAp} keyboardType="numeric"/>
                 </View>
               </DataTable.Cell>
 
               <DataTable.Cell style={{justifyContent:'center'}}>
                 <View >
-                  <TextInput value={""+row.rafaga_es} onChangeText={(data)=>updateLista(index,"rafaga_es",data)} style={styles.inputTableAp}/>
+                  <TextInput value={""+row.rafaga_es} onChangeText={(data)=>updateLista(index,"rafaga_es",data)} style={styles.inputTableAp} keyboardType="numeric"/>
                 </View>
               </DataTable.Cell>
 
               <DataTable.Cell style={{display: props.isPrioridad ,justifyContent:'center',flex: 0.7}} >
                  <View >
-                <TextInput value={""+row.prioridad} onChangeText={(data)=>updateLista(index,"prioridad",data)}style={{textAlign:'center',width: 30,height:25,display: props.isPrioridad}}/>
+                <TextInput value={""+row.prioridad} onChangeText={(data)=>updateLista(index,"prioridad",data)}style={{textAlign:'center',width: 30,height:25,display: props.isPrioridad}} keyboardType="numeric"/>
                 </View>
               </DataTable.Cell>
 

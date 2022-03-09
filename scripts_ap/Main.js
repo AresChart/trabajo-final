@@ -35,7 +35,13 @@ export function inicializarTablaEntradaNumerosAleatorios(tablaEntrada){
     const max_rafaga_es = 2;
    
     for (let index_i = 0; index_i < tablaEntrada.length; index_i++) {
-        tablaEntrada[index_i].t_llegada = parseInt(Math.random() * (max_t_llegada - min_llegada) + min_llegada);
+
+        if(index_i===0){
+            tablaEntrada[index_i].t_llegada = parseInt(Math.random() * (max_t_llegada - min_llegada) + min_llegada);
+        }else{
+            tablaEntrada[index_i].t_llegada = tablaEntrada[index_i-1].t_llegada+1;
+        }
+        
         tablaEntrada[index_i].t_ejecucion = parseInt(Math.random() * (max - min_ejecucion_prioridad) + min_ejecucion_prioridad);
         tablaEntrada[index_i].prioridad = parseInt(Math.random() * (max - min_ejecucion_prioridad) + min_ejecucion_prioridad);
         tablaEntrada[index_i].rafaga_es = parseInt(Math.random() * (max_rafaga_es - min_ejecucion_prioridad) + min_ejecucion_prioridad);
