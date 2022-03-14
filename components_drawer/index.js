@@ -12,7 +12,7 @@ import IndexSm from '../components_sm/IndexSm';
 import IndexPm from '../components_pm/IndexPm';
 import IndexAm from '../components_am/IndexAm';
 import IndexPd from '../components_pd/IndexPd';
-
+import IndexCp from '../components_cp/IndexCp';
 
 function HomeScreen(props) {
 
@@ -21,12 +21,15 @@ function HomeScreen(props) {
 
   return (
     <View style={{ width:'100%',height:'100%',alignItems: 'center', justifyContent: 'center' ,  backgroundColor: '#fff'}}>
-      <Text style={{fontSize:35}}>Infraestructura Computacional</Text>
+      <Text style={{fontSize:35,textAlign: 'center'}}>Universidad del Quindío</Text>
+      <Text style={{fontSize:20,marginTop:20}}>Armenia Quindío 09/03/2022</Text>
+      <Text style={{fontSize:25, marginTop: 20}}>Computing Infrastructure</Text>
       <Text style={{fontSize:25, marginTop: 40}}>Owners:</Text>
       <Text style={{fontSize:20,marginTop: 30}}>Kevin David Sanchez Solís</Text>
       <Text style={{fontSize:15}}>kdsanchezs@uqvirtual.edu.co</Text>
       <Text style={{fontSize:20}}>Anderson Ramirez Vasquez</Text>
       <Text style={{fontSize:15}}>aramirezv_1@uqvirtual.edu.co</Text>
+      <Text style={{fontSize:15,marginTop: 20}}>License: GNU GPL v3</Text>
     </View>
   );
 }
@@ -59,6 +62,10 @@ function ParticionesDisco() {
   return (<IndexPd/>);
 }
 
+function ComunicacionProcesos(){
+  return (<IndexCp/>);
+}
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -70,6 +77,7 @@ function MyDrawer() {
             <Drawer.Screen name="Algoritmos de planificación" component={AlgoritmosPlanificacionScreen} />
             <Drawer.Screen name="Estrategias De Ajuste" component={EstrategiaDeAjusteScreen} />
             <Drawer.Screen name="Sincronización de Procesos" component={SincronizacionDeProcesosScreen} />
+            <Drawer.Screen name="Comunicación entre procesos" component={ComunicacionProcesos} />
             <Drawer.Screen name="Paginación de Memoria" component={PaginacionDeMemoria} />
             <Drawer.Screen name="Segmentación de Memoria" component={SegmentacionMemoria} />
             <Drawer.Screen name="Asignación de Memoria" component={AsignacionMemoria} />

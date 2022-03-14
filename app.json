@@ -3,7 +3,7 @@
     "name": "Infraestructure",
     "slug": "final-project",
     "version": "1.0.0",
-    "icon": "./assets/icono-infrastructure.png",
+    "icon": "./assets/ios.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -16,11 +16,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.areschart.finalproject"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/ios.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.areschart.finalproject"
