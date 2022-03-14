@@ -17,7 +17,7 @@ let CapacidadMemoriaVirtual = 4;
 // Cantidad total de paginas o procesos
 let NumeroPaginas           = NumeroProcesos + CapacidadMemoriaVirtual;
 // Cantidad de marcos disponibles en memoria fisica
-let EspaciosDisponibles     = NumeroProcesos;
+export let EspaciosDisponibles     = NumeroProcesos;
 // Cantidad de bloques de datos disponibles en memoria virtual
 let EspaciosMemoriaVirtual  = CapacidadMemoriaVirtual;
 // Tamaño de cada marco o bloque de memoria
@@ -496,7 +496,7 @@ function validarMemoriaVirtual() {
  * 
  * @param {*} palabra que representa el proceso
  */
-function agregarPalabraTablaUsuarios(palabra) {
+export function agregarPalabraTablaUsuarios(palabra) {
 
     let indice = false;
     // Recorre el array de posiciones disponibles

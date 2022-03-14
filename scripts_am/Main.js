@@ -15,9 +15,9 @@ export let mapaBits = inicializarMapa();
         //Arreglo que almacena los archivos creados
         export let archivosCreadosContigua  = [];
         //Arreglo que almacena el tamaño de caracteres de los archivos creados
-        var tamañoCaracteresContigua = [];
+        export var tamañoCaracteresContigua = [];
         //Arreglo con los indices de inicio de cada archivo
-        var inicioContigua = [];
+        export var inicioContigua = [];
         //Arreglo que funciona como mapa de bits
         export var mapaContigua = crearMapa();
         // Log para disco de memoria Contigua

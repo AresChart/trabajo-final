@@ -18,7 +18,7 @@ export var memoriaDiscos =  new Array();
 //Arreglo de arreglos que almacena las particiones de los discos[[particion1, particion1][particion]...]
 export var particiones    =  [];
 //Arreglo de parametros de los discos = [[Particion primaria, Extendida, Logica, tamaño particion extendida] [] [] ...]
-var especificacionesDisco     =  new Array();
+export var especificacionesDisco     =  new Array();
 //Tamaño maximo del disco MBR (MB)
 var tamañoDiscoMBR = 2048;
 //Cantidad maxima de particiones primarias en un disco MBR
@@ -84,7 +84,6 @@ export  function  crearDisco(tipoDisco, nombreDisco, tamanioDisco) {
 
     memoriaDiscos[posicionDisco][0] = tamanioDisco;
    
-
     particiones.push();
     particiones[particiones.length] = new Array(3);
     /*
