@@ -13,7 +13,7 @@ import React from 'react';
 // Cantidad de memoria fisica
 let CantidadMemoria = 20;
 // Indice del segmento creado
-let segmentoIndex = 1;
+export let segmentoIndex = 1;
 
 // Cantidad de marcos disponibles en memoria fisica
 export let EspaciosDisponibles     = CantidadMemoria;
@@ -263,7 +263,7 @@ var indiceColores = 0;
  *
  * @returns Color aleatorio
  */
-function generarColor() {
+export function generarColor() {
 
     indiceColores++;
     if(indiceColores % 2 ===0){
@@ -293,7 +293,7 @@ function generarColor() {
  *
  * @returns numero aleatorio generado
  */
-function aleatorio(inferior, superior) {
+export function aleatorio(inferior, superior) {
     // Cantidad de posibilidades
     let numPosibilidades = superior - inferior;
     // Genera un numero aleatorio

@@ -15,6 +15,8 @@ function ProcessList(props) {
 
   // Array de datos a mostrar en la tabla
     let array = props.procesos;
+    // Indice de bloque para los procesos
+    let indices = props.indices;
 
     function obtenerHeight (row){
         if(isNaN(row.length)){
@@ -29,13 +31,13 @@ function ProcessList(props) {
  
         <DataTable id="tabla_salida" style={{flexDirection: 'column'}}>
           <DataTable.Header style={{width:'100%'}}>
-            <DataTable.Title style={{justifyContent:'center',flex:0.5}}><Text style={styles.item_tabla}>Pagina</Text></DataTable.Title>
+            <DataTable.Title style={{justifyContent:'center',flex:0.5}}><Text style={styles.item_tabla}>Bloque</Text></DataTable.Title>
             <DataTable.Title style={{justifyContent:'center'}}><Text style={styles.item_tabla}>Memoria</Text></DataTable.Title>
           </DataTable.Header>
       
           {array.map((row, index) => (
           <DataTable.Row style={{width:'100%', height: 40}}> 
-            <DataTable.Cell style={{width:75, height: 50, borderBottomWidth: 0,flex:0.5, justifyContent:'center'}}>{index+1}</DataTable.Cell>
+            <DataTable.Cell style={{width:75, height: 50, borderBottomWidth: 0,flex:0.5, justifyContent:'center'}}>{parseInt(indices[index]+1)}</DataTable.Cell>
             <DataTable.Cell style={{width:'80%',height: obtenerHeight(row) , flexDirection: 'column'}}>
             <View style={{margin: 0}}>
               <Text style={styles.item_process_list}>{array[index]}</Text>
