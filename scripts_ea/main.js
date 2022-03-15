@@ -141,23 +141,29 @@ function crearParrafoResultado(estrategia,itemAlgoritmoAjuste,tablaEntrada,lista
         }
     }
 
-    let resultado = "Se realizó la ejecución de la estrategia de ajuste sobre: "+estrategia+" por medio del "+itemAlgoritmoAjuste
+    let resultado = "Se realizó la ejecución de la estrategia de : "+estrategia+" por medio del "+itemAlgoritmoAjuste
     +", mediante el siguiente proceso:\n\n";
 
+    let yaSolicito = false;;
     for (let index = 0; index < tablaEntrada.length; index++) {
         if(tablaEntrada[index].solicita=="--"){
             resultado+=" se liberó el proceso "+tablaEntrada[index].proceso;
         }else{
-            resultado+=" se solicitó el proceso "+tablaEntrada[index].proceso;
+            if(!yaSolicito){
+                resultado+="Se solicitó el proceso "+tablaEntrada[index].proceso+".";
+                yaSolicito = true;
+            }else{
+                resultado+=" Se solicitó el proceso "+tablaEntrada[index].proceso;
+            }
         }
     }
-    resultado+=".\n\n Obteniendose como resultado final los procesos en el siguiente orden: "
+    resultado+=".\n\nObteniendose como resultado final los procesos en el siguiente orden: "
     for (let index = 0; index < listaCeldas.length; index++) {
         if(listaCeldas[index]!=undefined){
             resultado+=listaCeldas[index]+ " , ";
         }
     }
-    resultado = resultado.substring(0,resultado.length-2);
+    resultado = resultado.substring(0,resultado.length-3)+".";
     
     return resultado;
 }

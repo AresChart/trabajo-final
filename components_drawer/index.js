@@ -23,13 +23,13 @@ function HomeScreen(props) {
     <View style={{ width:'100%',height:'100%',alignItems: 'center', justifyContent: 'center' ,  backgroundColor: '#fff'}}>
       <Text style={{fontSize:35,textAlign: 'center'}}>Universidad del Quindío</Text>
       <Text style={{fontSize:20,marginTop:20}}>Armenia Quindío 09/03/2022</Text>
-      <Text style={{fontSize:25, marginTop: 20}}>Computing Infrastructure</Text>
-      <Text style={{fontSize:25, marginTop: 40}}>Owners:</Text>
+      <Text style={{fontSize:23, marginTop: 20}}>Infraestructura Computacional</Text>
+      <Text style={{fontSize:22, marginTop: 40}}>Desarrolladores:</Text>
       <Text style={{fontSize:20,marginTop: 30}}>Kevin David Sanchez Solís</Text>
       <Text style={{fontSize:15}}>kdsanchezs@uqvirtual.edu.co</Text>
-      <Text style={{fontSize:20}}>Anderson Ramirez Vasquez</Text>
+      <Text style={{fontSize:20}}>Anderson Ramírez Vásquez</Text>
       <Text style={{fontSize:15}}>aramirezv_1@uqvirtual.edu.co</Text>
-      <Text style={{fontSize:15,marginTop: 20}}>License: GNU GPL v3</Text>
+      <Text style={{fontSize:15,marginTop: 20}}>Licencia: GNU GPL v3</Text>
     </View>
   );
 }
@@ -54,7 +54,7 @@ function PaginacionDeMemoria() {
   return (<IndexPm/>);
 }
 
-function AsignacionMemoria() {
+function AsignacionDisco() {
   return (<IndexAm/>);
 }
 
@@ -73,14 +73,14 @@ function MyDrawer() {
   return (
       <NavigationContainer style={{backgroundColor: '#fff'}}>
         <Drawer.Navigator>
-            <Drawer.Screen name="Home" component={HomeScreen} />
+            <Drawer.Screen name="Inicio" component={HomeScreen} />
             <Drawer.Screen name="Algoritmos de planificación" component={AlgoritmosPlanificacionScreen} />
             <Drawer.Screen name="Estrategias De Ajuste" component={EstrategiaDeAjusteScreen} />
             <Drawer.Screen name="Sincronización de Procesos" component={SincronizacionDeProcesosScreen} />
             <Drawer.Screen name="Comunicación entre procesos" component={ComunicacionProcesos} />
             <Drawer.Screen name="Paginación de Memoria" component={PaginacionDeMemoria} />
             <Drawer.Screen name="Segmentación de Memoria" component={SegmentacionMemoria} />
-            <Drawer.Screen name="Asignación de Memoria" component={AsignacionMemoria} />
+            <Drawer.Screen name="Asignación de Disco" component={AsignacionDisco} />
             <Drawer.Screen name="Particiones de Disco" component={ParticionesDisco} />
         </Drawer.Navigator>
       </NavigationContainer>      

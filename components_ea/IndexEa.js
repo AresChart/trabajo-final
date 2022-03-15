@@ -4,14 +4,15 @@ import {View, ScrollView,Picker,Button,TextInput,TouchableOpacity,Text} from 're
 import TableInputProccessesComponent from './TableInputProccessesComponent';
 import MemoryCellsComponent from './MemoryCellsComponent';
 import * as main from '../scripts_ea/main';
-import Speaker from '../components_drawer/Speaker';
+import NumberFormat from 'react-number-format';
+import {Speaker,Pause} from '../components_drawer/Speaker';
 
 export default function IndexEa(props) {
 
   //Variable que acciona el refresco de la tabla
   const [refreshing, setRefreshing] = React.useState(false);
   const [tablaEntrada, setTablaEntrada] = useState([]);
-  const [cantidadCeldas, setCantidadCeldas] = useState(0);
+  const [cantidadCeldas, setCantidadCeldas] = useState("");
   const [banderaEntrada,setBanderaEntrada] = useState(false);
   const [banderaSalida,setBanderaSalida] = useState(false);
   const [celdasMemoria, setCeldasMemoria] = useState([]);
@@ -112,7 +113,7 @@ const onRefresh = React.useCallback(() => {
     function bottonReproducirComponent(){
       if(bottonReproducirActivo){
         return(
-        <TouchableOpacity  style={{marginTop:15, width: 160, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(array)}>
+        <TouchableOpacity  style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(parrafoResultado)}>
           <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
         </TouchableOpacity>);
       }   
@@ -123,9 +124,12 @@ const onRefresh = React.useCallback(() => {
     function resultadoComponent(){
         if(resultadoComponentActivo && banderaSalida){
           return( 
-          <View style={{top:270,width: '70%',height:200,alignItems: 'center',flexDirection: 'column'}}>
+          <View style={{top:0,width: '90%',height:350,alignItems: 'center',flexDirection: 'column'}}>
             {parrafoResultadoComponent()}
             {bottonReproducirComponent()}
+            <TouchableOpacity style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
+                    <Text style={{color:'white', fontSize: 17}}>Parar</Text>
+           </TouchableOpacity>
           </View>
         );
       }
@@ -172,12 +176,10 @@ const onRefresh = React.useCallback(() => {
 
       function inicializarTabla(){
         if(cantidadCeldas>15){
-          alert("Por favor NO ingreses más de 15 solicitudes")
-        }else{
-          crearTablaEntrada();
-          setBanderaEntrada(true);
+          return alert("Por favor NO ingreses más de 15 solicitudes")
         }
-        
+        crearTablaEntrada();
+        setBanderaEntrada(true);
       }
       
       function crearTablaEntrada(){
@@ -235,7 +237,9 @@ const onRefresh = React.useCallback(() => {
     <View style={{width:'100%',height:'100%',backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
 
           <View style={{height:140,top:10,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
-            <TextInput style={styles.input} onChangeText={(val)=>setCantidadCeldas(val)} placeholder="Cantidad de Celdas"/>
+             <NumberFormat value={cantidadCeldas} displayType={'text'} renderText={ (cantidadCeldas) => (
+                     <TextInput style={styles.input} onChangeText={(val)=>setCantidadCeldas(val)} value={cantidadCeldas} placeholder="Cantidad de Celdas" keyboardType='numeric'/>)}/>
+
               <TouchableOpacity style={{marginTop:5, width: 300, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>inicializarTabla()} >
                 <Text style={{color:'white', fontSize: 15}}>Crear Solicitudes</Text>
               </TouchableOpacity>

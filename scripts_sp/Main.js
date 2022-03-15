@@ -107,6 +107,16 @@ function fijarAleatorios(matrizEntrada){
     return salida;
 }
 
+export function editarTextoSalida(salida,hilosBloqueados,semaforos,variables){
+    let text = "Se ejecutá la sincronización de procesos haciendo uso de las siguientes variables: "+
+    variables+".\n\n"+
+    "Con las siguientes semaforos establecidos: "+semaforos+".\n\n"+
+    "Obteniendo como resultado las siguientes caracteres impresos: "+salida+".\n\n"+
+    "Acompañado de los siguientes HIlos bloqueados: "+hilosBloqueados;
+    
+    return text;
+}
+
 
 /*----------------------------------------------------------------------------
 --- Algoritmos para realizar la Sincrinizacion de procesos
