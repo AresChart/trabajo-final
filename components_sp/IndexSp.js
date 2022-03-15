@@ -57,12 +57,17 @@ function  crearTablaEntrada (){
   }
 
   function establecerSemaforos(){
-    if(cantidadSemaforos>5){
+    if(parseInt(cantidadSemaforos>5)){
      return alert("Por favor no ingrese más de 5 semáforos !")
     }
+
+    if(cantidadSemaforos==="" || parseInt(cantidadSemaforos)===0 ){
+      return alert("Ingrese una cantidad de semáforos válida !")
+    }
+
     let textSemaforos = "";
     for (let index = 0; index < cantidadSemaforos; index++) {
-      textSemaforos += "[ S"+(index+1)+" valor: 1 ]"
+      textSemaforos += "[s"+(index+1)+" valor=1]"
     }
     setTextSemaforos(textSemaforos);
     setTextVariables("c=0,s=0,t=1,x=1");
@@ -90,7 +95,24 @@ function  crearTablaEntrada (){
    setTablaEntrada({Hilo_1:matrizEntrada[0], Hilo_2:matrizEntrada[1], Hilo_3:matrizEntrada[2], Hilo_4:matrizEntrada[3] ,Hilo_5: matrizEntrada[4]});
   }
 
+  
+
   function ejecutarAlgoritmo(){
+    let textSemaforosValido = main.validarTextSemaforos(textSemaforos);
+    if(!textSemaforosValido){
+      return alert("Por favor valida la sintaxis de los semaforos inicializados");
+    }
+    
+    let textVariablesValido = main.validarVariablesEntrada(textVariables);
+    if(!textVariablesValido){
+      return alert("Por favor valida la sintaxis de las variables inicializadas");
+    }
+    
+    let tablaEntradaValida = main.validarTextHilos(tablaEntrada);
+    if(!tablaEntradaValida){
+      return alert("Por favor ingrese un valor en por lo menos 1 hilo");
+    }
+
     let resultado =  main.ejecutarAlgoritmo(textSemaforos,tablaEntrada,textVariables);
     let estaBloqueadoElSistema = resultado[1];
     setTextHilosBloqueados(""+resultado[2]);

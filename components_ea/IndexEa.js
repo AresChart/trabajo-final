@@ -175,9 +175,20 @@ const onRefresh = React.useCallback(() => {
     }
 
       function inicializarTabla(){
-        if(cantidadCeldas>15){
-          return alert("Por favor NO ingreses más de 15 solicitudes")
+
+        let textCantidadCeldasValido = main.validarCantidadCeldas(cantidadCeldas);
+        if(!textCantidadCeldasValido){
+          return alert("Por favor ingrese un valor de celdas válido");
         }
+
+        if(parseInt(cantidadCeldas)>15){
+          return alert("Por favor NO ingreses más de 15 solicitudes");
+        }
+
+        if(parseInt(cantidadCeldas)<3){
+          return alert("Por favor ingrese mínimo 3 solicitudes !");
+        }
+
         crearTablaEntrada();
         setBanderaEntrada(true);
       }

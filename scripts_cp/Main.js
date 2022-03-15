@@ -17,6 +17,34 @@ const CANTIDAD_FILAS_DAFAULT = 13;
 */
 //-----------------------------------------------------------------------------------------------
 
+export function validarTablaEntrada(tablaEntrada){
+    let cantidad = 0;
+    if(tablaEntrada.Hilo_1===undefined){
+        cantidad++;
+    }
+
+    if(tablaEntrada.Hilo_2===undefined){
+        cantidad++;
+    }
+
+    if(tablaEntrada.Hilo_3===undefined){
+        cantidad++;
+    }
+
+    if(tablaEntrada.Hilo_4===undefined){
+        cantidad++;
+    }
+    if(tablaEntrada.Hilo_5===undefined){
+        cantidad++;
+    }
+
+    if(cantidad===5){
+        return false
+    }
+
+    return true;
+}
+
 function validarExistSend(posHiloReceive,indexReceive, posHiloSend){
     let isSend = false;
     for (let index = 0; index < tablaValores[posHiloSend].length && !isSend; index++) {
@@ -55,11 +83,35 @@ export function ejecutar(tablaEntrada){
 
     let tabla =  Object.assign([], tablaEntrada);
 
-    tabla.Hilo_1 = tabla.Hilo_1.split("\n");
-    tabla.Hilo_2 = tabla.Hilo_2.split("\n");
-    tabla.Hilo_3 = tabla.Hilo_3.split("\n");
-    tabla.Hilo_4 = tabla.Hilo_4.split("\n");
-    tabla.Hilo_5 = tabla.Hilo_5.split("\n");
+    if(tabla.Hilo_1 === undefined){
+        tabla.Hilo_1 = "";
+    }else{
+        tabla.Hilo_1 = tabla.Hilo_1.split("\n");
+    }
+
+    if(tabla.Hilo_2 === undefined){
+        tabla.Hilo_2 = "";
+    }else{
+        tabla.Hilo_2 = tabla.Hilo_2.split("\n");
+    }
+
+    if(tabla.Hilo_3 === undefined){
+        tabla.Hilo_3 = "";
+    }else{
+        tabla.Hilo_3 = tabla.Hilo_3.split("\n");
+    }
+    
+    if(tabla.Hilo_4 === undefined){
+        tabla.Hilo_4 = "";
+    }else{
+        tabla.Hilo_4 = tabla.Hilo_4.split("\n");
+    }
+
+    if(tabla.Hilo_5 === undefined){
+        tabla.Hilo_5 = "";
+    }else{
+        tabla.Hilo_5 = tabla.Hilo_5.split("\n");
+    }
 
     tabla = [tabla.Hilo_1,tabla.Hilo_2,tabla.Hilo_3,tabla.Hilo_4,tabla.Hilo_5];
 

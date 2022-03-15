@@ -44,6 +44,11 @@ function  crearTablaEntrada (){
   }
 
   function ejecutarAlgoritmo(){
+    let tablaEntradaValida = main.validarTablaEntrada(tablaEntrada);
+    if(!tablaEntradaValida){
+      return alert("Ingrese al menos un valor en la tabla de entrada !")
+    }
+
     let resultado =  main.ejecutar(tablaEntrada);
     setTextSalida(resultado[0]);
     setTextHilosBloqueados(resultado[1]);

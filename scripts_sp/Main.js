@@ -24,12 +24,148 @@ export function generarSemaforosAleatorios(textSemaforos){
 
 }
 
+export function validarVariablesEntrada(textVariables){
+    let ascii;
+    let cantidadLetras =0;
+    let cantidadIguales=0;
+    let cantidadNumeros=0;
+    let cantidadComas =0;
+    for (let index = 0; index < textVariables.length; index++) {
+        ascii = textVariables[index].toUpperCase().charCodeAt(0);
+        if(ascii > 64 && ascii < 91){
+            cantidadLetras++;
+        }
+
+        if(textVariables[index]==="="){
+            cantidadIguales++;
+        }
+
+        if(/^-?\d+$/.test(textVariables[index])){
+            cantidadNumeros++;
+        }
+
+        if(textVariables[index]===","){
+            cantidadComas++;
+        }
+    }
+
+    if(cantidadNumeros!=cantidadLetras){
+        return false;
+    }
+
+    if(cantidadLetras!=cantidadIguales){
+        return false;
+    }
+
+    if((cantidadLetras-1)!=cantidadComas){
+        return false;
+    }
+
+    return true;
+}
+
+export function validarTextHilos(arrayTextHilos){
+    let cantidad =0;
+    
+        if(arrayTextHilos.Hilo_1===""){
+            cantidad++;
+        }
+        if(arrayTextHilos.Hilo_2===""){
+            cantidad++;
+        }
+        if(arrayTextHilos.Hilo_3===""){
+            cantidad++;
+        }
+        if(arrayTextHilos.Hilo_4===""){
+            cantidad++;
+        }
+        if(arrayTextHilos.Hilo_5===""){
+            cantidad++;
+        }
+
+        if(cantidad===5){
+            return false;
+        }
+        
+        return true;
+    }
+
+export function validarTextSemaforos(textSemaforos){
+    let cantidadCorchetesDerecha = 0;
+    let cantidadCorchetesIzquierda = 0;
+    let cantidadIguales = 0;
+    let cantidadValor = 0;
+    let cantidadEspacio=0;
+    let cantidadDigitos=0;
+    let cantidadSemaforos=0;
+
+    for (let index = 0; index < textSemaforos.length; index++) {
+        if (textSemaforos[index] === "s"){
+            cantidadSemaforos++;
+        }
+
+        if (/^-?\d+$/.test(textSemaforos[index])){
+            cantidadDigitos++;
+        }
+
+        if (textSemaforos[index] === "["){
+            cantidadCorchetesIzquierda++;
+        }
+
+        if (textSemaforos[index] === "]"){
+            cantidadCorchetesDerecha++;
+        }
+
+        if (textSemaforos[index] === "="){
+            cantidadIguales++;
+        }
+        
+        if (textSemaforos[index] === " "){
+            cantidadEspacio++;
+        }
+
+        if (textSemaforos[index] === "v" || textSemaforos[index] === "a" 
+        || textSemaforos[index] === "l"  || textSemaforos[index] === "o" 
+        ||  textSemaforos[index] === "r"  ){
+            cantidadValor++;
+        }
+
+    }
+
+    if(cantidadCorchetesDerecha!=cantidadCorchetesIzquierda){
+        return false;
+    }
+
+    if(cantidadCorchetesDerecha!=cantidadIguales){
+        return false;
+    }
+
+    if(cantidadCorchetesDerecha!=((cantidadValor)/5)){
+        return false;
+    }
+
+    if(cantidadCorchetesDerecha!=cantidadSemaforos){
+        return false;
+    }
+
+    if((cantidadCorchetesDerecha*2) != cantidadDigitos){
+        return false;
+    }
+
+    if(cantidadCorchetesDerecha!=cantidadEspacio){
+        return false;
+    }
+
+    return true;
+
+}
+
 function obtenerSemaforos(textSemaforos){
     var lista = textSemaforos.split(/(\d)/);
 
     for (let index = 0; index < lista.length; index++) {
 
-        if(!isNaN(lista[index]) && lista[index-1]==" valor: "){
+        if(!isNaN(lista[index]) && lista[index-1]==" valor="){
             valores.push(parseInt(lista[index]));
         }
     } 
@@ -66,10 +202,10 @@ function aleatorios(){
        }
 
        if(index < (listaSemaforos.length-1)){
-         matrizEntrada[filaAleatoria][hiloAleatorio] = "S"+(index+1)+".acquire()";
+         matrizEntrada[filaAleatoria][hiloAleatorio] = "s"+(index+1)+".acquire()";
          continue;
        }
-       matrizEntrada[filaAleatoria][hiloAleatorio] = "S"+(index_j)+".release()";
+       matrizEntrada[filaAleatoria][hiloAleatorio] = "s"+(index_j)+".release()";
        index_j++;
     }
 
@@ -139,7 +275,7 @@ export function ejecutarAlgoritmo(textSemaforos,tablaEntrada,textVariables){
         let hiloAleatorio = definirHiloAleatorio();
         let cuerpo = String(tablaEntrada[hiloAleatorio]);
         let elemento = cuerpo.split('\n')[posiciones[hiloAleatorio]];
-        elemento = elemento.replace(/ /g, "");
+        elemento = elemento.replace(/ /g, "").toLocaleLowerCase();
 
         if(elemento == "" || elemento=="}"){
             posiciones[hiloAleatorio]+=1;
@@ -157,7 +293,7 @@ export function ejecutarAlgoritmo(textSemaforos,tablaEntrada,textVariables){
         let esRelease = elemento.toLowerCase() .includes(".release()");
     
         let semaforo = elemento.split(".");
-        let posSemaforo = parseInt(semaforo[0].split("S")[1])-1;
+        let posSemaforo = parseInt(semaforo[0].split("s")[1])-1;
 
         textHilosBloqueados = definirComportamiento(posSemaforo,hiloAleatorio,elemento,esAcquire,esRelease,textHilosBloqueados);
 
@@ -170,6 +306,8 @@ export function ejecutarAlgoritmo(textSemaforos,tablaEntrada,textVariables){
 
     return [salida,estaElSistemaBloqueado,textHilosBloqueados,textVariables];
 }
+
+
 
 function esCondicional(elemento,hiloAleatorio,cuerpo){
    
@@ -263,7 +401,7 @@ function encontrarHilosBloqueados(){
     for (let index = 0; index < sema.length; index++) {
 
         if(sema[index].length!=0){
-            textHilosBloqueados+="S"+(index+1)+" : [";
+            textHilosBloqueados+="s"+(index+1)+" : [";
         }
         
         for (let index_j = 0; index_j < sema[index].length; index_j++) {

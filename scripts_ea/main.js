@@ -12,6 +12,17 @@ var solicitudesAgregadasPasoAPaso;
 var tabla;
 var esEjecucionPrimerVez = true;
 
+export function validarCantidadCeldas(textCantidadCeldas){
+    if(textCantidadCeldas===""){
+        return false;
+    }
+
+    if(parseInt(textCantidadCeldas)===0){
+        return false;
+    }
+    return true;
+}
+
 export function inicializarListasAleatorias(listaProcesos,listaRequerimientos,tablaEntrada){
     listaProcesos = "";
     for (let index = 0; index < tablaEntrada.length; index++) {
