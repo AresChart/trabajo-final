@@ -23,6 +23,15 @@ export const styles = StyleSheet.create({
     height:25,
   },
 
+  textInput_table_cp: {
+    width: 60,
+    height:220,
+    textAlign: 'center',
+    color:'black',
+    fontSize: 10,
+    textAlignVertical: 'top'
+  },
+
   button_style: {
     marginBottom: 10
   },
@@ -65,14 +74,22 @@ export const styles = StyleSheet.create({
       marginTop:20
     },
 
+    textInput_salida_cp: {
+      width: '80%',
+      height: 150,
+      textAlign: 'center',
+      color:'black',
+      fontSize: 10
+    },
+
     textInput_salida_sp: {
-      width: 300,
-      height: 30,
+      width: '80%',
+      height: 100,
       borderWidth: 1,
       textAlign: 'center',
       marginTop: 20,
       color:'black',
-      fontSize: 15
+      fontSize: 12,
     },
 
     textInput_hilos_bloqueados_sp: {
@@ -82,7 +99,19 @@ export const styles = StyleSheet.create({
       textAlign: 'center',
       marginTop: 20,
       color:'black',
-      fontSize: 15
+      fontSize: 15,
+      marginBottom:30
+    },
+
+    textInput_hilos_bloqueados_cp: {
+      width: '90%',
+      height: 30,
+      borderWidth: 1,
+      textAlign: 'center',
+      marginTop: 20,
+      color:'black',
+      fontSize: 10,
+      marginBottom:30
     },
 
     container: {
@@ -105,14 +134,24 @@ export const styles = StyleSheet.create({
         height:500,
       }, 
       item_resultado: {
-        fontSize: 15,
+        fontSize: 12,
         height: 200,
-        width:900,
+        width:'100%',
         justifyContent: "center",
         borderColor: 'black',
         borderWidth: .25,
         textAlign: 'justify',
       },
+      item_resultado_cola: {
+        fontSize: 15,
+        height: 200,
+        width:'100%',
+        justifyContent: "center",
+        borderColor: 'black',
+        borderWidth: .25,
+        textAlign: 'justify',
+      },
+
       checkbox: {
         alignSelf: "center",
       },

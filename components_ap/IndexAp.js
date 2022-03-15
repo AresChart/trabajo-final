@@ -7,7 +7,7 @@ import * as main from '../scripts_ap/Main';
 import TableOutComponent from './TableOutComponen';
 import TableProcessComponent from './TableProcessComponent';
 import NumberFormat from 'react-number-format';
-
+import {Speaker,Pause} from '../components_drawer/Speaker';
 
 
 export default function IndexAp() {
@@ -22,6 +22,8 @@ export default function IndexAp() {
   const [banderaSalida,setBanderaSalida] = useState(false);
   const [isQuamtum,setIsQuantum] = useState(false);
   const [item_algoritmo,setItem_algoritmo] = useState("FCFS");
+  const [textoFinal,setTextoFinal] = useState("");
+  const [textoCola,setTextoCola] = useState("");
 
   const [isPrioridad,setIsPrioridad] = useState('none');
   
@@ -53,7 +55,7 @@ export default function IndexAp() {
 
 function init(){
   if(parseInt(numeroProcesos)>10){
-    return alert("Por favor ingrese menos de 10 procesos");
+    return alert("Por favor NO ingresa más de 10 procesos");
   }else if (parseInt(numeroProcesos)===0){
     return alert("Por favor ingrese una cantida válida de procesos");
   }
@@ -80,14 +82,65 @@ function inicializarTablaSalida(matrizSalida){
   onRefresh();
 }
 
+function validaciones(){
+  let aprobadosTiemposLlegada = main.validosTimeposLLegada(tablaEntrada);
+  if(!aprobadosTiemposLlegada){
+     alert("La tabla de entrada tiene tiempos de llegada erroneos !");
+     return true;
+  }
+  let valoresTablaEntrada = main.validarTablaEntrada(tablaEntrada);
+  if(!valoresTablaEntrada){
+    alert("La tabla de entrada no es válida !");
+    return true;
+ }
+
+  if(numeroProcesos==="" || parseInt(numeroProcesos)===0){
+    alert("Ingrese mínimo número de procesos válido");
+    return true;
+  }
+
+  if(numeroCPU==="" || parseInt(numeroCPU)===0){
+     alert("El número de CPU´s no puede ser 0");
+     return true;
+  }
+
+  if(numeroNucleos==="" || parseInt(numeroNucleos)===0){
+     alert("El número de núcleos no puede ser 0");
+     return true;
+  }
+
+  if(item_algoritmo==="RR" && quantum==="" || parseInt(quantum)===0){
+     alert("Por favor ingrese un Quantum válido");
+     return true;
+  }
+  return false;
+}
+
 const [tiempoMasLejano, setTiempoMasLejano] = useState(0);
 
 function iniciarAlgoritmo (){
+ 
+  if(validaciones()){
+    return;
+  }
+
   let nucleosTotal = parseInt(numeroNucleos)*parseInt(numeroCPU);
   let resultado = main.ejecutarAlgoritmo(item_algoritmo,tablaEntrada,nucleosTotal,parseInt(quantum));
    setTiempoMasLejano(resultado[1]);
    setTablaStyles(main.crearTablaDeEstilos());
-   inicializarTablaSalida(resultado[0]);
+  let texto="";
+   if(item_algoritmo=="RR"){
+    setTextoCola(resultado[0][1]);
+    inicializarTablaSalida(resultado[0][0]);
+    texto = main.crearTextoSalida(item_algoritmo,resultado[0][0]);
+   }else{
+    setTextoCola(resultado[0]);
+    inicializarTablaSalida(resultado[0]);
+    texto = main.crearTextoSalida(item_algoritmo,resultado[0]);
+   }
+  
+
+  setTextoFinal(texto);
 }
 
 //Variable que acciona el refresco de la tabla
@@ -111,25 +164,11 @@ const onRefresh = React.useCallback(() => {
 }
 
 const [tablaStyles, setTablaStyles] = useState(new Array());
-function crearStyles(){
-  //setTablaStyles();
-
-
- //for (let index = 0; index < 10; index++) {
- // tablaStyles.push(new Array('red','#4B53BC','#4B53BC'));
- // tablaStyles[index]=new Array(3);
-  //tablaStyles[index][0] ='red';
- // tablaStyles[index][1] ='#4B53BC';
-  //tablaStyles[index][2] ='#4B53BC';
- //}
- //tablaStyles.push(new Array('#4B53BC','#4B53BC'));
-
-}
 
 function inicializarTablaEntradaNumerosAleatorios(){
-  main.inicializarTablaEntradaNumerosAleatorios(tablaEntrada);
+  main.inicializarTablaEntradaNumerosAleatorios(tablaEntrada,item_algoritmo);
+  
   return onRefresh();
- //setTablaEntrada(tabla);
 }
 
 function bottonInicializarTablaeEntrada(){
@@ -154,13 +193,22 @@ function tableProcessComponent (){
 
 function cambiarValorPickerAlgoritmos(itemValue){
   setItem_algoritmo(itemValue);
-  if(itemValue==="RR"){
+
+  if(itemValue==="Prioridad interna expulsiva (HRN_PRIMA)" || itemValue==="Prioridad interna no expulsiva (HRN)"){
+    setTablaEntrada(main.cambiarPrioridad(tablaEntrada));
+  }
+
+  if(itemValue==="RR" || itemValue==="Prioridad externa no expulsiva"){
     setIsQuantum(true);
   }else{
     setIsQuantum(false);
   }
 
-  if(itemValue==="Externo Expulsivo" || itemValue==="Externo No Expulsivo"){
+  let isItemValido = itemValue==="Prioridad externa expulsiva" 
+  || itemValue==="Prioridad externa no expulsiva" ||  itemValue==="Prioridad interna no expulsiva (HRN)"
+  || itemValue === "Prioridad interna expulsiva (HRN_PRIMA)";
+
+  if(isItemValido){
     setIsPrioridad('flex');
   }else{
     setIsPrioridad('none');
@@ -175,10 +223,10 @@ function pickerAlgortimos(){
   <Picker.Item label={"FCFS"}  value={"FCFS"}/>
   <Picker.Item label={"SJF"}  value={"SJF"}/>
   <Picker.Item label={"SRTF"}  value={"SRTF"}/>
-  <Picker.Item label={"Externo Expulsivo"}  value={"Externo Expulsivo"}/>
-  <Picker.Item label={"Externo No Expulsivo"}  value={"Externo No Expulsivo"}/>
-  <Picker.Item label={"HRN"}  value={"HRN"}/>
-  <Picker.Item label={"HRN_PRIMA"}  value={"HRN_PRIMA"}/>
+  <Picker.Item label={"Prioridad externa expulsiva"}  value={"Prioridad externa expulsiva"}/>
+  <Picker.Item label={"Prioridad externa no expulsiva"}  value={"Prioridad externa no expulsiva"}/>
+  <Picker.Item label={"Prioridad interna no expulsiva (HRN)"}  value={"Prioridad interna no expulsiva (HRN)"}/>
+  <Picker.Item label={"Prioridad interna expulsiva (HRN')"}  value={"Prioridad interna expulsiva (HRN_PRIMA)"}/>
   <Picker.Item label={"RR"}  value={"RR"}/>
 </Picker>);}
   return(<></>);
@@ -196,9 +244,39 @@ function quantumComponent(){
 }
 
 
+function resultado(){
+  if(banderaSalida){
+    return(
+      <View style={{marginTop:260,width: '90%', height:350,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+        <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={textoFinal}/>
+        <TouchableOpacity  style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
+          <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
+                    <Text style={{color:'white', fontSize: 17}}>Parar</Text>
+        </TouchableOpacity>
+      </View>
+      );
+  }
+
+  return(<></>);
+}
+
+function resultadoCola(){
+  if(banderaSalida && item_algoritmo==="RR"){
+    return(
+      <View style={{width:'90%',height: 200,top:210}}>
+            <TextInput style={styles.item_resultado_cola} multiline={true} numberOfLines={8} value={textoCola}/>
+      </View>
+      );
+  }
+
+  return(<></>);
+}
+
  return (
 
-    <ScrollView style={{paddingVertical: 0}}>
+    <ScrollView style={{paddingVertical: 0,backgroundColor: '#fff'}}>
     <View style={{width:'100%',height:'100%',backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
 
         <View style={{top:15,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
@@ -229,9 +307,10 @@ function quantumComponent(){
           <View style={{width:'90%',height:(160+(numeroProcesos*40)),top:(220+(5*numeroProcesos))}}>
             {tableProcessComponent()} 
           </View>
-   
-          <View style={{width:'100%',height: 300}}>
-          </View>
+
+          {resultadoCola()}
+
+          {resultado()}
     </View>
   </ScrollView>
   );

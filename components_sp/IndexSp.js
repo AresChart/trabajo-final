@@ -3,18 +3,23 @@ import {styles} from '../styles/styles';
 import {View, ScrollView,Picker,TextInput, Button,TouchableOpacity,Text} from 'react-native';
 import TableInputThreadsComponent from './TableInputThreadsComponent';
 import * as main from '../scripts_sp/Main';
+import NumberFormat from 'react-number-format';
+import {Speaker,Pause} from '../components_drawer/Speaker';
 
 export default function IndexSp() {
 
   //Variable que acciona el refresco de la tabla
   const [refreshing, setRefreshing] = React.useState(false);
-  const [cantidadSemaforos, setCantidadSemaforos] = useState(0);
+  const [cantidadSemaforos, setCantidadSemaforos] = useState("");
   const [textSemaforos, setTextSemaforos] = useState(0);
   const [textVariables, setTextVariables] = useState("");
   const [textSalida, setTextSalida] = useState("");
   const [textHilosBloqueados, setTextHilosBloqueados] = useState("");
   const [verTablaEntrada, setVerTablaEntrada] = useState(false);
   const [tablaEntrada, setTablaEntrada] = useState([]);
+  const [textoFinal,setTextoFinal] = useState("");
+  const [banderaSalida,setBanderaSalida] = useState(false);
+
 
   /**
       * Metodo que realiza la espera mientras se ejecuta una accion
@@ -52,6 +57,9 @@ function  crearTablaEntrada (){
   }
 
   function establecerSemaforos(){
+    if(cantidadSemaforos>5){
+     return alert("Por favor no ingrese más de 5 semáforos !")
+    }
     let textSemaforos = "";
     for (let index = 0; index < cantidadSemaforos; index++) {
       textSemaforos += "[ S"+(index+1)+" valor: 1 ]"
@@ -59,7 +67,6 @@ function  crearTablaEntrada (){
     setTextSemaforos(textSemaforos);
     setTextVariables("c=0,s=0,t=1,x=1");
     init();
-    //setverCantidadFilas(true);
   }
  
   function textInputSemaforosComponent(){
@@ -92,6 +99,11 @@ function  crearTablaEntrada (){
     if(estaBloqueadoElSistema){
       alert("Se bloqueo el sistema !");
     }
+
+    let text = main.editarTextoSalida(""+resultado[0],""+resultado[2],textSemaforos,textVariables)
+    setTextoFinal(text);
+    setBanderaSalida(true);
+
     onRefresh();
    }
 
@@ -141,7 +153,7 @@ function  crearTablaEntrada (){
   function textAreaSalidaComponent(){
     if(verTablaEntrada){
       return (
-        <TextInput style={styles.textInput_salida_sp} 
+        <TextInput style={styles.textInput_salida_sp} numberOfLines={13} multiline={true}
         onChangeText={(text) => setTextSalida(text)} placeholder="Salida" value={textSalida}/>
       );
     }
@@ -160,15 +172,36 @@ function  crearTablaEntrada (){
     return (<></>)
   }
 
+  function resultado(){
+    if(banderaSalida){
+      return(
+        <View style={{marginTop:0,width: '90%', height:320,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+          <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={textoFinal}/>
+          <TouchableOpacity  style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
+            <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
+                      <Text style={{color:'white', fontSize: 17}}>Parar</Text>
+            </TouchableOpacity>
+        </View>
+        );
+    }
+  
+    return(<></>);
+  }
+
  return (
 
   <ScrollView style={{paddingVertical: 0, backgroundColor: '#fff',}}>
     <View style={{width:'100%',height:'100%',backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
        
-        <View style={{top:20 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+        <View style={{top:10 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
           <View style={{alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
-              <TextInput style={styles.input} onChangeText={(val)=>setCantidadSemaforos(val)} placeholder="Cantidad de Semaforos"/>
-              <TouchableOpacity style={{marginTop:10, width: 300, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>establecerSemaforos()} >
+              
+              <NumberFormat value={cantidadSemaforos} displayType={'text'} renderText={ (cantidadSemaforos) => (
+                    <TextInput style={styles.input} onChangeText={(val)=>setCantidadSemaforos(val)} value={cantidadSemaforos} placeholder="Cantidad de Semaforos" keyboardType='numeric'/>)}/>
+
+              <TouchableOpacity style={{marginTop:10,marginBottom:10, width: 300, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>establecerSemaforos()} >
                 <Text style={{color:'white', fontSize: 15}}>Establecer Semaforos</Text>
               </TouchableOpacity>
           </View>
@@ -181,14 +214,15 @@ function  crearTablaEntrada (){
         
         {tableInputThreadsComponent()}
         
-        <View style={{top:200 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+        <View style={{height:400,width: '100%',top:60 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
           {buttonClear()}
           {textAreaSalidaComponent()}
           {textAreaHilosBloqueadosComponent()}
         </View>
 
-        <View  style={{width: '100%',height:250}}>
-        </View>
+        {resultado()}
+
+      
     </View>
   </ScrollView>
     );
