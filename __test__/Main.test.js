@@ -2,7 +2,7 @@
 import {cambiarPrioridad} from '../scripts_ap/Main';
 
 
-describe('prueba',() => {
+describe('Algoritmos de planificacion',() => {
     test('prueba', () => {
 
         let tablaEntrada = [
