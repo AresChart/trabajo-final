@@ -11,8 +11,17 @@ var hilosTerminados;
 const CANTIDAD_COLUMNAS = 5;
 const CANTIDAD_FILAS_DAFAULT = 13;
 
+
+export function editarTextoSalida(textSalida,textHilosBloqueados){
+    let salida = "Se ejecuta el Algoritmo de comunicación de procesos en cual obtiene la respuesta: \n\n"+
+    textSalida+"\n\n"
+    +"Con los siguientes hilos bloqueados :\n\n"+textHilosBloqueados;
+    
+    return salida;
+}
+
 /*---------------------------------------------------------
- --- Algoritmos para Generar valores y semáforos aleatorios
+ --- Algoritmos para Generar valores Aleaotorios
  ----------------------------------------------------------
 */
 //-----------------------------------------------------------------------------------------------

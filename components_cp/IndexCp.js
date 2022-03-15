@@ -3,6 +3,7 @@ import {styles} from '../styles/styles';
 import {View, ScrollView,Picker,TextInput, Button,TouchableOpacity,Text} from 'react-native';
 import TableInputThreadsComponent from './TableInputThreadsComponent';
 import * as main from '../scripts_cp/Main';
+import {Speaker,Pause} from '../components_drawer/Speaker';
 
 export default function IndexCp() {
 
@@ -11,6 +12,8 @@ export default function IndexCp() {
   const [textSalida, setTextSalida] = useState("");
   const [textHilosBloqueados, setTextHilosBloqueados] = useState("");
   const [tablaEntrada, setTablaEntrada] = useState([]);
+  const [textoFinal,setTextoFinal] = useState("");
+
 
   /**
       * Metodo que realiza la espera mientras se ejecuta una accion
@@ -52,6 +55,8 @@ function  crearTablaEntrada (){
     let resultado =  main.ejecutar(tablaEntrada);
     setTextSalida(resultado[0]);
     setTextHilosBloqueados(resultado[1]);
+    let salida = main.editarTextoSalida(textSalida,textHilosBloqueados);
+    setTextoFinal(salida);
    }
 
    function limpiarCampos(){
@@ -59,6 +64,20 @@ function  crearTablaEntrada (){
     setTextSalida("");
     crearTablaEntrada();
    }
+
+   function resultado(){
+      return(
+        <View style={{marginTop:30,width: '90%', height:350,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+          <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={textoFinal}/>
+          <TouchableOpacity  style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
+            <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
+                      <Text style={{color:'white', fontSize: 17}}>Parar</Text>
+          </TouchableOpacity>
+        </View>
+        );
+    }
 
 
   function buttonGenerarSemaforosAleatoriosComponent(){
@@ -115,6 +134,8 @@ function  crearTablaEntrada (){
             <Text style={{fontSize:12,marginTop:10}}>Hilos Bloqueados</Text>
             {textAreaHilosBloqueadosComponent()}
           </View>
+
+          {resultado()}
       </View>
     </ScrollView>
     );
