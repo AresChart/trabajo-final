@@ -11,7 +11,7 @@ import TableData from './TableDataComponent';
 import TableUser from './TableUserComponent';
 import { styles } from './styles';
 import NumberFormat from 'react-number-format';
-import Speaker from '../components_drawer/Speaker';
+import { Speaker, Pause } from '../components_drawer/Speaker';
 
 /**
  * Genera la vista para los algoritmos de paginación de memoria
@@ -180,8 +180,11 @@ function paginacion() {
 
         <View style={{width: "90%",top: 250, backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
             <TextInput multiline={true} style={styles.item_resultado} numberOfLines={8} value={funciones.paginationLog}/>
-            <TouchableOpacity style={{marginTop:20, width: 190, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={ ()=> Speaker(funciones.paginationLog)} >
+            <TouchableOpacity style={{marginTop:20, width: 190, height: 45, backgroundColor: 'blue', padding:10, alignItems: 'center', borderRadius: 5}} onPress={ ()=> Speaker(funciones.paginationLog)} >
                 <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{marginTop:15, width: 190, height: 45, backgroundColor: 'red', padding:10, alignItems: 'center', borderRadius: 5}} onPress= { ()=> Pause()}>
+                <Text style={{color:'white', fontSize: 17}}>Parar</Text>
             </TouchableOpacity>
         </View>
 

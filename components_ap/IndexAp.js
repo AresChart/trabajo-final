@@ -7,7 +7,7 @@ import * as main from '../scripts_ap/Main';
 import TableOutComponent from './TableOutComponen';
 import TableProcessComponent from './TableProcessComponent';
 import NumberFormat from 'react-number-format';
-import {Speaker,Pause} from '../components_drawer/Speaker';
+import { Speaker, Pause } from '../components_drawer/Speaker';
 
 
 export default function IndexAp() {
@@ -218,17 +218,19 @@ function cambiarValorPickerAlgoritmos(itemValue){
 
 function pickerAlgortimos(){
   if(banderaEntrada){
-  return (
-  <Picker style={{width: 300 }} selectedValue={item_algoritmo} onValueChange={(itemValue, itemIndex) => cambiarValorPickerAlgoritmos(itemValue)}>
-  <Picker.Item label={"FCFS"}  value={"FCFS"}/>
-  <Picker.Item label={"SJF"}  value={"SJF"}/>
-  <Picker.Item label={"SRTF"}  value={"SRTF"}/>
-  <Picker.Item label={"Prioridad externa expulsiva"}  value={"Prioridad externa expulsiva"}/>
-  <Picker.Item label={"Prioridad externa no expulsiva"}  value={"Prioridad externa no expulsiva"}/>
-  <Picker.Item label={"Prioridad interna no expulsiva (HRN)"}  value={"Prioridad interna no expulsiva (HRN)"}/>
-  <Picker.Item label={"Prioridad interna expulsiva (HRN')"}  value={"Prioridad interna expulsiva (HRN_PRIMA)"}/>
-  <Picker.Item label={"RR"}  value={"RR"}/>
-</Picker>);}
+    return (
+      <Picker style={{width: 300 }} selectedValue={item_algoritmo} onValueChange={(itemValue, itemIndex) => cambiarValorPickerAlgoritmos(itemValue)}>
+        <Picker.Item label={"FCFS"}  value={"FCFS"}/>
+        <Picker.Item label={"SJF"}  value={"SJF"}/>
+        <Picker.Item label={"SRTF"}  value={"SRTF"}/>
+        <Picker.Item label={"Prioridad externa expulsiva"}  value={"Prioridad externa expulsiva"}/>
+        <Picker.Item label={"Prioridad externa no expulsiva"}  value={"Prioridad externa no expulsiva"}/>
+        <Picker.Item label={"Prioridad interna no expulsiva (HRN)"}  value={"Prioridad interna no expulsiva (HRN)"}/>
+        <Picker.Item label={"Prioridad interna expulsiva (HRN')"}  value={"Prioridad interna expulsiva (HRN_PRIMA)"}/>
+        <Picker.Item label={"RR"}  value={"RR"}/>
+      </Picker>
+    );
+  }
   return(<></>);
 }
 
@@ -249,11 +251,11 @@ function resultado(){
     return(
       <View style={{marginTop:260,width: '90%', height:350,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
         <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={textoFinal}/>
-        <TouchableOpacity  style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
+        <TouchableOpacity  style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
           <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
-                    <Text style={{color:'white', fontSize: 17}}>Parar</Text>
+        <TouchableOpacity style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
+          <Text style={{color:'white', fontSize: 17}}>Parar</Text>
         </TouchableOpacity>
       </View>
       );

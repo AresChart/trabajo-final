@@ -8,7 +8,7 @@ import * as funciones from '../scripts_pd/Main';
 import { DataTable } from 'react-native-paper';
 import { styles } from './styles';
 import NumberFormat from 'react-number-format';
-import Speaker from '../components_drawer/Speaker';
+import { Speaker, Pause } from '../components_drawer/Speaker';
 
 import DiscoOutComponent from './DiscoOutComponent';
 
@@ -303,8 +303,11 @@ function modificarEstados(estado, index){
     return(
       <View style={{marginTop:10,width: '90%', height:200,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
         <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={array}/>
-        <TouchableOpacity  style={{marginTop:15, width: 160, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(array)}>
+        <TouchableOpacity  style={{marginTop:15, width: 160, height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(array)}>
           <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{marginTop:15, width: 160, height: 45, backgroundColor: 'red', padding:10, alignItems: 'center', borderRadius: 5}} onPress= { ()=> Pause()}>
+          <Text style={{color:'white', fontSize: 17}}>Parar</Text>
         </TouchableOpacity>
       </View>
     );
@@ -363,9 +366,9 @@ function modificarEstados(estado, index){
     if(particiones.length === discosGlobales.length){
       return(
         <ScrollView style={{paddingVertical: 5}}>
-           {discosGlobales.map((row,i) => (
-        <DiscoOutComponent top={(50+(50*discosGlobales.length))} discosGlobales={discosGlobales} particiones={particiones} posDisco={i}/>
-        ))}
+          {discosGlobales.map((row,i) => (
+            <DiscoOutComponent top={(50+(50*discosGlobales.length))} discosGlobales={discosGlobales} particiones={particiones} posDisco={i}/>
+          ))}
         </ScrollView>
       );
     }
@@ -551,8 +554,8 @@ function modificarEstados(estado, index){
         {tablePartitions()}
         {diskLog()}
 
-        <View style={{width:'90%',height:250,borderWidth: 1}}>
-        {discoOutComponent()}
+        <View style={{marginTop:50, width:'90%',height:250,borderWidth: 1}}>
+          {discoOutComponent()}
         </View>   
 
         <View style={{width:'70%',height:40,end:100}}>
