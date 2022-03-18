@@ -12,6 +12,9 @@ var solicitudesAgregadasPasoAPaso;
 var tabla;
 var esEjecucionPrimerVez = true;
 
+
+
+
 export function validarCantidadCeldas(textCantidadCeldas){
     if(textCantidadCeldas===""){
         return false;

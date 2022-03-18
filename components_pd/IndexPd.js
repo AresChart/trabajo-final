@@ -11,6 +11,9 @@ import NumberFormat from 'react-number-format';
 import { Speaker, Pause } from '../components_drawer/Speaker';
 
 import DiscoOutComponent from './DiscoOutComponent';
+import TableDisc from './TableDisc';
+
+
 
 /**
  * Metodo que Gestiona la vista principal del aplicativo
@@ -25,6 +28,7 @@ function App () {
   const [discosGlobales, setDiscosGlobales] = React.useState([]);
   const [particiones, setparticiones] = React.useState([]);
   const [posDisco, setPosDisco] = React.useState(0);
+  const [tablaStyles, setTablaStyles] = React.useState(new Array());
 
   /**
    * Metodo que realiza las operaciones para el refresco de la tabla
@@ -50,19 +54,24 @@ function App () {
     //Llama a la funcion de eliminar disco
     
     let resultado =  funciones.eliminarDisco(discos);
-    setparticiones(resultado[1]);
-    setDiscosGlobales(resultado[0]);
 
-
-    //Set para el selector de discos
-    setitemsInPicker(    
-      Object.keys(funciones.discosCreados).map(function(key, index) {
-        return (<Picker.Item label={funciones.discosCreados[key]['nombre']}  value={funciones.discosCreados[key]['nombre']}/>
-        )
-      })
-    );
-
-    return onRefresh();
+    // Valida que no se devuelva un error
+    if (resultado != -1) {
+      
+      setparticiones(resultado[1]);
+      setDiscosGlobales(resultado[0]);
+  
+  
+      //Set para el selector de discos
+      setitemsInPicker(    
+        Object.keys(funciones.discosCreados).map(function(key, index) {
+          return (<Picker.Item label={funciones.discosCreados[key]['nombre']}  value={funciones.discosCreados[key]['nombre']}/>
+          )
+        })
+      );
+  
+      return onRefresh();
+    }
   }
 
   /**
@@ -93,18 +102,24 @@ function App () {
     //Llamado al metodo para el ingreso de la particion.
   
     let resultado =  await funciones.ingresarParticion(discos, array);
-    setparticiones(resultado[1]);
-    setDiscosGlobales(resultado[0]);
 
-
-    // Limpia campos  de texto 
-    settLibre("");
-    settNuevo("");
-    setlibreA("");
-    setnombreP("");
-    setetiqueta("");
-
-    return onRefresh();
+    // Valida si no se encuentran errores
+    if (resultado != -1) {
+      
+      setparticiones(resultado[1]);
+      setDiscosGlobales(resultado[0]);
+  
+      setTablaStyles(funciones.inicializarTablaStyles(discos,discosGlobales,particiones));
+  
+      // Limpia campos  de texto 
+      settLibre("");
+      settNuevo("");
+      setlibreA("");
+      setnombreP("");
+      setetiqueta("");
+  
+      return onRefresh();
+    }
   }
  
   /**
@@ -123,6 +138,10 @@ function App () {
     if (tamaño == '') {
       return alert("Ingrese tamaño para el disco.");
     }
+    // Valida que exista tamaño para el disco
+    if (tamaño <= 0) {
+      return alert("El tamaño deve ser mayor a 0.");
+    }
     // Valida si el disco es MBR y el limite se excede
     if (tipo == "MBR" && parseInt(tamaño, 10) > 2048) {
       return alert("El tamaño maximo para disco MBR es: 2TB.");
@@ -131,35 +150,40 @@ function App () {
     //Llamado al metodo que almacena los discos
     
     let resultado = funciones.crearDisco(tipo, nombre, parseInt(tamaño, 10));
-    setparticiones(resultado[1]);
-    /*
-    let parti = funciones.particiones;
-    parti.push();
-    setparticiones(parti);
-    */
-    setDiscosGlobales(resultado[0]);
+
+    // Valida que no se devuelva un error
+    if (resultado != -1) {
+      
+      setparticiones(resultado[1]);
+      /*
+      let parti = funciones.particiones;
+      parti.push();
+      setparticiones(parti);
+      */
+      setDiscosGlobales(resultado[0]);
+    
   
-
-    //Set para el selector de discos
-    setitemsInPicker(    
-      Object.keys(funciones.discosCreados).map(function(key, index) {
-        return (
-          <Picker.Item label={funciones.discosCreados[key]['nombre']}  value={funciones.discosCreados[key]['nombre']}/>
-        )
-      })
-    );
-
-    // Valida si esta vacio
-    if (discos == "")  {
-      setDisco(funciones.discosCreados[nombre]['nombre']);
+      //Set para el selector de discos
+      setitemsInPicker(    
+        Object.keys(funciones.discosCreados).map(function(key, index) {
+          return (
+            <Picker.Item label={funciones.discosCreados[key]['nombre']}  value={funciones.discosCreados[key]['nombre']}/>
+          )
+        })
+      );
+  
+      // Valida si esta vacio
+      if (discos == "")  {
+        setDisco(funciones.discosCreados[nombre]['nombre']);
+      }
+  
+      // Limpia campos
+      setTamaño("");
+      setNombre("");
+  
+      // Refresca componentes
+      return onRefresh();
     }
-
-    // Limpia campos
-    setTamaño("");
-    setNombre("");
-
-    // Refresca componentes
-    return onRefresh();
   }
 
 
@@ -173,14 +197,17 @@ function App () {
     // Llama la funcion de eliminar particion
     
     let resultado = funciones.eliminarParticion(discos, index);
-    setparticiones(resultado[1]);
-    setDiscosGlobales(resultado[0]);
-    //let par = new Array(discosGlobales.length);
-    //setparticiones(par);
-    
 
-    // Refresca componentes
-    return onRefresh();
+    // Valida que se reporten errores
+    if (resultado != -1) {      
+      setparticiones(resultado[1]);
+      setDiscosGlobales(resultado[0]);
+      //let par = new Array(discosGlobales.length);
+      //setparticiones(par);
+
+      // Refresca componentes
+      return onRefresh();
+    }
   }
 
 
@@ -248,7 +275,7 @@ function modificarEstados(estado, index){
             <DataTable.Title style={{justifyContent:'center',flex:0.7}}>Tamaño</DataTable.Title>
             <DataTable.Title style={{justifyContent:'center'}}>Opciones</DataTable.Title>
           </DataTable.Header>
-          {Object.values(part).map((row, index) => (
+          {Object.values(array).map((row, index) => (
             <DataTable.Row>
               <DataTable.Cell style={{justifyContent:'center'}}>
                <View>
@@ -413,6 +440,14 @@ function modificarEstados(estado, index){
     onRefresh();
   }
 
+  function tableDisc (){
+      return(
+      <View style={{width:'90%',height:300,top:100,marginBottom:100}}>
+        <TableDisc width={'100%'} tablaStyles={tablaStyles}  />
+      </View>
+      );
+  }
+
   //llena el combo box de alinear
   let listaAlinear = metricas.map( data=> {
     return (
@@ -554,9 +589,11 @@ function modificarEstados(estado, index){
         {tablePartitions()}
         {diskLog()}
 
-        <View style={{marginTop:50, width:'90%',height:250,borderWidth: 1}}>
-          {discoOutComponent()}
-        </View>   
+        <View style={{width:'90%',height:250,borderWidth: 1}}>
+        {discoOutComponent()}
+        </View>
+
+        {tableDisc()}    
 
         <View style={{width:'70%',height:40,end:100}}>
         </View> 
