@@ -181,6 +181,8 @@ function App () {
     let resultado = funciones.eliminarParticion(discos, index);
     setparticiones(resultado[1]);
     setDiscosGlobales(resultado[0]);
+
+    setTablaStyles(funciones.inicializarTablaStyles(discos,discosGlobales,particiones));
     //let par = new Array(discosGlobales.length);
     //setparticiones(par);
     
