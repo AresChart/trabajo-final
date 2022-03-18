@@ -192,6 +192,63 @@ function existeParticionEnDisco(posicionDisco,nombreParticion){
     return false;
 }
 
+function obtenerBackGoundColorParticion(tipo){
+
+    switch (tipo) {
+        case "Fat32":
+            return "#31FF03 ";
+        case "NTFS":
+            return "#48e4ad";
+        //case "exFAT":
+            return "#DAF7A6";
+        case "Ext2":
+            return "#9db8d2";
+        //case "Ext3":
+            return "#DAF7A6";
+        case "Ext4":
+            return "#486884";
+        case "HFS+":
+            return "#c0a39e";
+        default:
+            return "#FFFFFF ";
+      }
+}
+
+function establecerFlexParticion(discos,particiones,indiceDisco,indiceParticion){
+    let tamanioDisco = discos[indiceDisco][1];
+    let tamanioParticion = particiones[indiceDisco][indiceParticion][1];
+    let indiceRealParticion = (tamanioParticion/tamanioDisco);
+    let cantidadParticiones = particiones[indiceDisco].length;
+
+    return (indiceRealParticion);
+}
+
+export function inicializarTablaStyles(nombreDisco,discos, particiones){
+
+    let posicionDisco = encontrarDisco(nombreDisco);
+    let disco = discos[posicionDisco];
+
+    let tablaFinal = [];
+
+        tablaFinal.push();
+        tablaFinal[0]=new Array(1);
+        tablaFinal[0][0] = "Nombre del disco: "+disco[0]+" Tamaño: "+ disco[1]+" MB"+ " Tipo del disco: "+disco[2];
+        
+        tablaFinal.push();
+        tablaFinal[1] = new Array(particiones[posicionDisco].length);
+        for (let index_j = 0; index_j < particiones[0].length; index_j++) {
+            if(particiones[posicionDisco][index_j]!=undefined){
+                tablaFinal[1][index_j] = new Array(3);
+                tablaFinal[1][index_j][0] = particiones[0][index_j][5]+particiones[posicionDisco][index_j][4]+particiones[posicionDisco][index_j][1]+" MB";
+                tablaFinal[1][index_j][1] = obtenerBackGoundColorParticion(particiones[posicionDisco][index_j][6]);
+                tablaFinal[1][index_j][2] = establecerFlexParticion(discos,particiones,posicionDisco,index_j);
+            }
+        }
+
+    //"" ""
+    return tablaFinal;
+}
+
 export function modificarEstadoParticionDisco(estado,index,posicionDisco){
     particiones[posicionDisco][index][8] = estado;
 }

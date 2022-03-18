@@ -9,8 +9,10 @@ import { DataTable } from 'react-native-paper';
 import { styles } from './styles';
 import NumberFormat from 'react-number-format';
 import Speaker from '../components_drawer/Speaker';
-
 import DiscoOutComponent from './DiscoOutComponent';
+import TableDisc from './TableDisc';
+
+
 
 /**
  * Metodo que Gestiona la vista principal del aplicativo
@@ -25,6 +27,7 @@ function App () {
   const [discosGlobales, setDiscosGlobales] = React.useState([]);
   const [particiones, setparticiones] = React.useState([]);
   const [posDisco, setPosDisco] = React.useState(0);
+  const [tablaStyles, setTablaStyles] = React.useState(new Array());
 
   /**
    * Metodo que realiza las operaciones para el refresco de la tabla
@@ -70,6 +73,8 @@ function App () {
    */
   async function llenarDatosParticion() {
 
+   
+
     //[Espacio libre, tamaño nuevo, espacio libre acontinuacion, alinear con,
     //crear Como, nombre particion, Sistema de archivos, Etiqueta]
     var array = {};
@@ -96,6 +101,7 @@ function App () {
     setparticiones(resultado[1]);
     setDiscosGlobales(resultado[0]);
 
+    setTablaStyles(funciones.inicializarTablaStyles(discos,discosGlobales,particiones));
 
     // Limpia campos  de texto 
     settLibre("");
@@ -248,7 +254,7 @@ function modificarEstados(estado, index){
             <DataTable.Title style={{justifyContent:'center',flex:0.7}}>Tamaño</DataTable.Title>
             <DataTable.Title style={{justifyContent:'center'}}>Opciones</DataTable.Title>
           </DataTable.Header>
-          {Object.values(part).map((row, index) => (
+          {Object.values(array).map((row, index) => (
             <DataTable.Row>
               <DataTable.Cell style={{justifyContent:'center'}}>
                <View>
@@ -410,6 +416,14 @@ function modificarEstados(estado, index){
     onRefresh();
   }
 
+  function tableDisc (){
+      return(
+      <View style={{width:'90%',height:300,top:100,marginBottom:100}}>
+        <TableDisc width={'100%'} tablaStyles={tablaStyles}  />
+      </View>
+      );
+  }
+
   //llena el combo box de alinear
   let listaAlinear = metricas.map( data=> {
     return (
@@ -553,7 +567,9 @@ function modificarEstados(estado, index){
 
         <View style={{width:'90%',height:250,borderWidth: 1}}>
         {discoOutComponent()}
-        </View>   
+        </View>
+
+        {tableDisc()}    
 
         <View style={{width:'70%',height:40,end:100}}>
         </View> 
