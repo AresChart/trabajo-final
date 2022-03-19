@@ -198,12 +198,16 @@ function App () {
     
     let resultado = funciones.eliminarParticion(discos, index);
 
+    //let par = new Array(discosGlobales.length);
+    //setparticiones(par);
+    
+
     // Valida que se reporten errores
     if (resultado != -1) {      
       setparticiones(resultado[1]);
       setDiscosGlobales(resultado[0]);
-      //let par = new Array(discosGlobales.length);
-      //setparticiones(par);
+  
+      setTablaStyles(funciones.inicializarTablaStyles(discos,discosGlobales,particiones));
 
       // Refresca componentes
       return onRefresh();
