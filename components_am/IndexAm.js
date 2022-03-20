@@ -9,7 +9,7 @@
  import ProcessList from './ProcessListComponent';
  import { styles } from './styles';
  import NumberFormat from 'react-number-format';
- import Speaker from '../components_drawer/Speaker';
+ import { Speaker, Pause } from '../components_drawer/Speaker';
  import { DataTable } from 'react-native-paper';
  
  /**
@@ -125,10 +125,13 @@
         }
 
         return (
-            <View style={{height:150, top:200,width: `100%`,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+            <View style={{height:250, marginTop: 100,width: `90%`,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
                 <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={log}/>
-                <TouchableOpacity style={{marginTop:15, width: 160, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Speaker(log)}>
+                <TouchableOpacity style={{marginTop:15, width: 160, height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Speaker(log)}>
                     <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{marginTop:15, width: 160, height: 45, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
+                    <Text style={{color:'white', fontSize: 17}}>Parar</Text>
                 </TouchableOpacity>
             </View>
         )

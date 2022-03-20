@@ -8,7 +8,8 @@ import * as funciones from '../scripts_pd/Main';
 import { DataTable } from 'react-native-paper';
 import { styles } from './styles';
 import NumberFormat from 'react-number-format';
-import Speaker from '../components_drawer/Speaker';
+import { Speaker, Pause } from '../components_drawer/Speaker';
+
 import DiscoOutComponent from './DiscoOutComponent';
 import TableDisc from './TableDisc';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
@@ -62,24 +63,29 @@ function App () {
     setparticionesCopy(fakeDeepCopy);
     setDiscosGlobales(resultado[0]);
 
-
-    //Set para el selector de discos
-    setitemsInPicker(    
-      Object.keys(funciones.discosCreados).map(function(key, index) {
-        return (<Picker.Item label={funciones.discosCreados[key]['nombre']}  value={funciones.discosCreados[key]['nombre']}/>
-        )
-      })
-    );
-
-    return onRefresh();
+    // Valida que no se devuelva un error
+    if (resultado != -1) {
+      
+      setparticiones(resultado[1]);
+      setDiscosGlobales(resultado[0]);
+  
+  
+      //Set para el selector de discos
+      setitemsInPicker(    
+        Object.keys(funciones.discosCreados).map(function(key, index) {
+          return (<Picker.Item label={funciones.discosCreados[key]['nombre']}  value={funciones.discosCreados[key]['nombre']}/>
+          )
+        })
+      );
+  
+      return onRefresh();
+    }
   }
 
   /**
    * Metodo que recopila los datos para crear una particion en un disco en especifico
    */
   async function llenarDatosParticion() {
-
-   
 
     //[Espacio libre, tamaño nuevo, espacio libre acontinuacion, alinear con,
     //crear Como, nombre particion, Sistema de archivos, Etiqueta]
@@ -139,6 +145,10 @@ function App () {
     if (tamaño == '') {
       return alert("Ingrese tamaño para el disco.");
     }
+    // Valida que exista tamaño para el disco
+    if (tamaño <= 0) {
+      return alert("El tamaño deve ser mayor a 0.");
+    }
     // Valida si el disco es MBR y el limite se excede
     if (tipo == "MBR" && parseInt(tamaño, 10) > 2048) {
       return alert("El tamaño maximo para disco MBR es: 2TB.");
@@ -157,28 +167,27 @@ function App () {
     */
     setDiscosGlobales(resultado[0]);
   
-
-    //Set para el selector de discos
-    setitemsInPicker(    
-      Object.keys(funciones.discosCreados).map(function(key, index) {
-        return (
-          <Picker.Item label={funciones.discosCreados[key]['nombre']}  value={funciones.discosCreados[key]['nombre']}/>
-        )
-      })
-    );
-
-    // Valida si esta vacio
-    if (discos == "")  {
-      setDisco(funciones.discosCreados[nombre]['nombre']);
+      //Set para el selector de discos
+      setitemsInPicker(    
+        Object.keys(funciones.discosCreados).map(function(key, index) {
+          return (
+            <Picker.Item label={funciones.discosCreados[key]['nombre']}  value={funciones.discosCreados[key]['nombre']}/>
+          )
+        })
+      );
+  
+      // Valida si esta vacio
+      if (discos == "")  {
+        setDisco(funciones.discosCreados[nombre]['nombre']);
+      }
+  
+      // Limpia campos
+      setTamaño("");
+      setNombre("");
+  
+      // Refresca componentes
+      return onRefresh();
     }
-
-    // Limpia campos
-    setTamaño("");
-    setNombre("");
-
-    // Refresca componentes
-    return onRefresh();
-  }
 
 
   /**
@@ -202,8 +211,16 @@ function App () {
     //setparticiones(par);
     
 
-    // Refresca componentes
-    return onRefresh();
+    // Valida que se reporten errores
+    if (resultado != -1) {      
+      setparticiones(resultado[1]);
+      setDiscosGlobales(resultado[0]);
+  
+      setTablaStyles(funciones.inicializarTablaStyles(discos,discosGlobales,particiones));
+
+      // Refresca componentes
+      return onRefresh();
+    }
   }
 
 
@@ -371,8 +388,11 @@ function App () {
     return(
       <View style={{marginTop:80,width: '90%', height:200,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
         <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={array}/>
-        <TouchableOpacity  style={{marginTop:15, width: 160, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(array)}>
+        <TouchableOpacity  style={{marginTop:15, width: 160, height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(array)}>
           <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{marginTop:15, width: 160, height: 45, backgroundColor: 'red', padding:10, alignItems: 'center', borderRadius: 5}} onPress= { ()=> Pause()}>
+          <Text style={{color:'white', fontSize: 17}}>Parar</Text>
         </TouchableOpacity>
       </View>
     );
@@ -431,9 +451,9 @@ function App () {
     if(particiones.length === discosGlobales.length){
       return(
         <ScrollView style={{paddingVertical: 5}}>
-           {discosGlobales.map((row,i) => (
-        <DiscoOutComponent top={(50+(50*discosGlobales.length))} discosGlobales={discosGlobales} particiones={particiones} posDisco={i}/>
-        ))}
+          {discosGlobales.map((row,i) => (
+            <DiscoOutComponent top={(50+(50*discosGlobales.length))} discosGlobales={discosGlobales} particiones={particiones} posDisco={i}/>
+          ))}
         </ScrollView>
       );
     }
@@ -628,10 +648,6 @@ function App () {
 
         {tableDisc()}    
         {diskLog()}
-
-       
-
-       
 
         <View style={{width:'70%',height:40,end:100}}>
         </View> 

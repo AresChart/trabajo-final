@@ -164,7 +164,7 @@ function  crearTablaEntrada (){
   function buttonClear(){
     if(verTablaEntrada){
       return(
-        <TouchableOpacity style={{marginTop:0, width: 300, height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>limpiarCampos()} >
+        <TouchableOpacity style={{marginTop:150, width: 300, height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>limpiarCampos()} >
           <Text style={{color:'white', fontSize: 15}}>Limpiar</Text>
         </TouchableOpacity>);
     }
@@ -199,10 +199,10 @@ function  crearTablaEntrada (){
       return(
         <View style={{marginTop:0,width: '90%', height:320,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
           <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={textoFinal}/>
-          <TouchableOpacity  style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
+          <TouchableOpacity  style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
             <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
+          <TouchableOpacity style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
                       <Text style={{color:'white', fontSize: 17}}>Parar</Text>
             </TouchableOpacity>
         </View>

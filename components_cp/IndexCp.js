@@ -69,11 +69,11 @@ function  crearTablaEntrada (){
       return(
         <View style={{marginTop:30,width: '90%', height:350,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
           <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={textoFinal}/>
-          <TouchableOpacity  style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
+          <TouchableOpacity  style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
             <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
-                      <Text style={{color:'white', fontSize: 17}}>Parar</Text>
+          <TouchableOpacity style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
+            <Text style={{color:'white', fontSize: 17}}>Parar</Text>
           </TouchableOpacity>
         </View>
         );
@@ -128,7 +128,7 @@ function  crearTablaEntrada (){
           
           {tableInputThreadsComponent()}
 
-          <View style={{width:'100%',marginTop:80 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+          <View style={{width:'100%',marginTop:100 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
             <Text style={{fontSize:12,marginTop:20}}>Texto De Salida</Text>
             {textAreaSalidaComponent()}
             <Text style={{fontSize:12,marginTop:10}}>Hilos Bloqueados</Text>

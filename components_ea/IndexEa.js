@@ -5,7 +5,7 @@ import TableInputProccessesComponent from './TableInputProccessesComponent';
 import MemoryCellsComponent from './MemoryCellsComponent';
 import * as main from '../scripts_ea/main';
 import NumberFormat from 'react-number-format';
-import {Speaker,Pause} from '../components_drawer/Speaker';
+import { Speaker, Pause } from '../components_drawer/Speaker';
 
 export default function IndexEa(props) {
 
@@ -47,7 +47,7 @@ const onRefresh = React.useCallback(() => {
     function tableInputProcessesComponent (){
         if(banderaEntrada){
           return(
-          <ScrollView style={{paddingVertical: 5,top: 100}}>
+          <ScrollView style={{paddingVertical: 5,marginTop: 60}}>
             <TableInputProccessesComponent  listaProcesos={listaProcesos}  listaRequerimientos={listaRequerimientos} setListaProcesos={setListaProcesos} setListaRequerimientos={setListaRequerimientos}/>
           </ScrollView>
           );
@@ -58,7 +58,7 @@ const onRefresh = React.useCallback(() => {
     function buttonGenerarAleatorios (){
       if(banderaEntrada){
         return(
-        <TouchableOpacity style={{marginTop:20, width: 300, height: 40, backgroundColor: '#EDAF0A',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>inicializarTablaEntradaNumerosAleatorios()} >
+        <TouchableOpacity style={{marginTop:20, width: 300, height: 45, backgroundColor: '#EDAF0A',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>inicializarTablaEntradaNumerosAleatorios()} >
           <Text style={{color:'white', fontSize: 17}}>Generar Aleatorios</Text>
         </TouchableOpacity>);  
       }
@@ -70,7 +70,7 @@ const onRefresh = React.useCallback(() => {
     function buttonEjecutarAlgoritmo (){
       if(banderaEntrada){
         return(
-        <TouchableOpacity style={{marginTop:20, width: 300, height: 42, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>iniciarAlgoritmo(false)} >
+        <TouchableOpacity style={{marginTop:20, width: 300, height: 47, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>iniciarAlgoritmo(false)} >
           <Text style={{color:'white', fontSize: 17}}>Ejecutar Algortimo</Text>
         </TouchableOpacity>);
       }
@@ -81,7 +81,7 @@ const onRefresh = React.useCallback(() => {
     function buttonEjecutarAlgoritmoPasoAPaso (){
       if(banderaEntrada){
         return(
-        <TouchableOpacity style={{marginTop:20, width: 300, height: 40, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>iniciarAlgoritmo(true)} >
+        <TouchableOpacity style={{marginTop:20, width: 300, height: 45, backgroundColor: 'green',padding:10,alignItems: 'center',borderRadius: 5}}onPress={()=>iniciarAlgoritmo(true)} >
           <Text style={{color:'white', fontSize: 17}}>Ejecutar x Pasos</Text>
         </TouchableOpacity>);
       }
@@ -113,7 +113,7 @@ const onRefresh = React.useCallback(() => {
     function bottonReproducirComponent(){
       if(bottonReproducirActivo){
         return(
-        <TouchableOpacity  style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(parrafoResultado)}>
+        <TouchableOpacity  style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(parrafoResultado)}>
           <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
         </TouchableOpacity>);
       }   
@@ -127,8 +127,8 @@ const onRefresh = React.useCallback(() => {
           <View style={{top:0,width: '90%',height:350,alignItems: 'center',flexDirection: 'column'}}>
             {parrafoResultadoComponent()}
             {bottonReproducirComponent()}
-            <TouchableOpacity style={{marginTop:15, width: '90%', height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
-                    <Text style={{color:'white', fontSize: 17}}>Parar</Text>
+            <TouchableOpacity style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Pause()}>
+              <Text style={{color:'white', fontSize: 17}}>Parar</Text>
            </TouchableOpacity>
           </View>
         );

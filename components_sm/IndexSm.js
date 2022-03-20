@@ -11,7 +11,7 @@ import PhysicalMemory from './PhysicalMemoryComponent';
 import SegmentList from './SegmentListComponent';
 import { styles } from './styles';
 import NumberFormat from 'react-number-format';
-import Speaker from '../components_drawer/Speaker';
+import { Speaker, Pause } from '../components_drawer/Speaker';
 
 function segmentation() {
 
@@ -195,8 +195,11 @@ function segmentation() {
 
             <View style={{width: "90%",top: 20, backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
                 <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={funciones.logSegmentacion}/>
-                <TouchableOpacity style={{marginTop:20,width: 160, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Speaker(funciones.logSegmentacion)}>
+                <TouchableOpacity style={{marginTop:20,width: 160, height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Speaker(funciones.logSegmentacion)}>
                     <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{marginTop:15, width: 160, height: 45, backgroundColor: 'red', padding:10, alignItems: 'center', borderRadius: 5}} onPress= { ()=> Pause()}>
+                    <Text style={{color:'white', fontSize: 17}}>Parar</Text>
                 </TouchableOpacity>
             </View>
            
