@@ -199,31 +199,92 @@ function obtenerBackGoundColorParticion(tipo){
 
     switch (tipo) {
         case "Fat32":
-            return "#31FF03 ";
+            return "#31FF03";
         case "NTFS":
             return "#48e4ad";
-        //case "exFAT":
-            return "#DAF7A6";
+        case "exFAT":
+            return "#31b44c";
         case "Ext2":
             return "#9db8d2";
-        //case "Ext3":
-            return "#DAF7A6";
+        case "Ext3":
+            return "#8294af";
         case "Ext4":
             return "#486884";
         case "HFS+":
             return "#c0a39e";
         default:
-            return "#FFFFFF ";
+            return "#FFFFFF";
       }
 }
+
+function obtenerBackGoundColorParticionLogica(tipo){
+
+    switch (tipo) {
+        case "Fat32":
+            return "#B8FFAB";
+        case "NTFS":
+            return "#54FFC3";
+        case "exFAT":
+            return "#99E8AA";
+        case "Ext2":
+            return "#CADAEB";
+        case "Ext3":
+            return "#B3BBC7";
+        case "Ext4":
+            return "#6B96BD";
+        case "HFS+":
+            return "#DBB8B2";
+        default:
+            return "#FFFFFF";
+      }
+}
+
 
 function establecerFlexParticion(discos,particiones,indiceDisco,indiceParticion){
     let tamanioDisco = discos[indiceDisco][1];
     let tamanioParticion = particiones[indiceDisco][indiceParticion][1];
     let indiceRealParticion = (tamanioParticion/tamanioDisco);
-    let cantidadParticiones = particiones[indiceDisco].length;
 
     return (indiceRealParticion);
+}
+
+
+function establecerFlexParticionLogica(tamanioParticionExtendida,particiones,indiceDisco,indiceParticion){
+    let tamanioParticion = particiones[indiceDisco][indiceParticion][1];
+    let indiceRealParticion = (tamanioParticion/tamanioParticionExtendida);
+
+    return (indiceRealParticion);
+}
+
+function contieneParticionExtentida(posicionDisco,particiones){
+    for (let index = 0; index < particiones[posicionDisco].length; index++) {
+        if(particiones[posicionDisco][index]!=undefined){
+            if(particiones[posicionDisco][index][4]==="Extendida"){
+                return [true, particiones[posicionDisco][index][1]];
+            }
+        }
+    }
+
+    return [false,0];
+}
+
+function obtenerParticionesLogicas(tamanioParticionExtendida,posicionDisco,particiones){
+    let particionesLogicas = [];
+    
+    let index =0;
+    for (let index_j = 0; index_j < particiones[posicionDisco].length; index_j++) {
+        if(particiones[posicionDisco][index_j]!=undefined){
+            if(particiones[posicionDisco][index_j][4]==="Logica"){
+                particionesLogicas.push(new Array(3));
+                //particionesLogicas[index][0] = particiones[0][index_j][5]+particiones[posicionDisco][index_j][4]+particiones[posicionDisco][index_j][1]+" MB";
+                particionesLogicas[index][0] = particiones[posicionDisco][index_j][1]+" MB";
+                particionesLogicas[index][1] = obtenerBackGoundColorParticionLogica(particiones[posicionDisco][index_j][6]);
+                particionesLogicas[index][2] = establecerFlexParticionLogica(tamanioParticionExtendida,particiones,posicionDisco,index_j);
+                index++;
+            }
+        }
+    }
+    return particionesLogicas;
 }
 
 export function inicializarTablaStyles(nombreDisco,discos, particiones){
@@ -232,24 +293,44 @@ export function inicializarTablaStyles(nombreDisco,discos, particiones){
     let disco = discos[posicionDisco];
 
     let tablaFinal = [];
+    let particionesExt = [];
+    particionesExt = new Array(4);
+    particionesExt[0] = new Array(1);
 
         tablaFinal.push();
-        tablaFinal[0]=new Array(1);
-        tablaFinal[0][0] = "Nombre del disco: "+disco[0]+" Tamaño: "+ disco[1]+" MB"+ " Tipo del disco: "+disco[2];
-        
-        tablaFinal.push();
-        tablaFinal[1] = new Array(particiones[posicionDisco].length);
+        tablaFinal[0] = new Array(1);
+        tablaFinal[0][0] = "Nombre del disco: "+disco[0]+"    Tamaño: "+ disco[1]+" MB"+ "    Tipo del disco: "+disco[2];
+        tablaFinal.push([]);
+
+        let resultado = contieneParticionExtentida(posicionDisco,particiones);
+        let hayParticionExt = resultado[0];
+        if(hayParticionExt){
+            //particionesExt = new Array(4);
+            particionesExt[1] = obtenerParticionesLogicas(resultado[1],posicionDisco,particiones);
+        }
+
+        let index = 0;
         for (let index_j = 0; index_j < particiones[posicionDisco].length; index_j++) {
             if(particiones[posicionDisco][index_j]!=undefined){
-                tablaFinal[1][index_j] = new Array(3);
-                tablaFinal[1][index_j][0] = particiones[0][index_j][5]+particiones[posicionDisco][index_j][4]+particiones[posicionDisco][index_j][1]+" MB";
-                tablaFinal[1][index_j][1] = obtenerBackGoundColorParticion(particiones[posicionDisco][index_j][6]);
-                tablaFinal[1][index_j][2] = establecerFlexParticion(discos,particiones,posicionDisco,index_j);
+                if(particiones[posicionDisco][index_j][4]==="Primaria" || particiones[posicionDisco][index_j][4]===""){
+                    tablaFinal[1].push();
+                    tablaFinal[1][index] = new Array(3);
+                    //tablaFinal[1][index][0] = particiones[0][index_j][5]+particiones[posicionDisco][index_j][4]+particiones[posicionDisco][index_j][1]+" MB";
+                    tablaFinal[1][index][0] = particiones[posicionDisco][index_j][1]+" MB";
+                    tablaFinal[1][index][1] = obtenerBackGoundColorParticion(particiones[posicionDisco][index_j][6]);
+                    tablaFinal[1][index][2] = establecerFlexParticion(discos,particiones,posicionDisco,index_j);
+                    index++;
+                }else if(particiones[posicionDisco][index_j][4]==="Extendida"){
+                    //particionesExt[0] = particiones[0][index_j][5]+particiones[posicionDisco][index_j][4]+particiones[posicionDisco][index_j][1]+" MB";
+                    particionesExt[0][0] = particiones[posicionDisco][index_j][1]+" MB";
+                    particionesExt[2] = obtenerBackGoundColorParticion(particiones[posicionDisco][index_j][6]);
+                    particionesExt[3] = establecerFlexParticion(discos,particiones,posicionDisco,index_j);
+                }
             }
         }
 
     //"" ""
-    return tablaFinal;
+    return [tablaFinal,particionesExt];
 }
 
 export function modificarEstadoParticionDisco(estado,index,posicionDisco){
@@ -258,6 +339,100 @@ export function modificarEstadoParticionDisco(estado,index,posicionDisco){
 
 export function setParticiones(particionesNuevas){
     particiones = particionesNuevas;
+}
+
+function validarExtendida(disco,particion,particionAnterior){
+    // Valida si la particion es extendida
+    if (particion[4] == 'Extendida') {
+
+        if(particionAnterior[4] == 'Extendida'){
+            especificacionesDisco[disco].mbrExtendidas++;
+        }
+
+        // Valida si ya se creo una particion extendida
+        if (especificacionesDisco[disco].mbrExtendidas == 0 ) {
+            //Se agrega registro en el log del disco
+            logDiscos[disco] += `Se notifica error, por que ya existe una partición extendida creada. \n`;
+            return true;
+            //alert('El disco MBR sólo admite una particion extendida.')
+        }
+        // Disminuye capacidad de particiones
+        especificacionesDisco[disco].mbrExtendidas--;
+    }
+    return false;
+}
+
+
+function validarLogica(disco,particion){
+    // Valida si la particion es logica
+    if (particion[4] == 'Logica') {
+        // Valida si aun no se ha creado una particion extendida
+        if (especificacionesDisco[disco].mbrExtendidas > 0 ) {
+            //Se agrega registro en el log del disco
+            logDiscos[disco] += `Se notifica error, ya que para crear una partición lógica, primero se debe crear una extendida. \n`;
+            return true;
+            //alert('Para crear una partición lógica, primero debe crear una extendida.');
+        }
+        // Disminuye capacidad de particiones
+        especificacionesDisco[disco].mbrLogicas--;
+    }
+    return false;
+}
+
+function validarPrimaria(disco,particion){
+    // Valida si la particion es primaria
+    if (particion[4] == 'Primaria') {
+        // Valida si se alcanzo el tope de particiones primarias
+        if (especificacionesDisco[disco].mbrPrimarias == 0 ) {
+            //Se agrega registro en el log del disco
+            logDiscos[disco] += `Se notifica error, por que se alcanzó el tope de particiones primarias en el disco. \n`;
+            return true;
+            //alert('Ya se alcanzó el tope (4) de particiones primarias en el disco.');
+        }
+        // Disminuye capacidad de particiones
+        especificacionesDisco[disco].mbrPrimarias--;
+    }
+    return false;
+}
+
+export function modificarParticiones(disco,particion,particionAnterior,posicionDisco){
+
+    if(validarExtendida(disco,particion,particionAnterior)){
+        return "El disco MBR sólo admite una particion extendida.";
+    }
+
+    if(validarLogica(disco,particion)){
+        return "Para crear una partición lógica, primero debe crear una extendida.";
+    }
+    
+    if(validarPrimaria(disco,particion)){
+        return "Para crear una partición lógica, primero debe crear una extendida.";
+    }
+
+    if(particionAnterior[4] == 'Logica'){
+        especificacionesDisco[disco].mbrLogicas++;
+    }
+
+    if(particionAnterior[4] == 'Extendida' && (particion[4] != 'Extendida') ){
+        
+        for (let index = 0; index < particiones[posicionDisco].length; index++) {
+            if(particiones[posicionDisco][index]!=undefined){
+                if(particiones[posicionDisco][index][4]=="Logica"){
+                    eliminarParticion(disco,index);
+                    index--;
+                }
+            }
+        }
+        
+        especificacionesDisco[disco].mbrExtendidas++;
+    }
+   
+
+    if(particionAnterior[4] == 'Primaria'){
+        especificacionesDisco[disco].mbrPrimarias++;
+    }
+    
+    return "";
 }
 
 /**
@@ -638,14 +813,22 @@ export function ingresarParticion(disco, particion) {
  */
 export function eliminarParticion(disco, index) {
 
-    
 
     let posicionDisco = encontrarDisco(disco);
     if(posicionDisco===-1){
         return alert('El disco no existe !');
     }
 
-    
+    if(particiones[posicionDisco][index][4]=="Extendida"){
+        for (let index = 0; index < particiones[posicionDisco].length; index++) {
+            if(particiones[posicionDisco][index]!=undefined){
+                if(particiones[posicionDisco][index][4]=="Logica"){
+                    eliminarParticion(disco,index);
+                    index--;
+                }
+            }
+        }    
+    }
 
     //Se agrega registro en el log del disco
     logDiscos[disco] += `Se solicita eliminar la partición ${index} del disco ${disco}. \n`;

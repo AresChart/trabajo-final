@@ -11,6 +11,7 @@ import NumberFormat from 'react-number-format';
 import Speaker from '../components_drawer/Speaker';
 import DiscoOutComponent from './DiscoOutComponent';
 import TableDisc from './TableDisc';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 
 
@@ -26,8 +27,11 @@ function App () {
 
   const [discosGlobales, setDiscosGlobales] = React.useState([]);
   const [particiones, setparticiones] = React.useState([]);
+  const [particionesCopy, setparticionesCopy] = React.useState([]);
+
   const [posDisco, setPosDisco] = React.useState(0);
-  const [tablaStyles, setTablaStyles] = React.useState(new Array());
+  const [tablaStyles, setTablaStyles] = React.useState( [["disco"],[["p","#DEDEDE",0.5]]] );
+  const [particionesExt, setParticionesExt] = React.useState([["disco"],[["p","#DEDEDE",0.5]],0.3]);
 
   /**
    * Metodo que realiza las operaciones para el refresco de la tabla
@@ -54,6 +58,8 @@ function App () {
     
     let resultado =  funciones.eliminarDisco(discos);
     setparticiones(resultado[1]);
+    let fakeDeepCopy = JSON.parse(JSON.stringify(resultado[1]));
+    setparticionesCopy(fakeDeepCopy);
     setDiscosGlobales(resultado[0]);
 
 
@@ -99,9 +105,13 @@ function App () {
   
     let resultado =  await funciones.ingresarParticion(discos, array);
     setparticiones(resultado[1]);
+    let fakeDeepCopy = JSON.parse(JSON.stringify(resultado[1]));
+    setparticionesCopy(fakeDeepCopy);
     setDiscosGlobales(resultado[0]);
 
-    setTablaStyles(funciones.inicializarTablaStyles(discos,discosGlobales,particiones));
+    let result = funciones.inicializarTablaStyles(discos,discosGlobales,particiones);
+    setTablaStyles(result[0]);
+    setParticionesExt(result[1]);
 
     // Limpia campos  de texto 
     settLibre("");
@@ -138,6 +148,8 @@ function App () {
     
     let resultado = funciones.crearDisco(tipo, nombre, parseInt(tamaño, 10));
     setparticiones(resultado[1]);
+    let fakeDeepCopy = JSON.parse(JSON.stringify(resultado[1]));
+    setparticionesCopy(fakeDeepCopy);
     /*
     let parti = funciones.particiones;
     parti.push();
@@ -180,9 +192,12 @@ function App () {
     
     let resultado = funciones.eliminarParticion(discos, index);
     setparticiones(resultado[1]);
-    setDiscosGlobales(resultado[0]);
+    let fakeDeepCopy = JSON.parse(JSON.stringify(resultado[1]));
+    setparticionesCopy(fakeDeepCopy);
 
-    setTablaStyles(funciones.inicializarTablaStyles(discos,discosGlobales,particiones));
+    let result = funciones.inicializarTablaStyles(discos,discosGlobales,particiones);
+    setTablaStyles(result[0]);
+    setParticionesExt(result[1]);
     //let par = new Array(discosGlobales.length);
     //setparticiones(par);
     
@@ -192,11 +207,28 @@ function App () {
   }
 
 
-function modificarEstados(estado, index){
-  particiones[posDisco][index][8] = estado;
-  onRefresh();
-  funciones.modificarEstadoParticionDisco(estado,index,posDisco);
-}
+   function modificarEstados(estado, index){
+  
+    if(!estado){
+      let posDisco = funciones.encontrarDisco(discos);
+      let resultado = funciones.modificarParticiones(discos,particiones[posDisco][index],particionesCopy[posDisco][index],posDisco);
+      if(resultado!=""){
+        return alert(resultado);
+      }
+      let fakeDeepCopy = JSON.parse(JSON.stringify(particiones));
+    setparticionesCopy(fakeDeepCopy);
+    }
+    
+    let result = funciones.inicializarTablaStyles(discos,discosGlobales,particiones);
+    setTablaStyles(result[0]);
+    setParticionesExt(result[1]);
+    
+
+    particiones[posDisco][index][8] = estado;
+    onRefresh();
+    funciones.modificarEstadoParticionDisco(estado,index,posDisco);
+  }
+
 
   /**
    * Muestra tabla de particiones
@@ -229,6 +261,12 @@ function modificarEstados(estado, index){
       onRefresh();
       funciones.setParticiones(particiones);
     }
+
+    function updateTipoSistemaArchivosParticiones (value,index){
+      particiones[posDisco][index][6] = value;
+      onRefresh();
+      funciones.setParticiones(particiones);
+    }
   
     
 /*
@@ -246,26 +284,28 @@ function modificarEstados(estado, index){
 
     //Retorna la tabla de particiones
     return(
-      <View style={{width: `100%` ,height: ((250)+(60*array.length)), top: 100}}>
+      <View style={{width: `100%` ,height: ((50)+(60*array.length)), top: 100}}>
 
-      <ScrollView horizontal={true} style={{ top: 0 ,width: '100%' ,height: 100}}  > 
-        <DataTable id="tablaParticiones" style={{width:600}}>
+      <ScrollView horizontal={true} style={{ top: 0 ,width: '100%' ,height: 10}}  > 
+        <DataTable id="tablaParticiones" style={{width:1000}}>
           <DataTable.Header>
             <DataTable.Title style={{justifyContent:'center'}}>Nombre Particion</DataTable.Title>
             <DataTable.Title style={{justifyContent:'center'}}>Tipo</DataTable.Title>
+            <DataTable.Title style={{justifyContent:'center'}}>Sistema De Archivos</DataTable.Title>
             <DataTable.Title style={{justifyContent:'center',flex:0.7}}>Tamaño</DataTable.Title>
-            <DataTable.Title style={{justifyContent:'center'}}>Opciones</DataTable.Title>
+            <DataTable.Title style={{justifyContent:'center'}}>Opción</DataTable.Title>
+            <DataTable.Title style={{justifyContent:'center'}}>Editar</DataTable.Title>
           </DataTable.Header>
           {Object.values(array).map((row, index) => (
             <DataTable.Row>
               <DataTable.Cell style={{justifyContent:'center'}}>
                <View>
                 <TextInput style={{fontSize:15}} editable={row[8]} value={row[5]} onChangeText={(data)=>updateNombreParticiones(data,index)}/>
-                </View>
-                </DataTable.Cell>
+               </View>
+              </DataTable.Cell>
               <DataTable.Cell style={{justifyContent:'center'}} >  
                 <View>
-              <Picker style={{width:150,height: 25, fontSize:10}} value={row[4]} selectedValue={row[4]} enabled={row[8]} onValueChange={(itemValue, itemIndex) => updateTipoParticiones(itemValue,index)}>
+              <Picker style={{width:150,height: 25, fontSize:8}} value={row[4]} selectedValue={row[4]} enabled={row[8]} onValueChange={(itemValue, itemIndex) => updateTipoParticiones(itemValue,index)}>
                 <Picker.Item label={""}  value={""}/>
                 <Picker.Item label={"Primaria"}  value={"Primaria"}/>
                 <Picker.Item label={"Logica"}  value={"Logica"}/>
@@ -273,13 +313,33 @@ function modificarEstados(estado, index){
               </Picker>
                </View>
               </DataTable.Cell >
+              <DataTable.Cell style={{justifyContent:'center'}} >  
+                <View>
+              <Picker style={{width:150,height: 25, fontSize:8}} value={row[6]} selectedValue={row[6]} enabled={row[8]} onValueChange={(itemValue, itemIndex) => updateTipoSistemaArchivosParticiones(itemValue,index)}>
+                  {sistemasArchivos}
+              </Picker>
+               </View>
+              </DataTable.Cell >
               <DataTable.Cell style={{justifyContent:'center',flex:0.7}}> {row[1]} </DataTable.Cell>
               <DataTable.Cell style={{justifyContent:'center'}}>
                <View>
-                <TouchableOpacity style={{marginTop:15, width: 100, height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}}  onPress= { ()=> EliminarParticion(index)}>
+                <TouchableOpacity style={{marginTop:0, width: 100, height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}}  onPress= { ()=> EliminarParticion(index)}>
                   <Text style={{color:'white', fontSize: 17}}>Eliminar</Text>
                 </TouchableOpacity>
               </View>
+              </DataTable.Cell>
+              <DataTable.Cell style={{justifyContent:'center'}}>
+               <View>
+               <BouncyCheckbox
+                  size={25}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                  text=""
+                  iconStyle={{ borderColor: "red" }}
+                  onPress={(val) => modificarEstados(val,index)}
+                  
+                />
+               </View>
               </DataTable.Cell>
               
             </DataTable.Row>
@@ -309,7 +369,7 @@ function modificarEstados(estado, index){
     
     //Retorna la tabla de particiones
     return(
-      <View style={{marginTop:10,width: '90%', height:200,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+      <View style={{marginTop:80,width: '90%', height:200,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
         <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={array}/>
         <TouchableOpacity  style={{marginTop:15, width: 160, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(array)}>
           <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
@@ -420,8 +480,8 @@ function modificarEstados(estado, index){
 
   function tableDisc (){
       return(
-      <View style={{width:'90%',height:300,top:100,marginBottom:100}}>
-        <TableDisc width={'100%'} tablaStyles={tablaStyles}  />
+      <View style={{width:'90%',height:200,marginTop:150}}>
+        <TableDisc width={'100%'} tablaStyles={tablaStyles} particionesExt={particionesExt} />
       </View>
       );
   }
@@ -565,13 +625,13 @@ function modificarEstados(estado, index){
           </View>
 
         {tablePartitions()}
-        {diskLog()}
-
-        <View style={{width:'90%',height:250,borderWidth: 1}}>
-        {discoOutComponent()}
-        </View>
 
         {tableDisc()}    
+        {diskLog()}
+
+       
+
+       
 
         <View style={{width:'70%',height:40,end:100}}>
         </View> 
