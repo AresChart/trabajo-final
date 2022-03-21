@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
       height:220,
       textAlign: 'center',
       color:'black',
-      fontSize: 10,
+      fontSize: 8,
       textAlignVertical: 'top'
     },
 

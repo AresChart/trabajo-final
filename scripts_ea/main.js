@@ -61,20 +61,28 @@ export function inicializarTablaEntrada(listaProcesos,listaRequerimientos,tablaE
 }
 
 
-export function inicializarTablaEntradaNumerosAleatorios(tablaEntrada){
+export function inicializarTablaEntradaNumerosAleatorios(itemAlgoritmo,tablaEntrada){
     let celdasALiberar = new Array();
     const MININO_SOLICITA =1;
     const MAXIMO_SOLICITA =4; 
     const DIVISION_TABLA = parseInt(tablaEntrada.length/3);
     for (let index_i = 0; index_i < tablaEntrada.length; index_i++) {
-        if(index_i<=DIVISION_TABLA || index_i>=DIVISION_TABLA*2){
+
+        if(itemAlgoritmo!= "Ajuste Sobre Solicitudes"){
+            if(index_i<=DIVISION_TABLA || index_i>=DIVISION_TABLA*2){
+                realizarSolicitudAleatoria(MAXIMO_SOLICITA,MININO_SOLICITA,tablaEntrada,index_i);
+                continue;
+            }
+            liberarSolicitudAleatoria(DIVISION_TABLA,celdasALiberar,tablaEntrada,index_i);
+        }else{
             realizarSolicitudAleatoria(MAXIMO_SOLICITA,MININO_SOLICITA,tablaEntrada,index_i);
-            continue;
         }
-        liberarSolicitudAleatoria(DIVISION_TABLA,celdasALiberar,tablaEntrada,index_i);
+
     }
     limpiarCeldasLiberadas(celdasALiberar);
-    reescribirSolicitudesFinales(tablaEntrada,DIVISION_TABLA);
+    if(itemAlgoritmo!= "Ajuste Sobre Solicitudes"){
+         reescribirSolicitudesFinales(tablaEntrada,DIVISION_TABLA);
+    }
 }
 
 function reescribirSolicitudesFinales(tablaEntrada,DIVISION_TABLA){
@@ -337,9 +345,20 @@ function encontarEspacioEnMemoriaMejorAjuste(listaCeldas,cantidadDeEspacios){
 //----------------- Estrategia de Ajuste Sobre Solicitudes --------------------------
 //-----------------------------------------------------------------------------------
 
-   
+export function contieneLiberarTablaEntrada(tablaEntrada){
+
+    for (let index = 0; index < tablaEntrada.length; index++) {
+        if(tablaEntrada[index].solicita=="--" || tablaEntrada[index].solicita==""){
+            return true;
+        } 
+    }
+
+    return false;
+}   
 
 export function ejecutarAlgoritmoAjusteSolicitudes(itemAlgoritmoAjuste,tablaEntrada,isPasoAPaso){
+
+    
 
     if(!isPasoAPaso){
         initVariablesGlobalesAlgoritmoSolicitudes();

@@ -57,30 +57,40 @@ function App () {
    function EliminarDisco() {
     //Llama a la funcion de eliminar disco
     
+    //setDisco("");
     let resultado =  funciones.eliminarDisco(discos);
+
+    if(resultado==-1){
+      return;
+    }
+
     setparticiones(resultado[1]);
     let fakeDeepCopy = JSON.parse(JSON.stringify(resultado[1]));
     setparticionesCopy(fakeDeepCopy);
     setDiscosGlobales(resultado[0]);
 
-    // Valida que no se devuelva un error
-    if (resultado != -1) {
-      
-      setparticiones(resultado[1]);
-      setDiscosGlobales(resultado[0]);
-  
-  
-      //Set para el selector de discos
-      setitemsInPicker(    
-        Object.keys(funciones.discosCreados).map(function(key, index) {
-          return (<Picker.Item label={funciones.discosCreados[key]['nombre']}  value={funciones.discosCreados[key]['nombre']}/>
-          )
-        })
-      );
-  
-      return onRefresh();
-    }
+    let disCread = [];
+    disCread.push("");
+    disCread.push(funciones.obtenerNombreDiscosCreados());
+
+    
+    setitemsInPicker(    
+      Object.keys(disCread).map(function(key, index) {
+        return (
+          <Picker.Item label={disCread[index]}  value={disCread[index]}/>
+        )
+      })
+    );
+
+    setTablaStyles([["disco"],[["p","#DEDEDE",0.5]]]);
+    setParticionesExt([["disco"],[["p","#DEDEDE",0.5]],0.3]);
+    setDisco("");
+
+    setVerTablaDisc(false);
+
+    return onRefresh();
   }
+ 
 
   /**
    * Metodo que recopila los datos para crear una particion en un disco en especifico
@@ -110,6 +120,12 @@ function App () {
     //Llamado al metodo para el ingreso de la particion.
   
     let resultado =  await funciones.ingresarParticion(discos, array);
+
+    if(resultado==-1){
+      return;
+    }
+
+
     setparticiones(resultado[1]);
     let fakeDeepCopy = JSON.parse(JSON.stringify(resultado[1]));
     setparticionesCopy(fakeDeepCopy);
@@ -126,6 +142,8 @@ function App () {
     setnombreP("");
     setetiqueta("");
 
+    setVerTablaDisc(true);
+
     return onRefresh();
   }
  
@@ -134,6 +152,8 @@ function App () {
    * La informacion: Tamaño Disco, Nombre Disco y Tipo Disco (MBR -GPT)
    */
   function CrearDisco() {
+
+    
 
     // Palabra sin espacios
     let palabra = nombre.trim();
@@ -157,6 +177,11 @@ function App () {
     //Llamado al metodo que almacena los discos
     
     let resultado = funciones.crearDisco(tipo, nombre, parseInt(tamaño, 10));
+
+    if(resultado==-1){
+      return;
+    }
+
     setparticiones(resultado[1]);
     let fakeDeepCopy = JSON.parse(JSON.stringify(resultado[1]));
     setparticionesCopy(fakeDeepCopy);
@@ -165,6 +190,8 @@ function App () {
     parti.push();
     setparticiones(parti);
     */
+
+    
     setDiscosGlobales(resultado[0]);
   
       //Set para el selector de discos
@@ -178,12 +205,20 @@ function App () {
   
       // Valida si esta vacio
       if (discos == "")  {
-        setDisco(funciones.discosCreados[nombre]['nombre']);
+        let pos = funciones.encontrarDisco(nombre);
+        setDisco(funciones.discosCreados[pos]['nombre']);
       }
   
       // Limpia campos
       setTamaño("");
       setNombre("");
+
+
+      if(resultado[0][0][2]=="MBR"){
+        setIsMbr('flex');
+      }else{
+        setIsMbr('none');
+      }
   
       // Refresca componentes
       return onRefresh();
@@ -198,6 +233,7 @@ function App () {
   function EliminarParticion(index) {
     
     // Llama la funcion de eliminar particion
+
     
     let resultado = funciones.eliminarParticion(discos, index);
     setparticiones(resultado[1]);
@@ -215,8 +251,10 @@ function App () {
     if (resultado != -1) {      
       setparticiones(resultado[1]);
       setDiscosGlobales(resultado[0]);
-  
-      setTablaStyles(funciones.inicializarTablaStyles(discos,discosGlobales,particiones));
+      
+      let result = funciones.inicializarTablaStyles(discos,discosGlobales,particiones);
+      setTablaStyles(result[0]);
+      setParticionesExt(result[1]);
 
       // Refresca componentes
       return onRefresh();
@@ -224,28 +262,45 @@ function App () {
   }
 
 
+  const [posicionChecked, setPosicionChecked] = React.useState(-1);
+
    function modificarEstados(estado, index){
   
+    //let posDisco = funciones.encontrarDisco(discos);
     if(!estado){
-      let posDisco = funciones.encontrarDisco(discos);
-      let resultado = funciones.modificarParticiones(discos,particiones[posDisco][index],particionesCopy[posDisco][index],posDisco);
-      if(resultado!=""){
-        return alert(resultado);
+      
+      if(discosGlobales[posDisco][2]=="MBR"){
+        let resultado = funciones.modificarParticiones(discos,particiones[posDisco][index],particionesCopy[posDisco][index],posDisco);
+        if(resultado!=""){
+          return alert(resultado);
+        }
       }
-      let fakeDeepCopy = JSON.parse(JSON.stringify(particiones));
+
+    let fakeDeepCopy = JSON.parse(JSON.stringify(particiones));
     setparticionesCopy(fakeDeepCopy);
     }
     
+    if(estado){
+      setPosicionChecked(index);
+      setparticiones(funciones.deshabilitarChecks(posDisco,index)) ;
+    }else if(!estado && index==posicionChecked){
+      setPosicionChecked(-1);
+      setparticiones(funciones.habilitarChecks(posDisco));
+    }
+
     let result = funciones.inicializarTablaStyles(discos,discosGlobales,particiones);
     setTablaStyles(result[0]);
     setParticionesExt(result[1]);
     
-
     particiones[posDisco][index][8] = estado;
-    onRefresh();
     funciones.modificarEstadoParticionDisco(estado,index,posDisco);
+    onRefresh();
   }
 
+  
+
+
+  const [isMbr,setIsMbr] = React.useState('none');
 
   /**
    * Muestra tabla de particiones
@@ -284,60 +339,58 @@ function App () {
       onRefresh();
       funciones.setParticiones(particiones);
     }
-  
-    
-/*
-    // Valida si no existe disco
-    if (discos == "") {
-      array = {};
-    }
-    // Valida si no existen particiones en el disco
-    else if (discos && !funciones.particiones[discos]) {
-      array = {};
-    } else {
-      array = funciones.particiones[discos];
-    }
-    */
 
+    function updateEtiquetaParticiones (value,index){
+      particiones[posDisco][index][7] = value;
+      onRefresh();
+      funciones.setParticiones(particiones);
+    }
+  
     //Retorna la tabla de particiones
     return(
       <View style={{width: `100%` ,height: ((50)+(60*array.length)), top: 100}}>
 
       <ScrollView horizontal={true} style={{ top: 0 ,width: '100%' ,height: 10}}  > 
-        <DataTable id="tablaParticiones" style={{width:1000}}>
+        <DataTable id="tablaParticiones" style={{width:1100}}>
           <DataTable.Header>
             <DataTable.Title style={{justifyContent:'center'}}>Nombre Particion</DataTable.Title>
-            <DataTable.Title style={{justifyContent:'center'}}>Tipo</DataTable.Title>
+            <DataTable.Title style={{justifyContent:'center',display: isMbr}}>Tipo</DataTable.Title>
             <DataTable.Title style={{justifyContent:'center'}}>Sistema De Archivos</DataTable.Title>
             <DataTable.Title style={{justifyContent:'center',flex:0.7}}>Tamaño</DataTable.Title>
+            <DataTable.Title style={{justifyContent:'center',}}>Etiqueta</DataTable.Title>
             <DataTable.Title style={{justifyContent:'center'}}>Opción</DataTable.Title>
             <DataTable.Title style={{justifyContent:'center'}}>Editar</DataTable.Title>
           </DataTable.Header>
           {Object.values(array).map((row, index) => (
-            <DataTable.Row>
+            <DataTable.Row style={{justifyContent:'center'}}>
               <DataTable.Cell style={{justifyContent:'center'}}>
                <View>
                 <TextInput style={{fontSize:15}} editable={row[8]} value={row[5]} onChangeText={(data)=>updateNombreParticiones(data,index)}/>
                </View>
               </DataTable.Cell>
-              <DataTable.Cell style={{justifyContent:'center'}} >  
+              <DataTable.Cell style={{justifyContent:'center',display: isMbr}} >  
                 <View>
-              <Picker style={{width:150,height: 25, fontSize:8}} value={row[4]} selectedValue={row[4]} enabled={row[8]} onValueChange={(itemValue, itemIndex) => updateTipoParticiones(itemValue,index)}>
-                <Picker.Item label={""}  value={""}/>
-                <Picker.Item label={"Primaria"}  value={"Primaria"}/>
-                <Picker.Item label={"Logica"}  value={"Logica"}/>
-                <Picker.Item label={"Extendida"}  value={"Extendida"}/>
+              <Picker style={{display: isMbr,width:150,height: 25, fontSize:7}} value={row[4]} selectedValue={row[4]} enabled={row[8]} onValueChange={(itemValue, itemIndex) => updateTipoParticiones(itemValue,index)}>
+                <Picker.Item style={{fontSize:7}} label={""}  value={""}/>
+                <Picker.Item style={{fontSize:7}}label={"Primaria"}  value={"Primaria"}/>
+                <Picker.Item style={{fontSize:7}} label={"Logica"}  value={"Logica"}/>
+                <Picker.Item style={{fontSize:7}}label={"Extendida"}  value={"Extendida"}/>
               </Picker>
                </View>
               </DataTable.Cell >
               <DataTable.Cell style={{justifyContent:'center'}} >  
                 <View>
-              <Picker style={{width:150,height: 25, fontSize:8}} value={row[6]} selectedValue={row[6]} enabled={row[8]} onValueChange={(itemValue, itemIndex) => updateTipoSistemaArchivosParticiones(itemValue,index)}>
+              <Picker style={{width:110,height: 25, fontSize:7}} value={row[6]} selectedValue={row[6]} enabled={row[8]} onValueChange={(itemValue) => updateTipoSistemaArchivosParticiones(itemValue,index)}>
                   {sistemasArchivos}
               </Picker>
                </View>
               </DataTable.Cell >
               <DataTable.Cell style={{justifyContent:'center',flex:0.7}}> {row[1]} </DataTable.Cell>
+              <DataTable.Cell style={{justifyContent:'center'}}>
+                <View>
+                   <TextInput style={{fontSize:15,width:55}} onChangeText={(val) => updateEtiquetaParticiones(val,index)} editable={row[8]} value={row[7]} placeholder="etiqueta" keyboardType='text'/>
+                </View>
+               </DataTable.Cell>
               <DataTable.Cell style={{justifyContent:'center'}}>
                <View>
                 <TouchableOpacity style={{marginTop:0, width: 100, height: 40, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}}  onPress= { ()=> EliminarParticion(index)}>
@@ -348,13 +401,14 @@ function App () {
               <DataTable.Cell style={{justifyContent:'center'}}>
                <View>
                <BouncyCheckbox
+
+                  disableBuiltInState={!row[9]} 
                   size={25}
                   fillColor="red"
                   unfillColor="#FFFFFF"
                   text=""
                   iconStyle={{ borderColor: "red" }}
-                  onPress={(val) => modificarEstados(val,index)}
-                  
+                  onPress={(val) => modificarEstados(val,index) }
                 />
                </View>
               </DataTable.Cell>
@@ -386,7 +440,7 @@ function App () {
     
     //Retorna la tabla de particiones
     return(
-      <View style={{marginTop:80,width: '90%', height:200,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+      <View style={{top:80,marginTop:80,width: '90%', height:200,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
         <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={array}/>
         <TouchableOpacity  style={{marginTop:15, width: 160, height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(array)}>
           <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
@@ -432,7 +486,7 @@ function App () {
   const [etiqueta, setetiqueta] = React.useState("");
 
   //Lista de tipo de archivos que puede tener una particion.
-  const archivos = ["Fat32", "NTFS", "exFAT", "Ext2", "Ext3", "Ext4", "HFS+"];
+  const archivos = ["","Fat32", "NTFS", "exFAT", "Ext2", "Ext3", "Ext4", "HFS+"];
   //Lista de tipo de particion
   const listaParticionTipo = ["Primaria", "Logica", "Extendida"];
   //Lista de tipo de particion
@@ -476,7 +530,7 @@ function App () {
     });
 
     // Valida si el tipo de disco seleccionado es GPT
-    if (funciones.discosCreados[discos] && funciones.discosCreados[discos].tipo == 'GPT') {
+    if (funciones.discosCreados[posDisco] && funciones.discosCreados[posDisco].tipo == 'GPT') {
       //llena el combo box de tipo de particion con opciones para GPT
       lista = listaParticionTipoGPT.map( data=> {
         return (
@@ -493,17 +547,38 @@ function App () {
   }
 
   function cambiarDisco(itemValue){
-    setDisco(itemValue);
-    setPosDisco(funciones.encontrarDisco());
-    onRefresh();
+    if(itemValue!=""){
+      setDisco(itemValue);
+      let posicion = funciones.encontrarDisco(itemValue);
+      setPosDisco(posicion);
+  
+      if(discosGlobales[posicion][2]=="MBR"){
+        setIsMbr('flex');
+      }else{
+        setIsMbr('none');
+      }
+  
+      let result = funciones.inicializarTablaStyles(itemValue,discosGlobales,particiones);
+      setTablaStyles(result[0]);
+      setParticionesExt(result[1]);
+
+      if(result[0][1].length > 0 || result[1].length>0){
+        setVerTablaDisc(true);
+      }
+  
+      onRefresh();
+    }
   }
 
   function tableDisc (){
+    if(verTablaDisc){
       return(
-      <View style={{width:'90%',height:200,marginTop:150}}>
-        <TableDisc width={'100%'} tablaStyles={tablaStyles} particionesExt={particionesExt} />
-      </View>
-      );
+        <View style={{width:'90%',height:200,marginTop:150}}>
+          <TableDisc width={'100%'} tablaStyles={tablaStyles} particionesExt={particionesExt} />
+        </View>
+        );
+    }
+    return(<></>);
   }
 
   //llena el combo box de alinear
@@ -512,6 +587,9 @@ function App () {
       <Picker.Item label={data}  value={data}/>
     )
   });
+
+  const [verTablaDisc, setVerTablaDisc] = React.useState(false);
+
 
   return (
 
@@ -633,10 +711,6 @@ function App () {
           </View>
 
           <View style={{width:'90%', top:5,alignItems: 'center',justifyContent: 'center',flexDirection: 'row'}}>
-
-          <TouchableOpacity style={{width: '40%', height: 42, backgroundColor: 'red',padding:10,alignItems: 'center',borderRadius: 5}} onPress={() => arreglo.datosPorDisco(discos)} >
-             <Text style={{color:'white', fontSize: 17}}>Cancelar</Text>
-           </TouchableOpacity>
 
           <TouchableOpacity style={{marginLeft:20, width: '40%', height: 42, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>llenarDatosParticion()} >
             <Text style={{color:'white', fontSize: 17}}>Agregar</Text>

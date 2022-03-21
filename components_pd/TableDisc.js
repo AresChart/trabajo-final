@@ -10,85 +10,6 @@ const TableDisc = (props) => {
   //const tablaExtendida = ["disco",[["p","#DEDEDE",0.5]],0.3];
   const tablaExtendida = props.particionesExt;
 
-  function obtenerHeight(index){
-    if(index===0){
-        return 10;
-    }
-    if(index%2===0){
-        return 10;
-    }
-
-    return 40;
-  } 
-
-  //----------------------------------------------------
-  function obtenerFlexDisco(i,j){
-      if(i===0){
-          return 1;
-      }
-      if(i%2===0){
-        return 1;
-      }
-
-      return tablaStyles[i][j][2];
-  }
-
-  function obtenerBackGoundColorParticion(i,j){
-    if(i===0){
-        return "#DEDEDE";
-    }
-    if(i%2===0){
-      return "#DEDEDE";
-    }
-
-    return tablaStyles[i][j][1];
-    }
-
-  function obtenerDataParticion(i,j){
-    if(i===0){
-      return tablaStyles[i][0];
-    }
-    if(i%2===0){
-      return tablaStyles[i][0];
-    }
-
-    return tablaStyles[i][j][0];
-  }
-  //----------------------------------------------------
-  function obtenerFlexDiscoExt(i,j){
-    if(i===0){
-        return 1;
-    }
-    if(i%2===0){
-      return 1;
-    }
-
-    return tablaExtendida[i][j][2];
-}
-
-  function obtenerBackGoundColorParticionExt(i,j){
-    if(i===0){
-        return "#DEDEDE";
-    }
-    if(i%2===0){
-      return "#DEDEDE";
-    }
-
-    return tablaExtendida[i][j][1];
-    }
-
-  function obtenerDataParticionExt(i,j){
-    if(i===0){
-      return tablaExtendida[i][0];
-    }
-    if(i%2===0){
-      return tablaExtendida[i][0];
-    }
-
-    return tablaExtendida[i][j][0];
-  }
-  //------------------------------------------------------
-
   function obtenerWidthExtendida(){
     if(tablaExtendida[3]===undefined){
       return ((1000*0.3) - 20);
@@ -130,7 +51,7 @@ const TableDisc = (props) => {
               {tablaExtendida[0].map(() => (
               <>
                 <DataTable.Cell style={{flex: tablaExtendida[3],borderWidth:2}}>
-                  <DataTable style={{flex:1, width: obtenerWidthExtendida(),height:110, borderWidth:1}}>
+                  <DataTable style={{flex:1, width: obtenerWidthExtendida(),height:110}}>
 
                     <DataTable.Row style={{width:'100%'}}>
                       <DataTable.Cell style={{justifyContent:'center',backgroundColor: tablaExtendida[2] ,borderWidth:0.5}}>

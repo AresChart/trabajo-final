@@ -148,7 +148,7 @@ export function validarTextSemaforos(textSemaforos){
         return false;
     }
 
-    if((cantidadCorchetesDerecha*2) != cantidadDigitos){
+    if( cantidadCorchetesDerecha*2 > (cantidadDigitos)){
         return false;
     }
 

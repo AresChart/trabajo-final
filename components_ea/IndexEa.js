@@ -167,7 +167,7 @@ const onRefresh = React.useCallback(() => {
 
     function inicializarTablaEntradaNumerosAleatorios(){
       let procesos = "";
-      main.inicializarTablaEntradaNumerosAleatorios(tablaEntrada);
+      main.inicializarTablaEntradaNumerosAleatorios(itemAlgoritmoAjuste,tablaEntrada);
       let resultado = main.inicializarListasAleatorias(listaProcesos,listaRequerimientos,tablaEntrada);
       setListaProcesos(resultado[0]);
       setListaRequerimientos(resultado[1]);
@@ -226,7 +226,14 @@ const onRefresh = React.useCallback(() => {
         main.inicializarTablaEntrada(listaProcesos,listaRequerimientos,tablaEntrada);
 
         if(itemAlgoritmoAjuste === "Ajuste Sobre Solicitudes"){
+
+          let contieneLiberar = main.contieneLiberarTablaEntrada(tablaEntrada);
+          if(contieneLiberar){
+            return alert("Solo ingrese solicitudes !");
+          }
+
            listaSalida = main.ejecutarAlgoritmoAjusteSolicitudes(itemAjustes,tablaEntrada,isPasoAPaso);
+           
            setparrafoResultado(listaSalida[1]);
         }else{
            listaSalida = main.ejecutarAlgoritmoAjusteHuecos(itemAjustes,tablaEntrada,isPasoAPaso);
