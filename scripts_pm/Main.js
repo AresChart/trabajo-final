@@ -1,7 +1,7 @@
 /**
  * Funcionalidades y variables de los algortimos de Paginacion
- * 
  * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
  */
 
 //--------------------------------------Importaciones----------------------------------------------------

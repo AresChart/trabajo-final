@@ -1,3 +1,8 @@
+/**
+ * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
+ */
+
 var listaCeldas = new Array(20);
 var index = 0;
 var posicionesBloques;
@@ -11,9 +16,6 @@ var solicitudesRealizadasPasoAPaso;
 var solicitudesAgregadasPasoAPaso;
 var tabla;
 var esEjecucionPrimerVez = true;
-
-
-
 
 export function validarCantidadCeldas(textCantidadCeldas){
     if(textCantidadCeldas===""){

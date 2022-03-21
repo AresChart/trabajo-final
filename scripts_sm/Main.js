@@ -1,7 +1,7 @@
 /**
  * Funcionalidades y variables de los algortimos de Segmentacion
- * 
  * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
  */
 
 //--------------------------------------Importaciones----------------------------------------------------

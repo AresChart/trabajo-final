@@ -7,6 +7,11 @@ import * as main from '../scripts_ea/main';
 import NumberFormat from 'react-number-format';
 import { Speaker, Pause } from '../components_drawer/Speaker';
 
+/**
+ * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
+ */
+
 export default function IndexEa(props) {
 
   //Variable que acciona el refresco de la tabla

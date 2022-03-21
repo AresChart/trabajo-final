@@ -1,3 +1,8 @@
+/**
+ * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
+ */
+
 var variables = [];
 var valoresVariables = [];
 var listaSemaforos;

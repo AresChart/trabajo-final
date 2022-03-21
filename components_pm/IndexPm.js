@@ -1,6 +1,7 @@
 /**
  * View de los algoritmos de Paginacion y Memoria virtual
  * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
  */
 
 import React from 'react';

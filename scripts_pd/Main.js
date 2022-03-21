@@ -1,6 +1,7 @@
 /**
  * Funcionalidades y variables de los algortimos de Creacion y Particiones de Discos.
  * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
  */
 
 //--------------------------------------Importaciones----------------------------------------------------

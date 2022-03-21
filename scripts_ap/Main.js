@@ -1,3 +1,7 @@
+/**
+ * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
+ */
 
 var matrizDeSalida;
 var matrizDeDatos;

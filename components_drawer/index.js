@@ -14,6 +14,11 @@ import IndexAm from '../components_am/IndexAm';
 import IndexPd from '../components_pd/IndexPd';
 import IndexCp from '../components_cp/IndexCp';
 
+/**
+ * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
+ */
+
 function HomeScreen(props) {
 
   const [estaParrafo, setEstaParrafo] = useState(false);

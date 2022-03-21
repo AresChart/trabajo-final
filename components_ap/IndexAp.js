@@ -10,6 +10,11 @@ import NumberFormat from 'react-number-format';
 import { Speaker, Pause } from '../components_drawer/Speaker';
 
 
+/**
+ * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
+ */
+
 export default function IndexAp() {
 
   const [numeroProcesos, setNumeroProcesos] = useState("");

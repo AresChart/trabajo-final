@@ -1,6 +1,7 @@
 /**
  * View de los algoritmos de mapa de bits y algortimos de asigancion de espacio
  * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
  */
 
  import React from 'react';

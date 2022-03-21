@@ -1,6 +1,7 @@
 /**
  * Aplicativo de gestion de particiones de disco
  * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
  */
 import React from 'react';
 import { Text, TextInput, View, Picker, Button,TouchableOpacity,ScrollView} from 'react-native';

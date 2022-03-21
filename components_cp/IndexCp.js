@@ -5,6 +5,12 @@ import TableInputThreadsComponent from './TableInputThreadsComponent';
 import * as main from '../scripts_cp/Main';
 import {Speaker,Pause} from '../components_drawer/Speaker';
 
+
+/**
+ * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
+ */
+
 export default function IndexCp() {
 
   //Variable que acciona el refresco de la tabla

@@ -1,6 +1,7 @@
 /**
  * Funcionalidades y variables de los algortimos de Mapa de Bits y algoritmos de Asigancion de espacio
  * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
  */
 
 //--------------------------------------Importaciones----------------------------------------------------

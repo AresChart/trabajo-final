@@ -6,6 +6,11 @@ import * as main from '../scripts_sp/Main';
 import NumberFormat from 'react-number-format';
 import {Speaker,Pause} from '../components_drawer/Speaker';
 
+/**
+ * @author Kevin David Sanchez Solis
+ * @author Anderson Ramirez Vasquez
+ */
+
 export default function IndexSp() {
 
   //Variable que acciona el refresco de la tabla
