@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "icon": "./assets/icono-infrastructure.png",
     "splash": {
-      "image": "./assets/splash_uniquindio.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
