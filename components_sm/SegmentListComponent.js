@@ -38,7 +38,7 @@ function ProcessList(props) {
               <DataTable.Cell style={{width:100, height: 50, borderBottomWidth: 0,justifyContent:'center'}}>{row.indice}</DataTable.Cell>
               <DataTable.Cell style={{width:100, height: obtenerHeight(row), flexDirection: 'column',justifyContent:'center'}}>
               <View style={{flexDirection: 'column', margin: 0}}>
-                <Text style={styles.item_segment_list}>{'Inicio: '+ parseInt(row.inicio+1)}</Text>
+                <Text style={styles.item_segment_list}>{'Inicio: '+ parseInt(row.inicio)}</Text>
                 <Text style={styles.item_segment_list}>{'Tamaño: '+row.tamaño}</Text>
               </View>
               </DataTable.Cell>

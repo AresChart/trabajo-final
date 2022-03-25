@@ -37,7 +37,7 @@ function ProcessList(props) {
       
           {array.map((row, index) => (
           <DataTable.Row style={{width:'100%', height: 40}}> 
-            <DataTable.Cell style={{width:75, height: 50, borderBottomWidth: 0,flex:0.5, justifyContent:'center'}}>{parseInt(indices[index]+1)}</DataTable.Cell>
+            <DataTable.Cell style={{width:75, height: 50, borderBottomWidth: 0,flex:0.5, justifyContent:'center'}}>{parseInt(indices[index])}</DataTable.Cell>
             <DataTable.Cell style={{width:'80%',height: obtenerHeight(row) , flexDirection: 'column'}}>
             <View style={{margin: 0}}>
               <Text style={styles.item_process_list}>{array[index]}</Text>

@@ -54,7 +54,7 @@ const TableDisc = (props) => {
                   <DataTable style={{flex:1, width: obtenerWidthExtendida(),height:110}}>
 
                     <DataTable.Row style={{width:'100%'}}>
-                      <DataTable.Cell style={{justifyContent:'center',backgroundColor: tablaExtendida[2] ,borderWidth:0.5}}>
+                      <DataTable.Cell style={{justifyContent:'center',backgroundColor: "#DEDEDE" ,borderWidth:0.5}}>
                         <Text style={{color: 'black',width:'100%'}}>{tablaExtendida[0][0]}</Text>
                       </DataTable.Cell>
                     </DataTable.Row>

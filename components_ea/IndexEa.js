@@ -276,10 +276,11 @@ const onRefresh = React.useCallback(() => {
               {buttonEjecutarAlgoritmoPasoAPaso()}
           </View>
 
-          <View style={{width:'90%' ,flex:1, alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+          <View style={{width:'90%' , alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
              {tableInputProcessesComponent()}
-             {memoryCellsComponent()}
           </View>
+
+          {memoryCellsComponent()}
 
          {resultadoComponent()}
       </View>

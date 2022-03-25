@@ -142,7 +142,6 @@ function  crearTablaEntrada (){
     crearTablaEntrada();
    }
 
-
   function buttonGenerarSemaforosAleatoriosComponent(){
     if(verTablaEntrada){
       return(

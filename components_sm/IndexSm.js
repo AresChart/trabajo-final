@@ -94,9 +94,11 @@ function segmentation() {
         }
 
         // Valida que la posicion sea mayor a 0
+        /*
         if(posicionSolicitada <= 0) {
             return alert("Las posiciones inician en 1.");
         }
+        */
 
         // Valida si el indice solicitado esta en el rango del segmento
         else if (funciones.TablaDatos[segmentoSolicitado].tamaño >= posicionSolicitada) {

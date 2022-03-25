@@ -381,7 +381,7 @@ function App () {
               </DataTable.Cell >
               <DataTable.Cell style={{justifyContent:'center'}} >  
                 <View>
-              <Picker style={{width:110,height: 25, fontSize:7}} value={row[6]} selectedValue={row[6]} enabled={row[8]} onValueChange={(itemValue) => updateTipoSistemaArchivosParticiones(itemValue,index)}>
+              <Picker style={{width:110,height: 25, fontSize:7}} value={row[6]} selectedValue={row[6]} enabled={row[8] && row[4]!="Extendida"} onValueChange={(itemValue) => updateTipoSistemaArchivosParticiones(itemValue,index)}>
                   {sistemasArchivos}
               </Picker>
                </View>
@@ -441,7 +441,7 @@ function App () {
     
     //Retorna la tabla de particiones
     return(
-      <View style={{top:80,marginTop:80,width: '90%', height:200,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+      <View style={{top:0,marginTop:80,width: '90%', height:200,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
         <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={array}/>
         <TouchableOpacity  style={{marginTop:15, width: 160, height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(array)}>
           <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
@@ -557,6 +557,10 @@ function App () {
         setIsMbr('flex');
       }else{
         setIsMbr('none');
+      }
+
+      if(discosGlobales[posicion][2]=="GPT"){
+        settipoP("Primaria");
       }
   
       let result = funciones.inicializarTablaStyles(itemValue,discosGlobales,particiones);
@@ -683,7 +687,7 @@ function App () {
               <DataTable.Cell>Sistema de archivos</DataTable.Cell>
               <DataTable.Cell style={{justifyContent: 'center'}}  text>
                 <View style={{width: 120}}>
-                <Picker style={{width:120, height: 20, fontSize:12}} selectedValue={sistemaA} onValueChange={(itemValue, itemIndex) => setsistemaA(itemValue)}>
+                <Picker style={{width:120, height: 20, fontSize:12}} enabled={tipoP!="Extendida"} selectedValue={sistemaA} onValueChange={(itemValue, itemIndex) => setsistemaA(itemValue)}>
                   {sistemasArchivos}
                 </Picker>
                 </View>

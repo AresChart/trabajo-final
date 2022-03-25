@@ -13,7 +13,7 @@ import React from 'react';
 // Cantidad de memoria fisica
 let CantidadMemoria = 20;
 // Indice del segmento creado
-export let segmentoIndex = 1;
+export let segmentoIndex = 0;
 
 // Cantidad de marcos disponibles en memoria fisica
 export let EspaciosDisponibles     = CantidadMemoria;
@@ -241,7 +241,7 @@ export function solicitarItem(segmento, indice) {
     // Valida que la posicion solictada no exceda el tamaño del proceso
     if (indice <= TablaDatos[segmento].tamaño) {        
         // Calcula la posicion en la que se encuentra el item en memoria fisica
-        let item = TablaDatos[segmento].inicio + (indice-1);
+        let item = TablaDatos[segmento].inicio;
         // Obtiene el item solicitado
         item = MemoriaFisica[item][0];
         // Ingresa registro al log

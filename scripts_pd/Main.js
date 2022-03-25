@@ -693,18 +693,34 @@ export function ingresarParticion(disco, particion) {
             //Se agrega registro en el log del disco
             logDiscos[disco] += `Se crea la partición en el disco. \n`;
 
-            particiones[posicionDisco][ listaIndices[posicionDisco] ] = [
-                particion['espacioLibre'] ? particion['espacioLibre'] : "",
-                particion['tamañoNuevo'] ? particion['tamañoNuevo'] : "",
-                particion['espacioLibreAcontinuacion'] ? particion['espacioLibreAcontinuacion'] : "",
-                particion['alinea'] ? particion['alinea'] : "",
-                particion['tipoParticion'] ? particion['tipoParticion'] : "",
-                particion['nombreParticion'] ? particion['nombreParticion'] : "",
-                particion['tipoSistemaArchivos'] ? particion['tipoSistemaArchivos'] : "",
-                particion['etiqueta'] ? particion['etiqueta'] : "",
-                false,
-                true,
-            ];
+            if (particion['tipoParticion'] == 'Extendida') {
+                particiones[posicionDisco][ listaIndices[posicionDisco] ] = [
+                    particion['espacioLibre'] ? particion['espacioLibre'] : "",
+                    particion['tamañoNuevo'] ? particion['tamañoNuevo'] : "",
+                    particion['espacioLibreAcontinuacion'] ? particion['espacioLibreAcontinuacion'] : "",
+                    particion['alinea'] ? particion['alinea'] : "",
+                    particion['tipoParticion'] ? particion['tipoParticion'] : "",
+                    particion['nombreParticion'] ? particion['nombreParticion'] : "",
+                    particion['tipoSistemaArchivos'] ? "" : "",
+                    particion['etiqueta'] ? particion['etiqueta'] : "",
+                    false,
+                    true,
+                ];
+            }else{
+                particiones[posicionDisco][ listaIndices[posicionDisco] ] = [
+                    particion['espacioLibre'] ? particion['espacioLibre'] : "",
+                    particion['tamañoNuevo'] ? particion['tamañoNuevo'] : "",
+                    particion['espacioLibreAcontinuacion'] ? particion['espacioLibreAcontinuacion'] : "",
+                    particion['alinea'] ? particion['alinea'] : "",
+                    particion['tipoParticion'] ? particion['tipoParticion'] : "",
+                    particion['nombreParticion'] ? particion['nombreParticion'] : "",
+                    particion['tipoSistemaArchivos'] ? particion['tipoSistemaArchivos'] : "",
+                    particion['etiqueta'] ? particion['etiqueta'] : "",
+                    false,
+                    true,
+                ];
+            }
+
             listaIndices[posicionDisco]=listaIndices[posicionDisco]+1;
 
             // Setea los valores de memoria en el disco
