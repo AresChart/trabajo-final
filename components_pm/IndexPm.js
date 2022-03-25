@@ -93,6 +93,10 @@ function paginacion() {
         if (palabraClone == "") {          
             return alert("Ingrese índice de la posición a solicitar.");
         }
+        // Valida que la palabra no este vacia
+        if (palabraClone > 2) {          
+            return alert("El bloque de memoria solo tiene de la posición 0 a la 2.");
+        }
 
         // Invoca el metodo que trae el item solicitado
         funciones.solicitarItem(paginaSolicitada, posicionSolicitada);
@@ -117,7 +121,7 @@ function paginacion() {
             return alert("Indique índice de palabra a eliminar.");
         }
         // Valida que el indice digitado exista
-        if (funciones.TablaProcesos.length < eliminarItem) {
+        if (funciones.TablaProcesos.length-1 < eliminarItem) {
             return alert("No existe índice de palabra.");
         }
 

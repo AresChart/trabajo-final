@@ -109,15 +109,15 @@ export function crearArchivo(nombre, tamaño) {
 export function eliminarArchivo(nombre, tamaño) {
 
     // Ingresa registro al log
-    logContigua += `Se solicta eliminar la palabra ${nombre}. \n`;
+    logContigua += `Se solicta eliminar del disco la palabra ${nombre}. \n`;
     // Ingresa registro al log
-    logEnlazada += `Se solicta eliminar la palabra ${nombre}. \n`;
+    logEnlazada += `Se solicta eliminar del disco la palabra ${nombre}. \n`;
     // Ingresa registro al log
-    logIndexadaEnlazada += `Se solicta eliminar la palabra ${nombre}. \n`;
+    logIndexadaEnlazada += `Se solicta eliminar del disco la palabra ${nombre}. \n`;
     // Ingresa registro al log
-    logIndexadaMultinivel += `Se solicta eliminar la palabra ${nombre}. \n`;
+    logIndexadaMultinivel += `Se solicta eliminar del disco la palabra ${nombre}. \n`;
     // Ingresa registro al log
-    logIndexadaCombinada += `Se solicta eliminar la palabra ${nombre}. \n`;
+    logIndexadaCombinada += `Se solicta eliminar del disco la palabra ${nombre}. \n`;
     //Llama a los metodos de eliminacion de archivos de los diferentes algortimos
     eliminarArchivoContigua(nombre, tamaño);
     eliminarArchivoEnlazada(nombre, tamaño);
@@ -221,7 +221,7 @@ export function crearMapaBits (algoritmo) {
 function eliminarArchivoContigua(nombre, tamaño) {
 
     // Ingresa registro al log
-    logContigua += 'Se solicita eliminar del disco la palabra: '+ nombre +'\n';
+    // logContigua += 'Se solicita eliminar del disco la palabra: '+ nombre +'\n';
 
     //Variable que almacena el resultado de la validacion
     let validarArchivo = validarArchivoContigua(nombre);
@@ -231,7 +231,7 @@ function eliminarArchivoContigua(nombre, tamaño) {
     let tope = Math.ceil(tamañoCaracteresContigua[validarArchivo]/3);
 
     // Ingresa registro al log
-    logContigua += ' Se obtiene posición de memoria de inicio de la palabra. \n';
+    // logContigua += ' Se obtiene posición de memoria de inicio de la palabra. \n';
 
     //Valida que el archivo si exista
     if (validarArchivo != -1) {
@@ -254,7 +254,7 @@ function eliminarArchivoContigua(nombre, tamaño) {
     }else{
         // Ingresa registro al log
         logContigua += ' No se encontró la palabra en disco. \n';
-        console.log("No existe el archivo que quiere eliminar");
+        // console.log("No existe el archivo que quiere eliminar");
     }
 
     // console.log("mapa (Contigua)");
@@ -608,7 +608,7 @@ function validarEspacioEnlazada(tamaño, bloquesNecesarios) {
     }else{
         // Ingresa registro al log
         logEnlazada += ` Se notifica que la palabra no existe en disco. \n`;
-        console.log("No existe el archivo que quiere eliminar");
+        // console.log("No existe el archivo que quiere eliminar");
     }
 
     //console.log(mapaEnlazada);
@@ -861,7 +861,7 @@ function validarEspacioIndexadaEnlazada(tamaño, bloquesNecesarios) {
     }else{
         // Ingresa registro al log
         logIndexadaEnlazada += ` Se notifica que la palabra a eliminar no existe. \n`;
-        console.log("No se existe el archivo que quiere eliminar.");
+        // console.log("No se existe el archivo que quiere eliminar.");
     }
 
     // console.log("mapa (IndexadaEnlazada)");
@@ -1187,7 +1187,7 @@ function eliminarArchivoIndexadaMultinivel (nombre, tamaño) {
     }else{
         // Ingresa registro al log
         logIndexadaMultinivel += ` Se notifica que el mensaje a eliminar no existe en memoria. \n`;
-        console.log("No se existe el archivo que quiere eliminar (indexada-multinivel)");
+        // console.log("No se existe el archivo que quiere eliminar (indexada-multinivel)");
     }
 
     // console.log("mapa (Indexada-Multinivel)");
@@ -1470,11 +1470,11 @@ function eliminarArchivoIndexadaCombinada (nombre, tamaño) {
     //Arreglo con posiciones ocupadas por el archivo
     let eliminar = posicionesIndexadaCombinada[validarArchivo];
 
-    // Ingresa registro al log
-    logIndexadaCombinada += ` Se recorren los indices utilizados para almacenar el mensaje, y se ponen en mapa de bits como disponibles. \n`;
-
+    
     //Valida que si exista un archivo creado con ese nombre
     if (validarArchivo != -1) {
+        // Ingresa registro al log
+        logIndexadaCombinada += ` Se recorren los indices utilizados para almacenar el mensaje, y se ponen en mapa de bits como disponibles. \n`;
         //Bucle que recorre las posiciones con los bloques ocupados por el archivo
         for (let index = 0; index < eliminar.length; index++) {
             //Setea en vacio el bloque
@@ -1492,9 +1492,9 @@ function eliminarArchivoIndexadaCombinada (nombre, tamaño) {
         posicionesIndexadaCombinada.splice(validarArchivo,1)
     }else{
         // Ingresa registro al log
-        logIndexadaCombinada += ` Se nortifica que no existe el mensaje a eliminar en disco. \n`;
+        logIndexadaCombinada += ` Se notifica que no existe el mensaje a eliminar en disco. \n`;
 
-        console.log("No se existe el archivo que quiere eliminar (indexada-Combinada)");
+        // console.log("No se existe el archivo que quiere eliminar (indexada-Combinada)");
     }
 
     // console.log("mapa (Indexada-Combinada)");
@@ -1507,8 +1507,8 @@ function eliminarArchivoIndexadaCombinada (nombre, tamaño) {
     // console.log(inicioIndexadaCombinada);
     // console.log("Posiciones (Indexada-Combinada)");
     // console.log(posicionesIndexadaCombinada);
-    console.log("Log");
-    console.log(logIndexadaCombinada);
+    // console.log("Log");
+    // console.log(logIndexadaCombinada);
  
 }
 

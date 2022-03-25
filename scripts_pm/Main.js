@@ -125,18 +125,18 @@ function crearTablaPaginas() {
   * @param {*} indicePagina indice de la pagina a eliminar
   */
 export function eliminarPalabra(indicePagina) {
-    // Ingresa registro al log
-    paginationLog += 'Se solicita eliminar el proceso número '+ indicePagina +'\n';
-
+    
     // Indice de la palabra en la tabla que ve el usuario
     let indiceTablaPaginas;
     // Indice de la palabra en memoria
     let indiceMemoria;
-
+    
     // Recorre tabla de paginas
     for (let index = 0; index < TablaPaginas.length; index++) {
         // Valida si coincide el registro con el indice a eliminar
         if (TablaPaginas[index].pagina == indicePagina) {
+            // Ingresa registro al log
+            paginationLog += 'Se solicita eliminar el proceso número '+ indicePagina +'\n';
             // Valida si la palabra esta en memoria virtual
             if (/^MV/.test(TablaPaginas[index].memoria)) {
                 
@@ -184,9 +184,10 @@ export function eliminarPalabra(indicePagina) {
                 // console.log("Log");
                 // console.log(paginationLog);
             //*/ 
-            break;
+            return;
         }
     }
+    return alert('La página a eliminar no contiene datos o no existe.');
 }
 
 /**
@@ -226,34 +227,35 @@ function limpiarArray(array) {
   */
 export function solicitarItem (numPagina, numPos) {
 
-    // Ingresa registro al log
-    paginationLog += 'Se solicita el item '+ numPos +' de la página '+ numPagina +'\n';
-
     // Recorre la tabla de paginas
     for (let index = 0; index < TablaPaginas.length; index++) {
         // Valida si el numero de la pagina coincide
         if (TablaPaginas[index].pagina == numPagina) {
             // Valida si esta en memoria virtual
             if (/^MV/.test(TablaPaginas[index].memoria)) {
+                // Ingresa registro al log
+                paginationLog += 'Se solicita el item '+ numPos +' de la página '+ numPagina +'\n';
                 // Trae el item solicitado
-                solicitarItemMemoriaVirtual(TablaPaginas[index], numPos);
+                return solicitarItemMemoriaVirtual(TablaPaginas[index], numPos);
 
             } else {
                 // Ingresa registro al log
+                paginationLog += 'Se solicita el item '+ numPos +' de la página '+ numPagina +'\n';
+                // Ingresa registro al log
                 paginationLog += 'Se obtiene el item solicitado: '+ MemoriaFisica[TablaPaginas[index].memoria][numPos] +'\n';
-                alert('Se obtiene el item solicitado: '+ MemoriaFisica[TablaPaginas[index].memoria][numPos]);
-                
                 // Imprime el dato desde la memoria fisica
                 console.log("En memoria Fisica "+ MemoriaFisica[TablaPaginas[index].memoria][numPos]);
-
+                return alert('Se obtiene el item solicitado: '+ MemoriaFisica[TablaPaginas[index].memoria][numPos]);
                 
             }
             break;
         }
         
     }
+    
+    return alert('La página solicitada no contiene datos');
 
-        ///** Visualizacion de datos
+        /** Visualizacion de datos
         console.log("Tabla Procesos");
         console.log(TablaProcesos);
         console.log("Memoria Fisica");
@@ -266,9 +268,7 @@ export function solicitarItem (numPagina, numPos) {
         console.log(TablaPaginas);
         console.log("Log");
         console.log(paginationLog);
-
-        ;
-        //*/ 
+        */ 
     
 }
 
@@ -283,7 +283,6 @@ export function solicitarItem (numPagina, numPos) {
 function solicitarItemMemoriaVirtual (indiceMV, numPos) {
     // Ingresa registro al log
     paginationLog += ' Proceso ubicado en memoria virtual \n';
-    console.log("entra");
     // Separa los datos dentro del array de paginas
     let posicion = indiceMV.memoria.split('-');
     // clona la informcion del array a subir
@@ -336,6 +335,8 @@ function solicitarItemMemoriaVirtual (indiceMV, numPos) {
     // Ingresa registro al log
     paginationLog += 'Se obtiene el item solicitado: '+ MemoriaFisica[numero][numPos] +'\n';
 
+    alert('Se obtiene el item solicitado: '+ MemoriaFisica[numero][numPos]);
+
     return numero;
 }
 
@@ -365,7 +366,7 @@ export function crearProceso(palabra) {
         // Agrega el proceso en la tabla de procesos global
         TablaProcesos.push(palabra);
         
-        ///** Visualizacion de datos
+        /** Visualizacion de datos
         console.log("Tabla Procesos");
         console.log(TablaProcesos);
         console.log("Memoria Fisica");
@@ -378,14 +379,14 @@ export function crearProceso(palabra) {
         console.log(TablaPaginas);
         console.log("Log");
         console.log(paginationLog);
-        //*/  
+        */  
 
     }
     // No existe memoria disponible para el ingreso de la palabra
     else{
         // Ingresa registro al log
         paginationLog += 'No hay memoria suficiente para almacenar el proceso, por lo cual se reporta un fallo en la operación. \n';
-        alert("Memoria Insuficiente para almacenar el proceso");
+        return alert("Memoria Insuficiente para almacenar el proceso");
     }
 }
 
