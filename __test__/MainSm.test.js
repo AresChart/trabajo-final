@@ -13,6 +13,6 @@ describe('aleatorio',() => {
     // Crea proceso
     test('crearProceso', () => {
         crearProceso('colombia');
-        expect(segmentoIndex).toBe(2);
+        expect(segmentoIndex).toBe(1);
     });
 });
