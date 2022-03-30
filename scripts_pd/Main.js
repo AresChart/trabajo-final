@@ -173,6 +173,20 @@ export function eliminarDisco(disco) {
     return [discos,particiones];
 }
 
+function obtenerSistemaArchivoLog (particion,tipoParticion){
+    if(tipoParticion=="Extendida"){
+        return "";
+    }
+    return " Sistema de archivos: "+particion[6];
+}
+
+export function crearLogDeEditar(disco,particion){
+    logDiscos[disco] += 
+    "Se edita una partición con los siguientes valores; tamaño: "+particion[0]+particion[1]+particion[2]
+    +" - tipo de partición: "+particion[4]+ " - nombre de partición: "+particion[5]+obtenerSistemaArchivoLog(particion,particion[4])
+    +" - Etiqueta: "+particion[7]+"\n";
+}
+
 function existeParticionEnDisco(posicionDisco,nombreParticion) {
     for (let index = 0; index < particiones[posicionDisco].length; index++) {
         if(particiones[posicionDisco][index]){

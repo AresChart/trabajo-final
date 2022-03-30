@@ -281,7 +281,7 @@ function verificarIntercepcionDeProcesos(tiempo_llegada) {
 
 //------------------- ALGORITMOS -------------------
 
-function FCFS(tabla,nucleos) {
+export function FCFS(tabla,nucleos) {
     guardarDatos(tabla);
     matrizIntermedia = new Array();
     let i = 0;
@@ -349,7 +349,7 @@ export function crearTextoSalida(item_algoritmo,tablaSalida){
 
 //--------------------------------------------------------------------------------------
 
-function SJF(tabla,nucleos) {
+export function SJF(tabla,nucleos) {
     guardarDatos(tabla);
     matrizIntermedia = new Array();
     var i = 0;
@@ -423,7 +423,7 @@ function obetenerPosPIDConMenorTiempoEje_SJF(tiempo_llegada, pids_habilitados) {
 
 //--------------------------------------------------------------------------------------
 
-function SRTF(tabla,nucleos) {
+export function SRTF(tabla,nucleos) {
    
     guardarDatos(tabla);
     matrizIntermedia = new Array();
@@ -519,7 +519,7 @@ function obtenerTiempoEjecucion_SRFT(pid) {
 
 //--------------------------------------------------------------------------------------
 
-function externoExpulsivo(tabla,nucleos) {
+export function externoExpulsivo(tabla,nucleos) {
     
     guardarDatos(tabla);
     matrizIntermedia = new Array();
@@ -604,7 +604,7 @@ function obetenerPosPIDConMayorPrioridad_EXT_EXP(tiempo_llegada) {
 
 //--------------------------------------------------------------------------------------
 
-function externoNoExpulsivo(tabla,nucleos) {
+export function externoNoExpulsivo(tabla,nucleos) {
     guardarDatos(tabla);
     matrizIntermedia = new Array();
     var i = 0;
@@ -678,7 +678,7 @@ function obetenerPosPIDConMayorPrioridad_EXT_NO_EXP(tiempo_llegada, pids_habilit
 
 //--------------------------------------------------------------------------------------
 
- function HRN_PRIMA(tabla,nucleos) {
+ export function HRN_PRIMA(tabla,nucleos) {
     guardarDatos(tabla);
     var ejecutados = new Array();
     matrizIntermedia = new Array();
@@ -774,7 +774,7 @@ function obetenerPosPIDConMayorPrioridad_EXT_NO_EXP(tiempo_llegada, pids_habilit
 
 var prioridadesFinales = [];
 
- function HRN(tabla,nucleos) {
+ export function HRN(tabla,nucleos) {
     guardarDatos(tabla);
     matrizIntermedia = new Array();
     var i = 0;
@@ -1044,7 +1044,7 @@ function contarEjecutados(pid){
     return cantidad;
 }
 
-function algortimoRR (tabla,nucleos,quantum){
+export function algortimoRR (tabla,nucleos,quantum){
     guardarDatos(tabla);
     var cola = [];
     var faltantes = new Array();

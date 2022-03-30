@@ -285,6 +285,7 @@ function App () {
       setPosicionChecked(index);
       setparticiones(funciones.deshabilitarChecks(posDisco,index)) ;
     }else if(!estado && index==posicionChecked){
+      funciones.crearLogDeEditar(discos,particiones[posDisco][index]);
       setPosicionChecked(-1);
       setparticiones(funciones.habilitarChecks(posDisco));
     }
