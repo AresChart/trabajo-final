@@ -354,16 +354,13 @@ export function crearArchivoContigua(nombre, tamaño) {
     // console.log("mapa (Contigua)");
     // console.log(mapaContigua);
     // console.log("creados (Contigua)");
-    console.log(archivosCreadosContigua);
+    // console.log(archivosCreadosContigua);
     // console.log("tamaño (Contigua)");
     // console.log(tamañoCaracteresContigua);
     // console.log("inicio (Contigua)");
     // console.log(inicioContigua);
     // console.log('log');
     // console.log(logContigua);
-    
-    
-    
 }
 
 /**
@@ -502,12 +499,12 @@ function validarEspacioContigua(tamaño, bloquesNecesarios) {
 }
 
 /**
-* Valida si se puede agregar el archivo que se quiere crear
-* @param {*} tamaño tamaño de caracteres que tiene el archivo
-* @param {*} bloquesNecesarios  tamaño de bloques necesarios para almacenar el archivo
-* @returns El valor de la posicion de inicio para agregar el archivo si se puede agregar.
-*          Si no se puede agregar retorna -1
-*/
+ * Valida si se puede agregar el archivo que se quiere crear
+ * @param {*} tamaño tamaño de caracteres que tiene el archivo
+ * @param {*} bloquesNecesarios  tamaño de bloques necesarios para almacenar el archivo
+ * @returns El valor de la posicion de inicio para agregar el archivo si se puede agregar.
+ *          Si no se puede agregar retorna -1
+ */
 function validarEspacioEnlazada(tamaño, bloquesNecesarios) {
     // Ingresa registro al log
     logEnlazada += ` Se valida si existe espacio para almacenar la palabar en disco. \n`;
@@ -569,7 +566,7 @@ function validarEspacioEnlazada(tamaño, bloquesNecesarios) {
                 // Ingresa registro al log
                 logEnlazada += ` En mapa de bits se pone disponible el bloque ${indice+1}. \n`;
                 //Se guarda del valor del siguiente bloque con datos del archivo
-                siguiente = mapaEnlazada[indice][2]-1;
+                siguiente = mapaEnlazada[indice][2];
                 //Se setea en vacio para eliminar los datos
                 mapaEnlazada[indice] = ["","",""];
                 //Se asigna el indice del bloque siguiente con datos del archivo
@@ -642,7 +639,7 @@ function validarArchivoEnlazada (nombre) {
  * @param {*} nombre Nombre del archivo a crear
  * @param {*} tamaño Tamaño del archivo a crear
  */
-export function crearArchivoIndexadaEnlazada(nombre, tamaño) {
+ export function crearArchivoIndexadaEnlazada(nombre, tamaño) {
 
     //Indica cuantos bloques se requieren para almacenar el archivo
     let bloquesNecesarios = Math.ceil(tamaño/(tamañoBloque));
@@ -664,56 +661,34 @@ export function crearArchivoIndexadaEnlazada(nombre, tamaño) {
         //Valida que el arreglo tenga posiciones. Que no tenga valor negativo
         if (posicionesDisponible != -1) {
             //Bucle que recorre los bloques para almacenar datos
-            for (let index = bloquesIndices; index < posicionesDisponible.length ; index++) {
-                //Bucle que recorre cada posicion del bloque para guardar datos
+            for (let index = 0; index < posicionesDisponible.length ; index++) {
+                // Ingresa registro al log
+                logIndexadaEnlazada += ` Bloque actual: ${index} \n`;
+                // Indice del bloque actual
+                let consecutivo = index;
+                //Bucle que recorre cada posicion del bloque de datos
                 for (let index1 = 0; index1 < mapaIndexadaEnlazada[0].length; index1++) {
-                    //Valida que todavia existan caracteres por asignar
-                    if (cantidad != 0) {
-                        //Asigna el caracter en la posicion
-                        mapaIndexadaEnlazada[posicionesDisponible[index]][index1] = nombre.charAt(indicador);
-                        cantidad--;
-                        indicador++;
-
-                    }else{
+                    //Valida si esta en la ultima posicion del bloque de datos
+                    if (index1 == 2 && cantidad != 0){
+                        // Ingresa registro al log
+                        logIndexadaEnlazada += ` En el bloque actual, se relaciona que el siguente bloque de indices es el bloque: ${posicionesDisponible[index+1]} \n`;
+                        mapaIndexadaEnlazada[posicionesDisponible[consecutivo]][index1] = posicionesDisponible[index+1];
+                    }
+                    // Valida que no este en la ultima posicion del bloque de datos
+                    else if (cantidad != 0 && index1 != 2) {
+                        // Ingresa registro al log
+                        logIndexadaEnlazada += ` En el bloque actual, se relaciona que el siguente bloque de datos es el bloque: ${posicionesDisponible[index+1]}  \n`;
+                        // Pone indice del bloque siguiente
+                        mapaIndexadaEnlazada[posicionesDisponible[consecutivo]][index1] = posicionesDisponible[index+1];
+                        // Llama al metodo para asignar datos
+                        indicador = asignarCaracter(mapaIndexadaEnlazada[posicionesDisponible[index+1]], indicador, nombre);
+                        cantidad = tamaño-indicador;
+                        index++;
+                    } else {
                         break;
                     }
-
                 }
                 
-            }
-
-            // Indica bloques consumidos
-            let aux = bloquesIndices;
-            // Indica tope de bloques para asignar
-            let tope = 1;
-
-            // Recorre los bloques destinados para los indices
-            for (let index = 0; index < bloquesIndices; index++){
-                //Bucle que recorre cada posicion de los bloques
-                for (let index2 = 0; index2 < mapaIndexadaEnlazada[0].length; index2++) {
-                    // Valida si es la ultima posicion del bloque de memoria
-                    if (index2 == mapaIndexadaEnlazada[0].length-1) {
-                        // Valida que no se pase de los bloques asignados para los indices
-                        if (tope < bloquesIndices) {
-                            // Ingresa registro al log
-                            logIndexadaEnlazada += ` Enlaza al bloque de indices ${posicionesDisponible[tope]}. \n`;
-                            // Realiza la asignacion de los datos
-                            mapaIndexadaEnlazada[posicionesDisponible[index]][index2] = posicionesDisponible[tope];
-                            tope++;
-                        }     
-                    }
-                    // Valida que no sea la ultima posicion del bloque de memoria
-                    if (index2 != mapaIndexadaEnlazada[0].length-1) {
-                        // Valida si es el ultimo bloque de memoria
-                        if (aux < posicionesDisponible.length) {
-                            // Ingresa registro al log
-                            logIndexadaEnlazada += ` En el bloque de memoria ${posicionesDisponible[index]} asigna en el espacio ${index2+1} que se consumió el bloque ${posicionesDisponible[aux]}. \n`;
-                            // Realiza la asignacion de los datos
-                            mapaIndexadaEnlazada[posicionesDisponible[index]][index2] = posicionesDisponible[aux];
-                            aux++;
-                        }
-                    }
-                }
             }
 
             //Ingresa el archivo en el arreglo de archivos creados
@@ -747,8 +722,31 @@ export function crearArchivoIndexadaEnlazada(nombre, tamaño) {
     // console.log(inicioIndexadaEnlazada);
     // console.log("Posiciones (IndexadaEnlazada)");
     // console.log(posicionesIndexadaEnlazada);
-    // console.log("Log");
-    // console.log(logIndexadaEnlazada);
+    console.log("Log");
+    console.log(logIndexadaEnlazada);
+}
+
+/**
+ * Asigna caracteres en un bloque de memoria
+ *
+ * @param {*} mapa bloque de memoria
+ * @param {*} indicador indicador del caracter a asignar
+ * @param {*} nombre nombre del archivo a ingresar en disco
+ *
+ * @returns indicador actual
+ */
+function asignarCaracter(mapa, indicador, nombre) {
+    // Recorre el bloque de memoria
+    for (let index = 0; index < mapa.length; index++) {
+        // Valida si se ingreso completamente la palabra
+        if (indicador != nombre.length) {
+            // Ingresa el caracter en un espacio del bloque de memoria
+            mapa[index] = nombre.charAt(indicador);
+            indicador++;
+        }
+    }
+
+    return indicador;
 }
 
 /**
@@ -847,7 +845,7 @@ function validarEspacioIndexadaEnlazada(tamaño, bloquesNecesarios) {
             //Setea en vacio el bloque
             mapaIndexadaEnlazada[eliminar[index]] = ["","",""];
             // Ingresa registro al log
-            logIndexadaEnlazada += ` Se libera el bloque ${eliminar[index]+1}. \n`;
+            logIndexadaEnlazada += ` Se libera el bloque ${eliminar[index]}. \n`;
         }
 
         //Elimina los datos del archivo a eliminar del arreglo de archivos creados
@@ -864,18 +862,18 @@ function validarEspacioIndexadaEnlazada(tamaño, bloquesNecesarios) {
         // console.log("No se existe el archivo que quiere eliminar.");
     }
 
-    // console.log("mapa (IndexadaEnlazada)");
-    // console.log(mapaIndexadaEnlazada);
-    // console.log("archivos (IndexadaEnlazada)");
-    // console.log(archivosCreadosIndexadaEnlazada);
-    // console.log("tamaños (IndexadaEnlazada)");
-    // console.log(tamañoCaracteresIndexadaEnlazada);
-    // console.log("inicio (IndexadaEnlazada)");
-    // console.log(inicioIndexadaEnlazada);
-    // console.log("posiciones disponibles (IndexadaEnlazada)");
-    // console.log(posicionesIndexadaEnlazada);
-    // console.log("Log");
-    // console.log(logIndexadaEnlazada);
+    console.log("mapa (IndexadaEnlazada)");
+    console.log(mapaIndexadaEnlazada);
+    console.log("archivos (IndexadaEnlazada)");
+    console.log(archivosCreadosIndexadaEnlazada);
+    console.log("tamaños (IndexadaEnlazada)");
+    console.log(tamañoCaracteresIndexadaEnlazada);
+    console.log("inicio (IndexadaEnlazada)");
+    console.log(inicioIndexadaEnlazada);
+    console.log("posiciones disponibles (IndexadaEnlazada)");
+    console.log(posicionesIndexadaEnlazada);
+    console.log("Log");
+    console.log(logIndexadaEnlazada);
 
 }
 
