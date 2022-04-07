@@ -23,9 +23,9 @@ function ProcessList(props) {
         
   return(
 
-    <View style={{top: 100,marginTop: 20,flexDirection: 'row',alignContent: "center",alignItems: "center",justifyContent: "center",padding: 1, right: 5 }}>
+    <View style={{top: 30,marginTop: 20,flexDirection: 'row',alignContent: "center",alignItems: "center",justifyContent: "center",padding: 1, right: 5 }}>
         <DataTable id="tabla_salida" style={{flexDirection: 'column'}}>
-          <DataTable.Header style={{width:220}}>
+          <DataTable.Header style={{width:'100%'}}>
             <DataTable.Title style={{justifyContent: 'center'}} adjustsFontSizeToFit>Bloque</DataTable.Title>
             <DataTable.Title style={{justifyContent: 'center'}} adjustsFontSizeToFit>Memoria</DataTable.Title>
           </DataTable.Header>

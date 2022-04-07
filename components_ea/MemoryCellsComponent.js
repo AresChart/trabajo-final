@@ -10,6 +10,7 @@ const MemoryCellsComponent = (props) => {
 
   return(
     <View style={styles.container_table}>
+      <Text style={{fontSize: 15, justifyContent:'center',marginLeft:90,marginBottom:20 ,fontWeight:'bold',fontStyle: 'italic'}}>Celdas de memoria</Text>
       <DataTable id="celdas_memoria">
         <DataTable.Header>
           <DataTable.Title style={{justifyContent: 'center'}}><Text style={{fontSize: 12}}>index</Text></DataTable.Title>

@@ -16,7 +16,7 @@ function ProcessList(props) {
         
   return(
 
-    <View style={{top:100, flexDirection: 'row',alignContent: "center",justifyContent: "center",padding: 1 }}>
+    <View style={{top:30, flexDirection: 'row',alignContent: "center",justifyContent: "center",padding: 1 }}>
 
         <DataTable id="tabla_salida" style={{flexDirection: 'column',justifyContent: 'center'}}>
           <DataTable.Header style={{width:'100%'}}>

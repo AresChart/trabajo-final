@@ -82,16 +82,16 @@ function paginacion() {
         let palabraClone = paginaSolicitada.trim();  
 
         // Valida que la palabra no este vacia
-        if (palabraClone == "") {          
-            return alert("Ingrese índice de página a solicitar.");
+        if (palabraClone == "" || parseInt(palabraClone)<0) {          
+            return alert("Ingrese índice válido de página a solicitar.");
         }
 
         // Variable auxiliar 
         palabraClone = posicionSolicitada.trim();  
 
         // Valida que la palabra no este vacia
-        if (palabraClone == "") {          
-            return alert("Ingrese índice de la posición a solicitar.");
+        if (palabraClone == "" || parseInt(palabraClone)<0) {          
+            return alert("Ingrese índice válido de la posición a solicitar.");
         }
         // Valida que la palabra no este vacia
         if (palabraClone > 2) {          
@@ -117,8 +117,8 @@ function paginacion() {
         let palabraClone = eliminarItem.trim();  
 
         // Valida que la palabra no este vacia
-        if (palabraClone == "") {          
-            return alert("Indique índice de palabra a eliminar.");
+        if (palabraClone == "" || parseInt(palabraClone)<0) {          
+            return alert("Indique índice válido de palabra a eliminar.");
         }
         // Valida que el indice digitado exista
         if (funciones.TablaProcesos.length-1 < eliminarItem) {
@@ -175,15 +175,20 @@ function paginacion() {
         </View>
 
         <View style={{top:100,flexDirection: 'column',width:'90%'}}>
+        <Text style={{fontSize: 15, justifyContent:'center',marginLeft:110,marginTop:10 ,fontWeight:'bold',fontStyle: 'italic'}}>Memoria Lógica</Text>
             <TableUser procesos = {funciones.TablaUsuario}/>
+        <Text style={{fontSize: 15, justifyContent:'center',marginLeft:110,marginTop:80 ,fontWeight:'bold',fontStyle: 'italic'}}>Tabla de páginas</Text>
             <TableData procesos = {funciones.TablaPaginas}/>
-            <View style={{ flexDirection: 'column', marginTop: 50, alignItems: "center"}}>
+
+            <View style={{ flexDirection: 'column', marginTop: 20, alignItems: "center",justifyContent:'center'}}>
+                <Text style={{fontSize: 15, justifyContent:'center',marginLeft:25,marginTop:80 ,fontWeight:'bold',fontStyle: 'italic'}}>Memoria Física</Text>
                 <ProcessList procesos = {funciones.MemoriaFisica}/>
+                <Text style={{fontSize: 15, justifyContent:'center',marginLeft:25,marginTop:80 ,fontWeight:'bold',fontStyle: 'italic'}}>Memoria Virtual</Text>
                 <ProcessList procesos = {funciones.MemoriaVirtual}/>
             </View>
         </View>
 
-        <View style={{width: "90%",top: 250, backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+        <View style={{width: "90%",top: 200, backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
             <TextInput multiline={true} style={styles.item_resultado} numberOfLines={8} value={funciones.paginationLog}/>
             <TouchableOpacity style={{marginTop:20, width: 190, height: 45, backgroundColor: 'blue', padding:10, alignItems: 'center', borderRadius: 5}} onPress={ ()=> Speaker(funciones.paginationLog)} >
                 <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
@@ -193,7 +198,7 @@ function paginacion() {
             </TouchableOpacity>
         </View>
 
-        <View style={{top:620,width: "100%",height:330}}>
+        <View style={{top:620,width: "100%",height:250}}>
         </View>
 
 

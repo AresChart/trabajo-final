@@ -287,9 +287,9 @@ export function ejecutarAlgoritmo(textSemaforos,tablaEntrada,textVariables){
             continue;
         }
 
-       let esSentencia = esSuma(elemento,hiloAleatorio) 
-       || esResta(elemento,hiloAleatorio) 
-       || esCondicional(elemento,hiloAleatorio,cuerpo);
+       let esSentencia = esSuma(elemento.toLocaleLowerCase(),hiloAleatorio) 
+       || esResta(elemento.toLocaleLowerCase(),hiloAleatorio) 
+       || esCondicional(elemento.toLocaleLowerCase(),hiloAleatorio,cuerpo);
        if(esSentencia){
            continue;
        }
@@ -298,7 +298,7 @@ export function ejecutarAlgoritmo(textSemaforos,tablaEntrada,textVariables){
         let esRelease = elemento.toLowerCase() .includes(".release()");
     
         let semaforo = elemento.split(".");
-        let posSemaforo = parseInt(semaforo[0].split("s")[1])-1;
+        let posSemaforo = parseInt(semaforo[0].toLowerCase().split("s")[1])-1;
 
         textHilosBloqueados = definirComportamiento(posSemaforo,hiloAleatorio,elemento,esAcquire,esRelease,textHilosBloqueados);
 

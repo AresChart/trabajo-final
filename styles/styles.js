@@ -50,18 +50,19 @@ export const styles = StyleSheet.create({
       height:220,
       textAlign: 'center',
       color:'black',
-      fontSize: 8,
+      fontSize: 10,
       textAlignVertical: 'top'
     },
 
     textInput_semaforos_sp: {
       width: 300,
-      height: 30,
+      height: 50,
       borderWidth: 1,
       textAlign: 'center',
       color:'black',
       fontSize: 15,
-      marginTop:20
+      marginTop:20,
+      padding:10
     },
 
     textInput_variables_sp: {
@@ -141,6 +142,7 @@ export const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: .25,
         textAlign: 'justify',
+        padding: 10
       },
       item_resultado_cola: {
         fontSize: 15,

@@ -74,7 +74,7 @@ export const styles = StyleSheet.create({
   },
   item_resultado: {
     fontSize: 15,
-    height: 100,
+    height: 200,
     width:'100%',
     alignContent: "center",
     alignItems: "center",

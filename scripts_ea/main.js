@@ -39,9 +39,9 @@ export function inicializarListasAleatorias(listaProcesos,listaRequerimientos,ta
         }
         
         if(tablaEntrada[index].solicita==="--"){
-            listaRequerimientos[index]="Liberar";
+            listaRequerimientos[index]="L";
         }else{
-            listaRequerimientos[index]="Solicitar "+tablaEntrada[index].solicita;
+            listaRequerimientos[index]="S "+tablaEntrada[index].solicita;
         }
     }
     return [listaProcesos,listaRequerimientos];
@@ -51,8 +51,8 @@ export function inicializarTablaEntrada(listaProcesos,listaRequerimientos,tablaE
     let procesos = listaProcesos.split("\n");
     for (let index = 0; index < listaRequerimientos.length; index++) {
         tablaEntrada[index].proceso = procesos[index];
-        if(listaRequerimientos[index].includes("Solicitar")){
-            let resultado = listaRequerimientos[index].split("Solicitar");
+        if(listaRequerimientos[index].includes("S")){
+            let resultado = listaRequerimientos[index].split("S");
             tablaEntrada[index].solicita = parseInt(resultado[1].replace(/ /g, ""));
             tablaEntrada[index].libera= "--";
         }else{

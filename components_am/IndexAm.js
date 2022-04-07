@@ -177,7 +177,7 @@
         }
 
         return (
-            <View style={{top: 850,marginTop:100}}>
+            <View style={{top: 850,marginTop:50}}>
                 <Text>Mapa de bits</Text>
                 <TextInput style={styles.item_input} multiline={true} numberOfLines={5} value={""+cadena}/>
             </View>
@@ -289,7 +289,7 @@
         return(
             
             <View style={{top:0, marginRight:0, marginLeft: 20, width: '100%' ,height: 500,flexDirection: 'column',alignContent: "center",alignItems: "center",justifyContent: "center",padding: 1}}>
-
+                <Text style={{fontSize: 15, justifyContent:'center',margin:10 ,fontWeight:'bold',fontStyle: 'italic'}}>DISCO</Text>
                 <DataTable id="tabla_salida" style={{flexDirection: 'column'}}>
                     <DataTable.Header >
                         <DataTable.Title ><Text style={styles.item_tabla}>Bloque 0</Text></DataTable.Title>
@@ -511,6 +511,7 @@
                 </Picker>
 
             </View>
+            <Text style={{fontSize: 15, justifyContent:'center',marginTop:60 ,fontWeight:'bold',fontStyle: 'italic'}}>Tabla de Archivos</Text>
                 {processTable()}
             <View style={{width: '90%' ,height: 1000,top: 50,flexDirection: 'column',alignContent: "center",alignItems: "center",justifyContent: "center"}}>
                 {mapaBits()}
@@ -520,7 +521,7 @@
             </View>
 
             {diskLog()}
-            <View style={{width:'100%',height: 30}}>
+            <View style={{width:'100%',height: 80}}>
             </View>
            
             

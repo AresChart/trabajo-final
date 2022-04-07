@@ -17,7 +17,6 @@ function ProcessList(props) {
   return(
 
     <View style={{width:'100%',top: 40, flexDirection: 'row',alignContent: "center",justifyContent: "center",padding: 1 }}>
-
         <DataTable id="tabla_salida" style={{flexDirection: 'column',width:'100%'}}>
           <DataTable.Header >
             <DataTable.Title style={{justifyContent: 'center'}}>Pagina</DataTable.Title>

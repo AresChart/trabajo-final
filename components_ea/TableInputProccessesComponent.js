@@ -23,6 +23,7 @@ const TableInputProccessesComponent = (props) => {
 
       return(
         <View style={{ width:320 ,height:400}}>
+          <Text style={{fontSize: 15, justifyContent:'center',marginLeft:90,marginBottom:20,fontWeight:'bold',fontStyle: 'italic'}}>Tabla de entrada</Text>
           <DataTable id="tabla">
             <DataTable.Header>
               <DataTable.Title style={{justifyContent: 'center',flex: 1}}><Text style={{fontSize: 12}}>Proceso</Text></DataTable.Title>
@@ -40,11 +41,11 @@ const TableInputProccessesComponent = (props) => {
                 <View style={{flexDirection: 'column'}}>
                   {listaRequerimientos.map((row,index) => (
                       <Picker style={{width:140, height: 20, fontSize:12}} value={""+row} selectedValue={""+row} onValueChange={(data)=>updateListaRequerimientos(index,data)}>
-                        <Picker.Item label={"Liberar"}  value={"Liberar"}/>
-                        <Picker.Item label={"Solicitar 1"}  value={"Solicitar 1"}/>
-                        <Picker.Item label={"Solicitar 2"}  value={"Solicitar 2"}/>
-                        <Picker.Item label={"Solicitar 3"}  value={"Solicitar 3"}/>
-                        <Picker.Item label={"Solicitar 4"}  value={"Solicitar 4"}/>
+                        <Picker.Item label={"L"}  value={"L"}/>
+                        <Picker.Item label={"S 1"}  value={"S 1"}/>
+                        <Picker.Item label={"S 2"}  value={"S 2"}/>
+                        <Picker.Item label={"S 3"}  value={"S 3"}/>
+                        <Picker.Item label={"S 4"}  value={"S 4"}/>
                       </Picker>
                   ))}
                 </View>

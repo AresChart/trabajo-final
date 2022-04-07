@@ -20,7 +20,8 @@ function PhysicalMemory(props) {
   return(
 
     <View
-    style={{top: 400,flexDirection: 'row',alignContent: "center",alignItems: "center",justifyContent: "center",padding: 1}}>
+    style={{top: 30,flexDirection: 'row',alignContent: "center",alignItems: "center",justifyContent: "center",padding: 1}}>
+       
       <DataTable id="tabla_salida" style={{flexDirection: 'column'}}>
         <DataTable.Header style={{width:'100%'}}>
           <DataTable.Title style={{ justifyContent:'center'}} adjustsFontSizeToFit ><Text style={styles.item_tabla_sm}>Índice</Text></DataTable.Title>

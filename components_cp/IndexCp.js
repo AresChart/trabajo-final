@@ -111,14 +111,14 @@ function  crearTablaEntrada (){
   function textAreaSalidaComponent(){
       return (
         <TextInput multiline={true} numberOfLines={5} style={styles.textInput_salida_cp} 
-        onChangeText={(text) => setTextSalida(text)} placeholder="Salida" value={textSalida}/>
+        onChangeText={(text) => setTextSalida(text)} value={textSalida}/>
       );
   }
 
   function textAreaHilosBloqueadosComponent(){
       return (
         <TextInput style={styles.textInput_hilos_bloqueados_cp} 
-        onChangeText={(text) => setTextHilosBloqueados(text)} placeholder="Hilos Bloqueados" value={textHilosBloqueados}/>
+        onChangeText={(text) => setTextHilosBloqueados(text)} value={textHilosBloqueados}/>
       );
   }
 

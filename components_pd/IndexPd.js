@@ -55,10 +55,9 @@ function App () {
   /**
    * Metodo que sirve para eliminar el disco seleccionado en el picker
    */
-   function EliminarDisco() {
-    //Llama a la funcion de eliminar disco
-    
-    //setDisco("");
+  function  EliminarDisco() {
+   
+  
     let resultado =  funciones.eliminarDisco(discos);
 
     if(resultado==-1){
@@ -73,21 +72,24 @@ function App () {
     let disCread = [];
     disCread.push("");
     disCread.push(funciones.obtenerNombreDiscosCreados());
-
+   
     
-    setitemsInPicker(    
-      Object.keys(disCread).map(function(key, index) {
+      setitemsInPicker(    
+       Object.keys(disCread).map(function(key, index) {
         return (
-          <Picker.Item label={disCread[index]}  value={disCread[index]}/>
+          <Picker.Item label={disCread[index]} value={disCread[index]}/>
         )
       })
     );
 
+   
+    onRefresh();
+
     setTablaStyles([["disco"],[["p","#DEDEDE",0.5]]]);
     setParticionesExt([["disco"],[["p","#DEDEDE",0.5]],0.3]);
-    setDisco("");
-
+    
     setVerTablaDisc(false);
+    setDisco("");
 
     return onRefresh();
   }

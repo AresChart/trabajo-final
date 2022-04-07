@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
   },
   item_resultado: {
     fontSize: 15,
-    height: 100,
+    height: 200,
     width:'100%',
     alignContent: "center",
     alignItems: "center",
@@ -62,6 +62,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     borderWidth: .25,
     textAlign: 'center',
+    padding:10
   },
   item_tabla: {
     fontSize: 20,

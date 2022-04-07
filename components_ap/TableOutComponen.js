@@ -9,6 +9,7 @@ const TableOutComponent = (props) => {
 
   return(
     <View style={{width:'95%',height:props.height, top:props.top}}>
+      <Text style={{fontSize: 15, justifyContent:'center',margin:10 ,fontWeight:'bold',fontStyle: 'italic'}}>Tabla de salida</Text>
       <DataTable id="tabla_salida">
         <DataTable.Header>
           <DataTable.Title style={{ flex: 0.7}} ><Text style={{fontSize: 13}}>Pid</Text></DataTable.Title>

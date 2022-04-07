@@ -47,6 +47,7 @@ const TableProcessComponent = (props) => {
 
   return(
     <View style={{width:'100%',height:'100%', top: props.top}}>
+      <Text style={{fontSize: 15, justifyContent:'center',margin:10 ,fontWeight:'bold',fontStyle: 'italic'}}>Tabla de procesos</Text>
       <ScrollView horizontal={true} vertical={true} style={{ top: 0 ,width: '100%' ,height: 1000}}  > 
         <DataTable style={{width:1000}}>
         {tablaStyles.map((row,i) => (

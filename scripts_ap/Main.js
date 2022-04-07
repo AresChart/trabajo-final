@@ -49,7 +49,8 @@ export function inicializarTablaEntradaNumerosAleatorios(tablaEntrada,item_algor
         if(item_algoritmo==="Prioridad interna expulsiva (HRN_PRIMA)" || item_algoritmo==="Prioridad interna no expulsiva (HRN)"){
             tablaEntrada[index_i].prioridad = parseInt(1);
         }else{
-            tablaEntrada[index_i].prioridad = parseInt(Math.random() * (max - min_ejecucion_prioridad) + min_ejecucion_prioridad);
+            var exp = Math.pow(10, 2);
+            tablaEntrada[index_i].prioridad = parseInt( (Math.random() * (max - min_ejecucion_prioridad) + min_ejecucion_prioridad) * exp, 10)/ exp;
         }
         
         tablaEntrada[index_i].rafaga_es = parseInt(Math.random() * (max_rafaga_es - min_ejecucion_prioridad) + min_ejecucion_prioridad);

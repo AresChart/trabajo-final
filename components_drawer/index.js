@@ -13,6 +13,7 @@ import IndexPm from '../components_pm/IndexPm';
 import IndexAm from '../components_am/IndexAm';
 import IndexPd from '../components_pd/IndexPd';
 import IndexCp from '../components_cp/IndexCp';
+import * as Speech from 'expo-speech';
 
 /**
  * @author Kevin David Sanchez Solis
@@ -40,34 +41,42 @@ function HomeScreen(props) {
 }
 
 function SegmentacionMemoria() {
+  Speech.stop();
   return (<IndexSm/>);
 }
 
 function AlgoritmosPlanificacionScreen() {
+    Speech.stop();
     return (<IndexAp/>);
 }
 
 function EstrategiaDeAjusteScreen() {
+   Speech.stop();
    return (<IndexEa/>);
 }
 
 function SincronizacionDeProcesosScreen() {
+  Speech.stop();
   return (<IndexSp/>);
 }
 
 function PaginacionDeMemoria() {
+  Speech.stop();
   return (<IndexPm/>);
 }
 
 function AsignacionDisco() {
+  Speech.stop();
   return (<IndexAm/>);
 }
 
 function ParticionesDisco() {
+  Speech.stop();
   return (<IndexPd/>);
 }
 
 function ComunicacionProcesos(){
+  Speech.stop();
   return (<IndexCp/>);
 }
 

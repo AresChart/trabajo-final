@@ -32,6 +32,8 @@ export default function IndexEa(props) {
   const [resultadoComponentActivo, setResultadoComponentActivo] = React.useState(true);
   const [parrafoResultado, setparrafoResultado] = useState("");
 
+  const [isVisible,setIsVisible] = useState('none');
+
   /**
       * Metodo que realiza la espera mientras se ejecuta una accion
       * @param {*} timeout Tiempo de espera que se quiere
@@ -194,6 +196,7 @@ const onRefresh = React.useCallback(() => {
           return alert("Por favor ingrese mínimo 3 solicitudes !");
         }
 
+        setIsVisible('flex');
         crearTablaEntrada();
         setBanderaEntrada(true);
       }
@@ -209,7 +212,7 @@ const onRefresh = React.useCallback(() => {
           }else{
             listaProcesos+=("S"+(index+1)+"\n");
           }
-          listaRequerimientos.push("Solicitar 1");
+          listaRequerimientos.push("S 1");
           tablaEntrada.push({proceso: "S"+(index+1), solicita: "", libera: ""});
         }
         setListaProcesos(listaProcesos);
@@ -279,6 +282,8 @@ const onRefresh = React.useCallback(() => {
           <View style={{width:'90%' , alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
              {tableInputProcessesComponent()}
           </View>
+          <Text style={{display:isVisible,fontSize: 15, justifyContent:'center',margin:10 ,fontStyle: 'italic'}}>Proceso (nombre)</Text>
+          <Text style={{display:isVisible,fontSize: 15, justifyContent:'center',margin:10 ,fontStyle: 'italic'}}>Requerimiento (S: Solicitar, L: Liberar) </Text>
 
           {memoryCellsComponent()}
 

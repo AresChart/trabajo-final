@@ -78,14 +78,14 @@ function segmentation() {
         let palabraClone = segmentoSolicitado.trim();  
 
         // Valida que la palabra no este vacia
-        if (palabraClone == "") {          
-            return alert("Ingrese un índice de segmento.");
+        if (palabraClone == "" || parseInt(palabraClone)<0) {          
+            return alert("Ingrese un índice válido de segmento.");
         }
         palabraClone = posicionSolicitada.trim();  
 
         // Valida que la palabra no este vacia
-        if (palabraClone == "") {          
-            return alert("Ingrese el índice de la posición dentro del segmento a solicitar.");
+        if (palabraClone == "" || parseInt(palabraClone)<0) {          
+            return alert("Ingrese el índice válido de la posición dentro del segmento a solicitar.");
         }
 
         // Valida si el segmento existe
@@ -122,8 +122,8 @@ function segmentation() {
         let palabraClone = ""+eliminarItem;  
 
         // Valida que la palabra no este vacia
-        if (palabraClone == "") {          
-            return alert("Ingrese el índice del segmento a eliminar.");
+        if (palabraClone == "" || parseInt(palabraClone)<0) {          
+            return alert("Ingrese el índice válido del segmento a eliminar.");
         }
 
         // Valida si el segmento existe
@@ -188,15 +188,18 @@ function segmentation() {
             {/**View del input eliminar proceso - palabra con el indice*/}
             {/**View tabla de procesos */}
             <View style={{top:110, flexDirection: 'column',width: "90%", alignContent: "center", justifyContent: "center"}}>
+            <Text style={{fontSize: 15, justifyContent:'center',marginLeft:110,marginBottom:10 ,fontWeight:'bold',fontStyle: 'italic'}}>Dirección Lógica</Text>
                 <ProcessList procesos = {funciones.TablaProcesos}/>
+                <Text style={{fontSize: 15, justifyContent:'center',marginLeft:110,marginBottom:10, marginTop:90 ,fontWeight:'bold',fontStyle: 'italic'}}>Tabla de segmentos</Text>
                 <SegmentList procesos = {funciones.TablaDatos}/>
+                <Text style={{fontSize: 15, justifyContent:'center',marginLeft:110,marginBottom:10, marginTop:90 ,fontWeight:'bold',fontStyle: 'italic'}}>Memoria Física</Text>
                 <PhysicalMemory procesos = {funciones.MemoriaFisica}/>
 
-                <View style={{width: "100%",height:600}}>
+                <View style={{width: "100%",height:200}}>
                 </View>
             </View>
 
-            <View style={{width: "90%",top: 20, backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+            <View style={{width: "90%",top: 0, backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
                 <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={funciones.logSegmentacion}/>
                 <TouchableOpacity style={{marginTop:20,width: 160, height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress= { ()=> Speaker(funciones.logSegmentacion)}>
                     <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
@@ -206,7 +209,7 @@ function segmentation() {
                 </TouchableOpacity>
             </View>
            
-            <View style={{width: "100%",height:100}}>
+            <View style={{width: "100%",height:50}}>
             </View>
 
         </View>

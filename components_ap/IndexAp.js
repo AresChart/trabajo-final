@@ -41,7 +41,7 @@ export default function IndexAp() {
 
   function tableOutComponent (){
     if(banderaSalida){
-      return( <TableOutComponent top={10+(5*numeroProcesos)} height={40*numeroProcesos} tablaSalida={tablaSalida}/>);
+      return( <TableOutComponent top={50+(5*numeroProcesos)} height={40*numeroProcesos} tablaSalida={tablaSalida}/>);
     }
 
     return(<></>);
@@ -59,11 +59,13 @@ export default function IndexAp() {
   }
 
 function init(){
+  setBanderaSalida(false);
   if(parseInt(numeroProcesos)>10){
     return alert("Por favor NO ingresa más de 10 procesos");
-  }else if (parseInt(numeroProcesos)===0){
+  }else if (parseInt(numeroProcesos)<=0){
     return alert("Por favor ingrese una cantida válida de procesos");
   }
+
   crearTablaEntrada();
   setBanderaEntrada(true);
   onRefresh();
@@ -99,22 +101,22 @@ function validaciones(){
     return true;
  }
 
-  if(numeroProcesos==="" || parseInt(numeroProcesos)===0){
+  if(numeroProcesos==="" || parseInt(numeroProcesos)<=0){
     alert("Ingrese mínimo número de procesos válido");
     return true;
   }
 
-  if(numeroCPU==="" || parseInt(numeroCPU)===0){
+  if(numeroCPU==="" || parseInt(numeroCPU)<=0){
      alert("El número de CPU´s no puede ser 0");
      return true;
   }
 
-  if(numeroNucleos==="" || parseInt(numeroNucleos)===0){
+  if(numeroNucleos==="" || parseInt(numeroNucleos)<=0){
      alert("El número de núcleos no puede ser 0");
      return true;
   }
 
-  if(item_algoritmo==="RR" && quantum==="" || parseInt(quantum)===0){
+  if(item_algoritmo==="RR" && quantum==="" || parseInt(quantum)<=0){
      alert("Por favor ingrese un Quantum válido");
      return true;
   }
@@ -224,7 +226,7 @@ function cambiarValorPickerAlgoritmos(itemValue){
 function pickerAlgortimos(){
   if(banderaEntrada){
     return (
-      <Picker style={{width: 300 }} selectedValue={item_algoritmo} onValueChange={(itemValue, itemIndex) => cambiarValorPickerAlgoritmos(itemValue)}>
+      <Picker style={{width: '90%',fontSize:8 }} selectedValue={item_algoritmo} onValueChange={(itemValue, itemIndex) => cambiarValorPickerAlgoritmos(itemValue)}>
         <Picker.Item label={"FCFS"}  value={"FCFS"}/>
         <Picker.Item label={"SJF"}  value={"SJF"}/>
         <Picker.Item label={"SRTF"}  value={"SRTF"}/>
@@ -254,7 +256,7 @@ function quantumComponent(){
 function resultado(){
   if(banderaSalida){
     return(
-      <View style={{marginTop:260,width: '90%', height:350,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+      <View style={{marginTop:380,width: '90%', height:350,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
         <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={textoFinal}/>
         <TouchableOpacity  style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
           <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
@@ -272,7 +274,7 @@ function resultado(){
 function resultadoCola(){
   if(banderaSalida && item_algoritmo==="RR"){
     return(
-      <View style={{width:'90%',height: 200,top:210}}>
+      <View style={{width:'90%',height: 200,top:360}}>
             <TextInput style={styles.item_resultado_cola} multiline={true} numberOfLines={8} value={textoCola}/>
       </View>
       );
@@ -303,7 +305,7 @@ function resultadoCola(){
           </TouchableOpacity>
         </View>
         
-        <View style={{top:25 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+        <View style={{width:'100%', top:25 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
           {pickerAlgortimos()}
           {bottonInicializarTablaeEntrada()}
           {buttonEjecutarAlgoritmoComponent()} 
@@ -311,7 +313,7 @@ function resultadoCola(){
           {tableInputComponent()} 
           {tableOutComponent()}
 
-          <View style={{width:'90%',height:(160+(numeroProcesos*40)),top:(220+(5*numeroProcesos))}}>
+          <View style={{width:'90%',height:(160+(numeroProcesos*40)),top:(290+(5*numeroProcesos))}}>
             {tableProcessComponent()} 
           </View>
 

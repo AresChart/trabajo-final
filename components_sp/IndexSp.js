@@ -6,6 +6,7 @@ import * as main from '../scripts_sp/Main';
 import NumberFormat from 'react-number-format';
 import {Speaker,Pause} from '../components_drawer/Speaker';
 
+
 /**
  * @author Kevin David Sanchez Solis
  * @author Anderson Ramirez Vasquez
@@ -24,6 +25,7 @@ export default function IndexSp() {
   const [tablaEntrada, setTablaEntrada] = useState([]);
   const [textoFinal,setTextoFinal] = useState("");
   const [banderaSalida,setBanderaSalida] = useState(false);
+  const [isVisible,setIsVisible] = React.useState('none');
 
 
   /**
@@ -66,7 +68,7 @@ function  crearTablaEntrada (){
      return alert("Por favor no ingrese más de 5 semáforos !")
     }
 
-    if(cantidadSemaforos==="" || parseInt(cantidadSemaforos)===0 ){
+    if(cantidadSemaforos==="" || parseInt(cantidadSemaforos)<=0 ){
       return alert("Ingrese una cantidad de semáforos válida !")
     }
 
@@ -74,8 +76,9 @@ function  crearTablaEntrada (){
     for (let index = 0; index < cantidadSemaforos; index++) {
       textSemaforos += "[s"+(index+1)+" valor=1]"
     }
+    setIsVisible('flex');
     setTextSemaforos(textSemaforos);
-    setTextVariables("c=0,s=0,t=1,x=1");
+    setTextVariables("c=0,s=0");
     init();
   }
  
@@ -130,6 +133,7 @@ function  crearTablaEntrada (){
     let text = main.editarTextoSalida(""+resultado[0],""+resultado[2],textSemaforos,textVariables)
     setTextoFinal(text);
     setBanderaSalida(true);
+    
 
     onRefresh();
    }
@@ -180,7 +184,7 @@ function  crearTablaEntrada (){
     if(verTablaEntrada){
       return (
         <TextInput style={styles.textInput_salida_sp} numberOfLines={13} multiline={true}
-        onChangeText={(text) => setTextSalida(text)} placeholder="Salida" value={textSalida}/>
+        onChangeText={(text) => setTextSalida(text)} value={textSalida}/>
       );
     }
 
@@ -189,9 +193,9 @@ function  crearTablaEntrada (){
 
   function textAreaHilosBloqueadosComponent(){
     if(verTablaEntrada){
-      return (
+      return ( 
         <TextInput style={styles.textInput_hilos_bloqueados_sp} 
-        onChangeText={(text) => setTextHilosBloqueados(text)} placeholder="Hilos Bloqueados" value={textHilosBloqueados}/>
+        onChangeText={(text) => setTextHilosBloqueados(text)} value={textHilosBloqueados}/>
       );
     }
 
@@ -201,7 +205,7 @@ function  crearTablaEntrada (){
   function resultado(){
     if(banderaSalida){
       return(
-        <View style={{marginTop:50,width: '90%', height:320,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
+        <View style={{marginTop:80,width: '90%', height:320,backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
           <TextInput style={styles.item_resultado} multiline={true} numberOfLines={8} value={textoFinal}/>
           <TouchableOpacity  style={{marginTop:15, width: '90%', height: 45, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=> Speaker(textoFinal)}>
             <Text style={{color:'white', fontSize: 17}}>Reproducir</Text>
@@ -231,7 +235,9 @@ function  crearTablaEntrada (){
                 <Text style={{color:'white', fontSize: 15}}>Establecer Semaforos</Text>
               </TouchableOpacity>
           </View>
+            <Text style={{display:isVisible ,fontSize: 15, justifyContent:'center',marginLeft:10,marginTop:10 ,fontStyle: 'italic'}}>Variables</Text>
             {textInputVariablesComponent()}
+            <Text style={{display:isVisible ,fontSize: 15, justifyContent:'center',marginLeft:10,marginTop:20 ,fontStyle: 'italic'}}>Semáforos</Text>
             {textInputSemaforosComponent()}
             {buttonGenerarSemaforosAleatoriosComponent()}
             {buttonEjecutarAlgoritmo()}
@@ -240,15 +246,17 @@ function  crearTablaEntrada (){
         
         {tableInputThreadsComponent()}
         
-        <View style={{marginTop:50,height:400,width: '100%',top:60 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+        <View style={{marginTop:0,height:400,width: '100%',top:60 ,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
           {buttonClear()}
+          <Text style={{display:isVisible ,fontSize: 15, justifyContent:'center',marginLeft:10,marginTop:20 ,fontStyle: 'italic'}}>Texto de salida</Text>
           {textAreaSalidaComponent()}
+          <Text style={{display:isVisible ,fontSize: 15, justifyContent:'center',marginLeft:10,marginTop:10 ,fontStyle: 'italic'}}>Hilos Bloqueados</Text>
           {textAreaHilosBloqueadosComponent()}
         </View>
 
         {resultado()}
               
-        <View style={{width:'70%',height:50,end:100}}>
+        <View style={{width:'70%',height:80,end:100}}>
         </View> 
       
     </View>
