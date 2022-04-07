@@ -13,10 +13,14 @@ const TableInputComponent = (props) => {
     
   }
 
-
+  function updateListaPrioridad (index,property,value){
+    let nuevaLista = [...tablaEntrada];
+    nuevaLista[index][property]=value;
+    props.setTablaEntrada(nuevaLista);
+  }
 
   function updateLista (index,property,value){
-    if (/^\d+$/.test(value) || value==="") {
+    if (/^\d+$/.test(value) || value==="" && !value.includes("-")) {
     let nuevaLista = [...tablaEntrada];
     nuevaLista[index][property]=value;
     props.setTablaEntrada(nuevaLista);
@@ -58,7 +62,7 @@ const TableInputComponent = (props) => {
 
               <DataTable.Cell style={{display: props.isPrioridad ,justifyContent:'center',flex: 0.7}} >
                  <View >
-                <TextInput value={""+row.prioridad} onChangeText={(data)=>updateLista(index,"prioridad",data)}style={{textAlign:'center',width: 30,height:25,display: props.isPrioridad}} keyboardType="numeric"/>
+                <TextInput value={""+row.prioridad} onChangeText={(data)=>updateListaPrioridad(index,"prioridad",data)} style={{textAlign:'center',width: 30,height:25,display: props.isPrioridad}}/>
                 </View>
               </DataTable.Cell>
 

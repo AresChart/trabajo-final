@@ -129,9 +129,12 @@ export function validarTablaEntrada(tablaEntrada,item_algoritmo){
             return false;
         }
         
-        if(item_algoritmo==="Prioridad interna expulsiva (HRN_PRIMA)" || item_algoritmo==="Prioridad interna no expulsiva (HRN)"){
-            if(tablaEntrada[index].prioridad===""){
+        if(item_algoritmo==="Prioridad interna expulsiva (HRN_PRIMA)" || item_algoritmo==="Prioridad interna no expulsiva (HRN)" || item_algoritmo=="Prioridad externa expulsiva"){
+            if(tablaEntrada[index].prioridad==="" || (/^(0|[1-9]\d*|(?=\.))(\.\d+)?$/.test(tablaEntrada[index].prioridad))==false ){
                 return false;
+            }
+            if(/^(0|[1-9]\d*|(?=\.))(\.\d+)?$/.test(tablaEntrada[index].prioridad)){
+                tablaEntrada[index].prioridad = parseFloat(tablaEntrada[index].prioridad).toFixed(2);
             }
         }
     }

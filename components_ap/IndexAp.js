@@ -95,7 +95,7 @@ function validaciones(){
      alert("La tabla de entrada tiene tiempos de llegada erroneos !");
      return true;
   }
-  let valoresTablaEntrada = main.validarTablaEntrada(tablaEntrada);
+  let valoresTablaEntrada = main.validarTablaEntrada(tablaEntrada, item_algoritmo);
   if(!valoresTablaEntrada){
     alert("La tabla de entrada no es válida !");
     return true;
