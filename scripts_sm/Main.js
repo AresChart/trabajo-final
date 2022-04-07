@@ -228,6 +228,8 @@ export function eliminarSegmento(segmento) {
  * @returns Estado de la solicitud
  */
 export function solicitarItem(segmento, indice) {
+    // Parsea indice como entero
+    indice = parseInt(indice);
 
     // Ingresa registro al log
     logSegmentacion += `Se solicita el item del segmento ${segmento} en la posición ${indice}. \n`;
@@ -239,11 +241,11 @@ export function solicitarItem(segmento, indice) {
     logSegmentacion += ` Se valida que la posición solictada no exceda el tamaño del proceso. \n`;
 
     // Valida que la posicion solictada no exceda el tamaño del proceso
-    if (indice <= TablaDatos[segmento].tamaño) {        
+    if (indice < TablaDatos[segmento].tamaño) {        
         // Calcula la posicion en la que se encuentra el item en memoria fisica
         let item = TablaDatos[segmento].inicio;
         // Obtiene el item solicitado
-        item = MemoriaFisica[item][0];
+        item = MemoriaFisica[parseInt(item+indice)][0];
         // Ingresa registro al log
         logSegmentacion += ` Se obtiene el item: ${item}. \n`;
 
