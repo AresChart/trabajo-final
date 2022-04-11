@@ -144,6 +144,7 @@ export const styles = StyleSheet.create({
         textAlign: 'justify',
         padding: 10
       },
+
       item_resultado_cola: {
         fontSize: 15,
         height: 200,

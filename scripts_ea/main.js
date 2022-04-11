@@ -3,7 +3,7 @@
  * @author Anderson Ramirez Vasquez
  */
 
-var listaCeldas = new Array(20);
+var listaCeldas;
 var index = 0;
 var posicionesBloques;
 
@@ -194,11 +194,14 @@ function crearParrafoResultado(estrategia,itemAlgoritmoAjuste,tablaEntrada,lista
 
 //----------------- Estrategia de Ajuste Sobre Huecos -------------------------------
 
+export function asignarCantidadCeldasMemoria(cantidadCeldasMemoria){
+   listaCeldas = new Array(parseInt(cantidadCeldasMemoria));
+}
 
 
-export function ejecutarAlgoritmoAjusteHuecos(itemAlgoritmoAjuste,tablaEntrada,isPasoAPaso){
+export function ejecutarAlgoritmoAjusteHuecos(itemAlgoritmoAjuste,tablaEntrada,isPasoAPaso,cantidadCeldasMemoria){
     if(index===tablaEntrada.length){
-        listaCeldas = new Array(20);
+        listaCeldas = new Array(parseInt(cantidadCeldasMemoria));
         index=0;
     }
     for (index; index < tablaEntrada.length; index++) {
@@ -358,7 +361,7 @@ export function contieneLiberarTablaEntrada(tablaEntrada){
     return false;
 }   
 
-export function ejecutarAlgoritmoAjusteSolicitudes(itemAlgoritmoAjuste,tablaEntrada,isPasoAPaso){
+export function ejecutarAlgoritmoAjusteSolicitudes(itemAlgoritmoAjuste,tablaEntrada,isPasoAPaso,cantidadCeldasMemoria){
 
     
 
@@ -367,7 +370,7 @@ export function ejecutarAlgoritmoAjusteSolicitudes(itemAlgoritmoAjuste,tablaEntr
     }
    
     posicionesBloques = new Array();
-    listaCeldas = new Array(20);
+    listaCeldas = new Array(parseInt(cantidadCeldasMemoria));
     let bloque = encontrarBloquesDeMemoria(0);
     let posicionInicial = bloque[0];
     let posicionFinal = bloque[1];

@@ -9,7 +9,7 @@ const MemoryCellsComponent = (props) => {
   const celdasMemoria = props.celdasMemoria;
 
   return(
-    <View style={styles.container_table}>
+    <View style={{width:300, height:80+50*celdasMemoria.length}}>
       <Text style={{fontSize: 15, justifyContent:'center',marginLeft:90,marginBottom:20 ,fontWeight:'bold',fontStyle: 'italic'}}>Celdas de memoria</Text>
       <DataTable id="celdas_memoria">
         <DataTable.Header>

@@ -18,6 +18,7 @@ export default function IndexEa(props) {
   const [refreshing, setRefreshing] = React.useState(false);
   const [tablaEntrada, setTablaEntrada] = useState([]);
   const [cantidadCeldas, setCantidadCeldas] = useState("");
+  const [cantidadCeldasMemoria, setCantidadCeldasMemoria] = useState("");
   const [banderaEntrada,setBanderaEntrada] = useState(false);
   const [banderaSalida,setBanderaSalida] = useState(false);
   const [celdasMemoria, setCeldasMemoria] = useState([]);
@@ -181,19 +182,39 @@ const onRefresh = React.useCallback(() => {
       onRefresh();
     }
 
-      function inicializarTabla(){
 
-        let textCantidadCeldasValido = main.validarCantidadCeldas(cantidadCeldas);
+    function realizarValidaciones(){
+      let textCantidadCeldasValido = main.validarCantidadCeldas(cantidadCeldas);
         if(!textCantidadCeldasValido){
-          return alert("Por favor ingrese un valor de celdas válido");
+           alert("Por favor ingrese un valor de celdas válido");
+           return true;
+        }
+
+        if(parseInt(cantidadCeldasMemoria)>20){
+          alert("Por favor NO ingreses más de 20 celdas de memoria");
+          return true;
+        }
+
+        if(parseInt(cantidadCeldasMemoria)<1){
+           alert("Por favor ingrese una cantidad de celdas válida");
+           return true;
         }
 
         if(parseInt(cantidadCeldas)>15){
-          return alert("Por favor NO ingreses más de 15 solicitudes");
+           alert("Por favor NO ingreses más de 15 solicitudes");
+           return true;
         }
 
         if(parseInt(cantidadCeldas)<3){
-          return alert("Por favor ingrese mínimo 3 solicitudes !");
+           alert("Por favor ingrese mínimo 3 solicitudes !");
+           return true;
+        }
+    }
+
+      function inicializarTabla(){
+
+        if(realizarValidaciones()){
+          return;
         }
 
         setIsVisible('flex');
@@ -230,6 +251,9 @@ const onRefresh = React.useCallback(() => {
       }
 
       function iniciarAlgoritmo (isPasoAPaso){
+        if(realizarValidaciones()){
+          return;
+        }
         let listaSalida;
         main.inicializarTablaEntrada(listaProcesos,listaRequerimientos,tablaEntrada);
 
@@ -240,11 +264,13 @@ const onRefresh = React.useCallback(() => {
             return alert("Solo ingrese solicitudes !");
           }
 
-           listaSalida = main.ejecutarAlgoritmoAjusteSolicitudes(itemAjustes,tablaEntrada,isPasoAPaso);
+           main.asignarCantidadCeldasMemoria(cantidadCeldasMemoria);
+           listaSalida = main.ejecutarAlgoritmoAjusteSolicitudes(itemAjustes,tablaEntrada,isPasoAPaso,cantidadCeldasMemoria);
            
            setparrafoResultado(listaSalida[1]);
         }else{
-           listaSalida = main.ejecutarAlgoritmoAjusteHuecos(itemAjustes,tablaEntrada,isPasoAPaso);
+           main.asignarCantidadCeldasMemoria(cantidadCeldasMemoria);
+           listaSalida = main.ejecutarAlgoritmoAjusteHuecos(itemAjustes,tablaEntrada,isPasoAPaso,cantidadCeldasMemoria);
            setparrafoResultado(listaSalida[1]);
         }
 
@@ -262,9 +288,12 @@ const onRefresh = React.useCallback(() => {
   <ScrollView style={{paddingVertical: 0,backgroundColor: '#fff'}}>
     <View style={{width:'100%',height:'100%',backgroundColor: '#fff',alignItems: 'center',flexDirection: 'column'}}>
 
-          <View style={{height:140,top:10,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
+          <View style={{height:200,top:10,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
              <NumberFormat value={cantidadCeldas} displayType={'text'} renderText={ (cantidadCeldas) => (
                      <TextInput style={styles.input} onChangeText={(val)=>setCantidadCeldas(val)} value={cantidadCeldas} placeholder="Cantidad de Celdas" keyboardType='numeric'/>)}/>
+
+             <NumberFormat value={cantidadCeldasMemoria} displayType={'text'} renderText={ (cantidadCeldasMemoria) => (
+                     <TextInput style={styles.input} onChangeText={(val)=>setCantidadCeldasMemoria(val)} value={cantidadCeldasMemoria} placeholder="Celdas de Memoria" keyboardType='numeric'/>)}/>
 
               <TouchableOpacity style={{marginTop:5, width: 300, height: 40, backgroundColor: 'blue',padding:10,alignItems: 'center',borderRadius: 5}} onPress={()=>inicializarTabla()} >
                 <Text style={{color:'white', fontSize: 15}}>Crear Solicitudes</Text>
@@ -288,7 +317,7 @@ const onRefresh = React.useCallback(() => {
           {memoryCellsComponent()}
 
          {resultadoComponent()}
-      </View>
+    </View>
       </ScrollView>
     );
 }

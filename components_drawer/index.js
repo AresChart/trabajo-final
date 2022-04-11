@@ -22,9 +22,6 @@ import * as Speech from 'expo-speech';
 
 function HomeScreen(props) {
 
-  const [estaParrafo, setEstaParrafo] = useState(false);
-  const [estaReproducir, setEstaReproducir] = useState(false);
-
   return (
     <View style={{ width:'100%',height:'100%',alignItems: 'center', justifyContent: 'center' ,  backgroundColor: '#fff'}}>
       <Text style={{fontSize:35,textAlign: 'center'}}>Universidad del Quindío</Text>
