@@ -26,7 +26,6 @@ export function generarSemaforosAleatorios(textSemaforos){
     listaSemaforos = textSemaforos.split("]");
 
    return aleatorios();
-
 }
 
 export function validarVariablesEntrada(textVariables){
@@ -93,7 +92,7 @@ export function validarTextHilos(arrayTextHilos){
         }
         
         return true;
-    }
+}
 
 export function validarTextSemaforos(textSemaforos){
     let cantidadCorchetesDerecha = 0;
@@ -268,6 +267,7 @@ export function editarTextoSalida(salida,hilosBloqueados,semaforos,variables){
 Este algoritmo permite la ejecución del 
 */
 export function ejecutarAlgoritmo(textSemaforos,tablaEntrada,textVariables){
+
     valores = [];
     obtenerSemaforos(textSemaforos);
     let textHilosBloqueados = "";

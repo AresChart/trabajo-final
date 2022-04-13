@@ -98,6 +98,7 @@ export function ejecutar(tablaEntrada){
 
     let tabla =  Object.assign([], tablaEntrada);
 
+
     if(tabla.Hilo_1 === undefined){
         tabla.Hilo_1 = "";
     }else{

@@ -74,8 +74,8 @@ function App () {
     disCread.push(funciones.obtenerNombreDiscosCreados());
    
     
-      setitemsInPicker(    
-       Object.keys(disCread).map(function(key, index) {
+    setitemsInPicker(    
+      Object.keys(disCread).map(function(key, index) {
         return (
           <Picker.Item label={disCread[index]} value={disCread[index]}/>
         )
