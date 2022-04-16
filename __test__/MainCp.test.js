@@ -1,7 +1,10 @@
-import {generarAleatorios, ejecutar} from '../scripts_cp/Main';
+import { generarAleatorios, ejecutar } from '../scripts_cp/Main';
 
-
+/**
+ * Pruebas unitarias para los algoritmos de Comunicación entre procesos
+ */
 describe('Comunicación de procesos',() => {
+
     // Test para verificar que se genera 1 aleatorio para cada hilo (5)
     test('generarAleatorios', () => {
         // Obtiene arreglo de hilos aleatorios generados
@@ -12,7 +15,7 @@ describe('Comunicación de procesos',() => {
 
     // Valida funcion de ejecutar algoritmo
     test('ejecutar', () => {
-
+        // Datos de entrada
         let entrada = {
             Hilo_1:'G\nZ\nH2.send(p)\nF\nW\nX\nT\nQ\nD\nU\nU\nX\nS',
             Hilo_2:'D\nV\nH1.receive()\nM\nL\nU\nU\nM\nF\nY\nG\nD\nC',
@@ -21,6 +24,7 @@ describe('Comunicación de procesos',() => {
             Hilo_5:'W\nP\nZ\nK\nK\nH\nC\nM\nE\nJ\nO\nX\nF'
         };
 
+        // Resultado esperado
         let salida = [
             '\n' +
               'H1: [  G  ,  Z  ,  F  ,  W  ,  X  ,  T  ,  Q  ,  D  ,  U  ,  U  ,  X  ,  S   ]\n' +
@@ -34,8 +38,8 @@ describe('Comunicación de procesos',() => {
               ' H5 : [  W  ,  P  ,  Z  ,  K  ,  K  ,  H  ,  C  ,  M  ,  E  ,  J  ,  O  ,  X  ,  F   ]',
             '     '
         ];
-
+        // Llamado al metodo de ejecutar algoritmo
         expect(ejecutar(entrada)).toEqual(salida);
-
     });
 });
+

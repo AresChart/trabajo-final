@@ -1,6 +1,8 @@
 import {generarSemaforosAleatorios, ejecutarAlgoritmo} from '../scripts_sp/Main';
 
-
+/**
+ * Pruebas unitarias para los algoritmos de Sincronización de procesos
+ */
 describe('Sincronización de procesos',() => {
     // Test para verificar que se genera 1 aleatorio para cada hilo (5)
     test('generarAleatorios', () => {
