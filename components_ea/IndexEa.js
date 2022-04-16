@@ -229,12 +229,12 @@ const onRefresh = React.useCallback(() => {
         for (let index = 0; index < cantidadCeldas; index++) {
 
           if(index==cantidadCeldas-1){
-            listaProcesos+=("S"+(index+1));
+            listaProcesos+=("P"+(index+1));
           }else{
-            listaProcesos+=("S"+(index+1)+"\n");
+            listaProcesos+=("P"+(index+1)+"\n");
           }
-          listaRequerimientos.push("S 1");
-          tablaEntrada.push({proceso: "S"+(index+1), solicita: "", libera: ""});
+          listaRequerimientos.push("P 1");
+          tablaEntrada.push({proceso: "P"+(index+1), solicita: "", libera: ""});
         }
         setListaProcesos(listaProcesos);
         setListaRequerimientos(listaRequerimientos);
@@ -294,7 +294,7 @@ const onRefresh = React.useCallback(() => {
 
           <View style={{height:200,top:10,alignItems: 'center',justifyContent: 'center',flexDirection: 'column'}}>
              <NumberFormat value={cantidadCeldas} displayType={'text'} renderText={ (cantidadCeldas) => (
-                     <TextInput style={styles.input} onChangeText={(val)=>setCantidadCeldas(val)} value={cantidadCeldas} placeholder="Cantidad de Celdas" keyboardType='numeric'/>)}/>
+                     <TextInput style={styles.input} onChangeText={(val)=>setCantidadCeldas(val)} value={cantidadCeldas} placeholder="Cantidad de Solicitudes" keyboardType='numeric'/>)}/>
 
              <NumberFormat value={cantidadCeldasMemoria} displayType={'text'} renderText={ (cantidadCeldasMemoria) => (
                      <TextInput style={styles.input} onChangeText={(val)=>setCantidadCeldasMemoria(val)} value={cantidadCeldasMemoria} placeholder="Celdas de Memoria" keyboardType='numeric'/>)}/>

@@ -256,11 +256,6 @@ function eliminarArchivoContigua(nombre, tamaño) {
         logContigua += ' No se encontró la palabra en disco. \n';
         // console.log("No existe el archivo que quiere eliminar");
     }
-
-    // console.log("mapa (Contigua)");
-    // console.log(mapaContigua);
-    // console.log("Log");
-    // console.log(logContigua);
 }
 
 /**
@@ -349,18 +344,6 @@ export function crearArchivoContigua(nombre, tamaño) {
         logContigua += ' Se notifica que no existe el espacio contiguo para almacenar la palabra. \n';
         console.log("No se encontro espacio para agregar el archivo");
     }
-
-    
-    // console.log("mapa (Contigua)");
-    // console.log(mapaContigua);
-    // console.log("creados (Contigua)");
-    // console.log(archivosCreadosContigua);
-    // console.log("tamaño (Contigua)");
-    // console.log(tamañoCaracteresContigua);
-    // console.log("inicio (Contigua)");
-    // console.log(inicioContigua);
-    // console.log('log');
-    // console.log(logContigua);
 }
 
 /**
@@ -485,17 +468,6 @@ function validarEspacioContigua(tamaño, bloquesNecesarios) {
         logEnlazada += ` No hay espacio disponible para almacenar la palabra. \n`;
         console.log("No hay espacio suficiente");
     }
-    
-    // console.log("mapa (Enlazada)");
-    // console.log(mapaEnlazada);
-    // console.log("creados (Enlazada)");
-    // console.log(archivosCreadosEnlazada);
-    // console.log("tamaño (Enlazada)");
-    // console.log(tamañoCaracteresEnlazada);
-    // console.log("inicio (Enlazada)");
-    // console.log(inicioEnlazada);
-    // console.log("Log");
-    // console.log(logEnlazada);   
 }
 
 /**
@@ -590,18 +562,6 @@ function validarEspacioEnlazada(tamaño, bloquesNecesarios) {
         tamañoCaracteresEnlazada.splice(validarArchivo,1);
         //Elimina los datos del archivo a eliminar del arreglo de posicion inicial del archivo
         inicioEnlazada.splice(validarArchivo,1);
-
-        // console.log("mapa (Enlazada)");
-        // console.log(mapaEnlazada);
-        // console.log("archivos (Enlazada)");
-        // console.log(archivosCreadosEnlazada);
-        // console.log("tamaño (Enlazada)");
-        // console.log(tamañoCaracteresEnlazada);
-        // console.log("Inicio (Enlazada)");
-        // console.log(inicioEnlazada);
-        // console.log("log");
-        // console.log(logEnlazada);
-
     }else{
         // Ingresa registro al log
         logEnlazada += ` Se notifica que la palabra no existe en disco. \n`;
@@ -711,19 +671,6 @@ function validarArchivoEnlazada (nombre) {
         logIndexadaEnlazada += ` Se notifica que no se encontró espacio para guardar la palabra \n`;
         console.log("No hay espacio");
     }
-
-    // console.log("mapa (IndexadaEnlazada)");
-    // console.log(mapaIndexadaEnlazada);
-    // console.log("archivos (IndexadaEnlazada)");
-    // console.log(archivosCreadosIndexadaEnlazada);
-    // console.log("tamaños (IndexadaEnlazada)");
-    // console.log(tamañoCaracteresIndexadaEnlazada);
-    // console.log("inicio (IndexadaEnlazada)");
-    // console.log(inicioIndexadaEnlazada);
-    // console.log("Posiciones (IndexadaEnlazada)");
-    // console.log(posicionesIndexadaEnlazada);
-    console.log("Log");
-    console.log(logIndexadaEnlazada);
 }
 
 /**
@@ -861,20 +808,6 @@ function validarEspacioIndexadaEnlazada(tamaño, bloquesNecesarios) {
         logIndexadaEnlazada += ` Se notifica que la palabra a eliminar no existe. \n`;
         // console.log("No se existe el archivo que quiere eliminar.");
     }
-
-    console.log("mapa (IndexadaEnlazada)");
-    console.log(mapaIndexadaEnlazada);
-    console.log("archivos (IndexadaEnlazada)");
-    console.log(archivosCreadosIndexadaEnlazada);
-    console.log("tamaños (IndexadaEnlazada)");
-    console.log(tamañoCaracteresIndexadaEnlazada);
-    console.log("inicio (IndexadaEnlazada)");
-    console.log(inicioIndexadaEnlazada);
-    console.log("posiciones disponibles (IndexadaEnlazada)");
-    console.log(posicionesIndexadaEnlazada);
-    console.log("Log");
-    console.log(logIndexadaEnlazada);
-
 }
 
 /**
@@ -1067,22 +1000,7 @@ export function crearArchivoIndexadaMultinivel(nombre, tamaño) {
     }else{
         // Ingresa registro al log
         logIndexadaMultinivel += ` Se notifica que no se encontró espacio para almacenar la palabra en disco \n`;
-        console.log("No hay espacio suficiente para almacenar el archivo (Indexada-Multinivel)");
     }
-
-    // console.log("mapa (Indexada-Multinivel)");
-    // console.log(mapaIndexadaMultinivel);
-    // console.log("archivos (Indexada-Multinivel)");
-    // console.log(archivosCreadosIndexadaMultinivel);
-    // console.log("tamaños (Indexada-Multinivel)");
-    // console.log(tamañoCaracteresIndexadaMultinivel);
-    // console.log("inicio (Indexada-Multinivel)");
-    // console.log(inicioIndexadaMultinivel);
-    // console.log("Posiciones (Indexada-Multinivel)");
-    // console.log(posicionesIndexadaMultinivel);
-    // console.log("Log");
-    // console.log(logIndexadaMultinivel);
-
 }
 
  /**
@@ -1185,22 +1103,7 @@ function eliminarArchivoIndexadaMultinivel (nombre, tamaño) {
     }else{
         // Ingresa registro al log
         logIndexadaMultinivel += ` Se notifica que el mensaje a eliminar no existe en memoria. \n`;
-        // console.log("No se existe el archivo que quiere eliminar (indexada-multinivel)");
     }
-
-    // console.log("mapa (Indexada-Multinivel)");
-    // console.log(mapaIndexadaMultinivel);
-    // console.log("archivos (Indexada-Multinivel)");
-    // console.log(archivosCreadosIndexadaMultinivel);
-    // console.log("tamaños (Indexada-Multinivel)");
-    // console.log(tamañoCaracteresIndexadaMultinivel);
-    // console.log("inicio (Indexada-Multinivel)");
-    // console.log(inicioIndexadaMultinivel);
-    // console.log("Posiciones (Indexada-Multinivel)");
-    // console.log(posicionesIndexadaMultinivel);
-    // console.log("Log");
-    // console.log(logIndexadaMultinivel);
-
 }
 
  /**
@@ -1256,22 +1159,7 @@ export function crearArchivoIndexadaCombinada(nombre, tamaño) {
     }else{
         // Ingresa registro al log
         logIndexadaCombinada += ` Se notifica que no existe espacio suficiente para ingresar el mensaje. \n`;
-        console.log("No hay espacio suficiente para almacenar el archivo (Indexada-Multinivel)");
     }
-
-    // console.log("mapa (Indexada-Combinada)");
-    // console.log(mapaIndexadaMultinivel);
-    // console.log("archivos (Indexada-Combinada)");
-    // console.log(archivosCreadosIndexadaMultinivel);
-    // console.log("tamaños (Indexada-Combinada)");
-    // console.log(tamañoCaracteresIndexadaMultinivel);
-    // console.log("inicio (Indexada-Combinada)");
-    // console.log(inicioIndexadaMultinivel);
-    // console.log("Posiciones (Indexada-Combinada)");
-    // console.log(posicionesIndexadaMultinivel);
-    console.log("Log");
-    console.log(logIndexadaCombinada);
-
 }
 
 /**
@@ -1491,23 +1379,7 @@ function eliminarArchivoIndexadaCombinada (nombre, tamaño) {
     }else{
         // Ingresa registro al log
         logIndexadaCombinada += ` Se notifica que no existe el mensaje a eliminar en disco. \n`;
-
-        // console.log("No se existe el archivo que quiere eliminar (indexada-Combinada)");
     }
-
-    // console.log("mapa (Indexada-Combinada)");
-    // console.log(mapaIndexadaCombinada);
-    // console.log("archivos (Indexada-Combinada)");
-    // console.log(archivosCreadosIndexadaCombinada);
-    // console.log("tamaños (Indexada-Combinada)");
-    // console.log(tamañoCaracteresIndexadaCombinada);
-    // console.log("inicio (Indexada-Combinada)");
-    // console.log(inicioIndexadaCombinada);
-    // console.log("Posiciones (Indexada-Combinada)");
-    // console.log(posicionesIndexadaCombinada);
-    // console.log("Log");
-    // console.log(logIndexadaCombinada);
- 
 }
 
  /**
@@ -1591,11 +1463,4 @@ export function limpiarDiscos() {
     logIndexadaCombinada = '';
     logIndexadaEnlazada = '';
     logIndexadaMultinivel = '';
-}
-
-/**
- * Muestra la informacion del disco seleccionado
- */
-export function informacionDisco(disco) {
-    
 }

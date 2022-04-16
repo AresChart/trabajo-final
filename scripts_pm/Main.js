@@ -254,22 +254,6 @@ export function solicitarItem (numPagina, numPos) {
     }
     
     return alert('La página solicitada no contiene datos');
-
-        /** Visualizacion de datos
-        console.log("Tabla Procesos");
-        console.log(TablaProcesos);
-        console.log("Memoria Fisica");
-        console.log(MemoriaFisica);
-        console.log("Memoria Virtual");
-        console.log(MemoriaVirtual);
-        console.log("Tabla Usuario");
-        console.log(TablaUsuario);
-        console.log("Tabla Paginas");
-        console.log(TablaPaginas);
-        console.log("Log");
-        console.log(paginationLog);
-        */ 
-    
 }
 
 /**
@@ -365,22 +349,6 @@ export function crearProceso(palabra) {
 
         // Agrega el proceso en la tabla de procesos global
         TablaProcesos.push(palabra);
-        
-        /** Visualizacion de datos
-        console.log("Tabla Procesos");
-        console.log(TablaProcesos);
-        console.log("Memoria Fisica");
-        console.log(MemoriaFisica);
-        console.log("Memoria Virtual");
-        console.log(MemoriaVirtual);
-        console.log("Tabla Usuario");
-        console.log(TablaUsuario);
-        console.log("Tabla Paginas");
-        console.log(TablaPaginas);
-        console.log("Log");
-        console.log(paginationLog);
-        */  
-
     }
     // No existe memoria disponible para el ingreso de la palabra
     else{
