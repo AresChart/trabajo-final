@@ -2,7 +2,6 @@ import React , {useState} from 'react';
 import {styles} from '../styles/styles';
 import {View,ScrollView,Picker,Button,TextInput,TouchableOpacity,Text} from 'react-native';
 import TableInputComponent from './TableInputComponet';
-
 import * as main from '../scripts_ap/Main';
 import TableOutComponent from './TableOutComponen';
 import TableProcessComponent from './TableProcessComponent';
@@ -205,7 +204,7 @@ function cambiarValorPickerAlgoritmos(itemValue){
     setTablaEntrada(main.cambiarPrioridad(tablaEntrada));
   }
 
-  if(itemValue==="RR" || itemValue==="Prioridad externa no expulsiva"){
+  if(itemValue==="RR"){
     setIsQuantum(true);
   }else{
     setIsQuantum(false);

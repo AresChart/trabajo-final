@@ -46,6 +46,12 @@ const TableInputProccessesComponent = (props) => {
                         <Picker.Item label={"S 2"}  value={"S 2"}/>
                         <Picker.Item label={"S 3"}  value={"S 3"}/>
                         <Picker.Item label={"S 4"}  value={"S 4"}/>
+                        <Picker.Item label={"S 5"}  value={"S 5"}/>
+                        <Picker.Item label={"S 6"}  value={"S 6"}/>
+                        <Picker.Item label={"S 7"}  value={"S 7"}/>
+                        <Picker.Item label={"S 8"}  value={"S 8"}/>
+                        <Picker.Item label={"S 9"}  value={"S 8"}/>
+                        <Picker.Item label={"S 10"}  value={"S 10"}/>
                       </Picker>
                   ))}
                 </View>

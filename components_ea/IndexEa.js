@@ -185,30 +185,30 @@ const onRefresh = React.useCallback(() => {
 
     function realizarValidaciones(){
       let textCantidadCeldasValido = main.validarCantidadCeldas(cantidadCeldas);
-        if(!textCantidadCeldasValido){
-           alert("Por favor ingrese un valor de celdas válido");
-           return true;
-        }
+      if(!textCantidadCeldasValido){
+         alert("Por favor ingrese un valor de celdas válido");
+         return true;
+      }
 
-        if(parseInt(cantidadCeldasMemoria)>20){
-          alert("Por favor NO ingreses más de 20 celdas de memoria");
-          return true;
-        }
+      if(parseInt(cantidadCeldasMemoria)>20){
+        alert("Por favor NO ingreses más de 20 celdas de memoria");
+        return true;
+      }
 
-        if(parseInt(cantidadCeldasMemoria)<1){
-           alert("Por favor ingrese una cantidad de celdas válida");
-           return true;
-        }
+      if(parseInt(cantidadCeldasMemoria)<1){
+         alert("Por favor ingrese una cantidad de celdas válida");
+         return true;
+      }
 
-        if(parseInt(cantidadCeldas)>15){
-           alert("Por favor NO ingreses más de 15 solicitudes");
-           return true;
-        }
+      if(parseInt(cantidadCeldasMemoria) < parseInt(cantidadCeldas)){
+         alert("Por favor NO ingreses más de "+cantidadCeldasMemoria+" solicitudes");
+         return true;
+      }
 
-        if(parseInt(cantidadCeldas)<3){
-           alert("Por favor ingrese mínimo 3 solicitudes !");
-           return true;
-        }
+      if(parseInt(cantidadCeldas)<1){
+         alert("Por favor ingrese mínimo 3 solicitudes !");
+         return true;
+      }
     }
 
       function inicializarTabla(){
@@ -255,7 +255,11 @@ const onRefresh = React.useCallback(() => {
           return;
         }
         let listaSalida;
-        main.inicializarTablaEntrada(listaProcesos,listaRequerimientos,tablaEntrada);
+        let resultado = main.inicializarTablaEntrada(listaProcesos,listaRequerimientos,tablaEntrada,cantidadCeldasMemoria);
+
+        if(resultado){
+          return alert("Por favor solicite una cantidad inferior a la cantidad de celdas de memoria !");
+        }
 
         if(itemAlgoritmoAjuste === "Ajuste Sobre Solicitudes"){
 

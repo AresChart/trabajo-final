@@ -770,17 +770,6 @@ export function ingresarParticion(disco, particion) {
         }
     }
 
-    // console.log("Discos");
-    // console.log(discosCreados);
-    // console.log("memoria");
-    // console.log(memoriaDiscos);
-    // console.log("Especificacion");
-    // console.log(especificacionesDisco);
-    // console.log("Particiones");
-    // console.log(particiones);
-    console.log("Log discos");
-    console.log(logDiscos);
-
     let discos =  obtenerDiscosMemoria();
 
     return [discos,particiones];
@@ -860,17 +849,6 @@ export function eliminarParticion(disco, index) {
     delete memoriaDiscos[posicionDisco][4];
 
     listaIndices[posicionDisco]=listaIndices[posicionDisco]-1;
-
-    console.log("Discos");
-    console.log(discosCreados);
-    console.log("memoria");
-    console.log(memoriaDiscos);
-    console.log("Especificacion");
-    console.log(especificacionesDisco);
-    console.log("Particiones");
-    console.log(particiones);
-    console.log("Log discos");
-    console.log(logDiscos);
 
     let discos = obtenerDiscosMemoria();
 

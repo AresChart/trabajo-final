@@ -57,7 +57,7 @@ function App () {
    */
   function  EliminarDisco() {
    
-  
+    setDisco("");
     let resultado =  funciones.eliminarDisco(discos);
 
     if(resultado==-1){

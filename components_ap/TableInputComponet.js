@@ -8,10 +8,6 @@ const TableInputComponent = (props) => {
 
   const tablaEntrada = props.tablaEntrada;
 
-  function cellPrioridadComponent(){
-
-    
-  }
 
   function updateListaPrioridad (index,property,value){
     let nuevaLista = [...tablaEntrada];
