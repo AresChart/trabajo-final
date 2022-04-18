@@ -3,7 +3,7 @@
  * @author Anderson Ramirez Vasquez
  */
 
-var listaCeldas;
+export var listaCeldas;
 var index = 0;
 var posicionesBloques;
 
